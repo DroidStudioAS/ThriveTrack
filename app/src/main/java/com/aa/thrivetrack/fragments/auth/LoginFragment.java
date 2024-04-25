@@ -4,14 +4,17 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.network.NetworkHelper;
+import com.aa.thrivetrack.network.SessionStorage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +48,15 @@ public class LoginFragment extends Fragment {
                 params.put("password", passwordEt.getText().toString());
 
                 NetworkHelper.callGet(PATH_TO_LOGIN, params);
+                NetworkHelper.waitForReply();
+
+                Log.i("server reponse", SessionStorage.getServerResponse());
+                if(SessionStorage.getServerResponse().equals("true")){
+                    Toast.makeText(getContext(), "Logged In", Toast.LENGTH_SHORT).show();
+                }
+
+                SessionStorage.resetServerResponse();
+
             }
         });
         /*****End Of OnClickListeners****/

@@ -33,6 +33,11 @@ public class NetworkHelper {
         }
         return url.toString();
     }
+    public static void waitForReply(){
+        while (SessionStorage.getServerResponse().equals("")){
+            Log.i("waiting","...");
+        }
+    }
 
     public static void callGet(String[] routeParams, Map<String,String> params){
         //build URL
@@ -53,7 +58,7 @@ public class NetworkHelper {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                Log.i("response", response.body().string());
+               SessionStorage.setServerResponse(response.body().string());
             }
         });
 
@@ -81,11 +86,9 @@ public class NetworkHelper {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                Log.i("response", response.body().string());
+                SessionStorage.setServerResponse(response.body().string());
             }
         });
 
     }
-
-
 }

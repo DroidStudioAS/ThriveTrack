@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.network.NetworkHelper;
+import com.aa.thrivetrack.network.SessionStorage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +47,15 @@ public class RegisterFragment extends Fragment {
                     Map<String ,String> params = new HashMap();
                     params.put("username",usernameEt.getText().toString());
                     params.put("password", passwordEt.getText().toString());
+
                     NetworkHelper.callPost(PATH_TO_REGISTER, params);
+                    NetworkHelper.waitForReply();
+
+                    if(SessionStorage.getServerResponse().equals("true")){
+                        Toast.makeText(getContext(), "Registered", Toast.LENGTH_SHORT).show();
+                    }
+
+                    SessionStorage.resetServerResponse();
                 }
             }
         });
