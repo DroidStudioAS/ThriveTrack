@@ -23,7 +23,6 @@ public class LoginFragment extends Fragment {
     EditText passwordEt;
 
     private static final String[] PATH_TO_LOGIN = new String[]{"authentication","login"};
-    private static final String[] primer = new String[]{};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

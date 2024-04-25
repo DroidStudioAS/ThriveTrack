@@ -10,9 +10,11 @@ import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 //TODO: DELETE ALL LOGS IN RELEASE VERSION
@@ -58,7 +60,30 @@ public class NetworkHelper {
 
 
     }
-    public static void callPost(){
+    public static void callPost(String[] routeParams, Map<String,String> params){
+        String url = buildUrl(routeParams);
+        FormBody.Builder formBuilder = new FormBody.Builder();
+        for (Map.Entry<String,String> entry : params.entrySet()){
+            formBuilder.add(entry.getKey(), entry.getValue());
+        }
+
+        RequestBody body = formBuilder.build();
+        Request postRequest = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(postRequest).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.i("Failed", e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                Log.i("response", response.body().string());
+            }
+        });
 
     }
 

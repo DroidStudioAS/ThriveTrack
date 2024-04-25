@@ -14,12 +14,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/username_label"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
+        app:layout_constraintEnd_toEndOf="@+id/registerUsernameEt"
+        app:layout_constraintStart_toStartOf="@+id/registerUsernameEt"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/registerUsernameEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -34,12 +34,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/password_label"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintEnd_toEndOf="@+id/registerPassowordEt"
+        app:layout_constraintStart_toStartOf="@+id/registerPassowordEt"
+        app:layout_constraintTop_toBottomOf="@+id/registerUsernameEt" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/registerPassowordEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -54,12 +54,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/confirm_password_label"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/registerConfirmPasswordEt"
+        app:layout_constraintStart_toStartOf="@+id/registerConfirmPasswordEt"
+        app:layout_constraintTop_toBottomOf="@+id/registerPassowordEt" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/registerConfirmPasswordEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -69,13 +69,13 @@
         app:layout_constraintTop_toBottomOf="@+id/registerConfirmPasswordLabel" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/registerTrigger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
+        app:layout_constraintTop_toBottomOf="@+id/registerConfirmPasswordEt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
