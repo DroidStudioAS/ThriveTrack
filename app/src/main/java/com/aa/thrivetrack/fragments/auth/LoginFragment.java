@@ -1,5 +1,6 @@
 package com.aa.thrivetrack.fragments.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.aa.thrivetrack.R;
+import com.aa.thrivetrack.SetupActivity;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
@@ -52,7 +54,8 @@ public class LoginFragment extends Fragment {
 
                 Log.i("server reponse", SessionStorage.getServerResponse());
                 if(SessionStorage.getServerResponse().equals("true")){
-                    Toast.makeText(getContext(), "Logged In", Toast.LENGTH_SHORT).show();
+                    Intent setupIntent = new Intent(requireContext(), SetupActivity.class);
+                    startActivity(setupIntent);
                 }
 
                 SessionStorage.resetServerResponse();

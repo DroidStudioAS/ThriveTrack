@@ -1,4 +1,4 @@
-package com.aa.thrivetrack;
+package com.aa.thrivetrack.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
