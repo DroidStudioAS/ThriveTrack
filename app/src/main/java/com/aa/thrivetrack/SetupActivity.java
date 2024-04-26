@@ -22,6 +22,8 @@ import com.aa.thrivetrack.network.SessionStorage;
 public class SetupActivity extends AppCompatActivity  {
 
     int currentFragment = 1;
+    int exploreModeInputStep = 1;
+
     Button nextFragmentButton;
     Fragment toGoTo = new Fragment();
 
@@ -57,6 +59,13 @@ public class SetupActivity extends AppCompatActivity  {
                 }else if(toGoTo instanceof ExploreModeGoalInputFragment){
                     exploreModeCallback= (OnExploreModeGoalInputCallback) toGoTo;
                     exploreModeCallback.onInput();
+
+                    if(!SessionStorage.validateExploreGoal(exploreModeInputStep)){
+                        Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    exploreModeInputStep++;
                     return;
                 }
 
