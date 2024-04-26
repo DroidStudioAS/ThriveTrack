@@ -8,14 +8,17 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.aa.thrivetrack.fragments.setup.IntroductionFragment;
 import com.aa.thrivetrack.fragments.setup.ModePickerFragment;
+import com.aa.thrivetrack.network.SessionStorage;
 
 public class SetupActivity extends AppCompatActivity  {
 
     int currentFragment = 1;
     Button nextFragmentButton;
+    Fragment toGoTo = new Fragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,13 @@ public class SetupActivity extends AppCompatActivity  {
         nextFragmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(toGoTo instanceof ModePickerFragment){
+                    if (SessionStorage.getModeSelected()==""){
+                        Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
                 goToNextFragment(currentFragment);
                 currentFragment++;
             }
@@ -37,13 +47,12 @@ public class SetupActivity extends AppCompatActivity  {
     }
 
     public void goToNextFragment(int index){
-        Fragment toGoTo = new Fragment();
         switch (index){
             case 0:
                 toGoTo = new IntroductionFragment();
                 break;
             case 1:
-                toGoTo=new ModePickerFragment();
+                toGoTo = new ModePickerFragment();
                 break;
         }
 
