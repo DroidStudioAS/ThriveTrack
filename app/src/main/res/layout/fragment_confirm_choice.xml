@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout8"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".fragments.setup.explore.ConfirmChoiceFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="These Are The Goals You Selected. Are You Sure About This?"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/firstGoalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/first_label"
+        app:layout_constraintEnd_toEndOf="@+id/firstGoalEt"
+        app:layout_constraintStart_toStartOf="@+id/firstGoalEt"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <EditText
+        android:id="@+id/firstGoalEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstGoalLabel" />
+
+    <TextView
+        android:id="@+id/secondGoalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/second_label"
+        app:layout_constraintEnd_toEndOf="@+id/secondGoalEt"
+        app:layout_constraintStart_toStartOf="@+id/secondGoalEt"
+        app:layout_constraintTop_toBottomOf="@+id/firstGoalEt" />
+
+    <EditText
+        android:id="@+id/secondGoalEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondGoalLabel" />
+
+    <TextView
+        android:id="@+id/thirdGoalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/third_label"
+        app:layout_constraintEnd_toEndOf="@+id/thirdGoalEt"
+        app:layout_constraintStart_toStartOf="@+id/thirdGoalEt"
+        app:layout_constraintTop_toBottomOf="@+id/secondGoalEt" />
+
+    <EditText
+        android:id="@+id/thirdGoalEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thirdGoalLabel" />
+
+    <TextView
+        android:id="@+id/fourthGoalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/fourth_label"
+        app:layout_constraintEnd_toEndOf="@+id/fourthGoalEt"
+        app:layout_constraintStart_toStartOf="@+id/fourthGoalEt"
+        app:layout_constraintTop_toBottomOf="@+id/thirdGoalEt" />
+
+    <EditText
+        android:id="@+id/fourthGoalEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fourthGoalLabel" />
+
+    <TextView
+        android:id="@+id/fifthGoalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/fifth_label"
+        app:layout_constraintEnd_toEndOf="@+id/fifthGoalEt"
+        app:layout_constraintStart_toStartOf="@+id/fifthGoalEt"
+        app:layout_constraintTop_toBottomOf="@+id/fourthGoalEt" />
+
+    <EditText
+        android:id="@+id/fifthGoalEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fifthGoalLabel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

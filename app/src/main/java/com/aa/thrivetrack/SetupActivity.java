@@ -15,6 +15,7 @@ import com.aa.thrivetrack.fragments.setup.IntroductionFragment;
 import com.aa.thrivetrack.fragments.setup.ModePickerFragment;
 import com.aa.thrivetrack.fragments.setup.GoalInputEndFragment;
 import com.aa.thrivetrack.fragments.setup.TaskInputExplanationFragment;
+import com.aa.thrivetrack.fragments.setup.explore.ConfirmChoiceFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ExploreModeGoalInputFragment;
 import com.aa.thrivetrack.fragments.setup.focus.FocusModeGoalInputFragment;
 import com.aa.thrivetrack.network.SessionStorage;
@@ -49,14 +50,16 @@ public class SetupActivity extends AppCompatActivity  {
                         Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                }else if(toGoTo instanceof FocusModeGoalInputFragment){
+                }
+                else if(toGoTo instanceof FocusModeGoalInputFragment){
                     focusModeCallback= (OnFocusModeGoalInputCallback) toGoTo;
                     focusModeCallback.onInput();
                     if(SessionStorage.getGoalInFocus().equals("")){
                         Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                }else if(toGoTo instanceof ExploreModeGoalInputFragment){
+                }
+                else if(toGoTo instanceof ExploreModeGoalInputFragment){
                     exploreModeCallback= (OnExploreModeGoalInputCallback) toGoTo;
                     exploreModeCallback.onInput();
 
@@ -64,9 +67,10 @@ public class SetupActivity extends AppCompatActivity  {
                         Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
                         return;
                     }
-
                     exploreModeInputStep++;
-                    return;
+                    if(exploreModeInputStep<=5){
+                        return;
+                    }
                 }
 
                 //navigate to next fragment
@@ -95,6 +99,8 @@ public class SetupActivity extends AppCompatActivity  {
             case 3:
                 if(SessionStorage.getModeSelected()=="focus"){
                     toGoTo = new GoalInputEndFragment();
+                }else if (SessionStorage.getModeSelected()=="explore"){
+                    toGoTo=new ConfirmChoiceFragment();
                 }
                 break;
             case 4:
