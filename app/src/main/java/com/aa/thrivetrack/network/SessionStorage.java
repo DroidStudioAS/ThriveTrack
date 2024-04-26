@@ -9,6 +9,7 @@ public class SessionStorage {
     private static String SERVER_RESPONSE = "";
 
     private static String MODE_SELECTED = "";
+    private static String GOAL_IN_FOCUS = "";
 
 
     //GETTERS
@@ -18,6 +19,10 @@ public class SessionStorage {
 
     public static String getModeSelected() {
         return MODE_SELECTED;
+    }
+
+    public static String getGoalInFocus() {
+        return GOAL_IN_FOCUS;
     }
 
     //SETTERS
@@ -33,5 +38,9 @@ public class SessionStorage {
 
     public static void setModeSelected(String modeSelected) {
         MODE_SELECTED = modeSelected;
+    }
+
+    public static void setGoalInFocus(String goalInFocus) {
+        GOAL_IN_FOCUS = goalInFocus;
     }
 }

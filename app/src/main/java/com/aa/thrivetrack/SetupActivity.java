@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.aa.thrivetrack.callback.OnFocusModeGoalInputCallback;
 import com.aa.thrivetrack.fragments.setup.IntroductionFragment;
 import com.aa.thrivetrack.fragments.setup.ModePickerFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ExploreModeGoalInputFragment;
@@ -21,6 +22,8 @@ public class SetupActivity extends AppCompatActivity  {
     int currentFragment = 1;
     Button nextFragmentButton;
     Fragment toGoTo = new Fragment();
+
+    private OnFocusModeGoalInputCallback focusModeCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,13 @@ public class SetupActivity extends AppCompatActivity  {
                 //validate input
                 if(toGoTo instanceof ModePickerFragment){
                     if (SessionStorage.getModeSelected()==""){
+                        Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }else if(toGoTo instanceof FocusModeGoalInputFragment){
+                    focusModeCallback= (OnFocusModeGoalInputCallback) toGoTo;
+                    focusModeCallback.onInput();
+                    if(SessionStorage.getGoalInFocus().equals("")){
                         Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -64,6 +74,8 @@ public class SetupActivity extends AppCompatActivity  {
                 }else if (SessionStorage.getModeSelected()=="explore"){
                     toGoTo=new ExploreModeGoalInputFragment();
                 }
+                break;
+            case 3:
                 break;
         }
 
