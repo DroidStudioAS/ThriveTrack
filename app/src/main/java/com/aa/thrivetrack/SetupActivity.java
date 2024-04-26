@@ -2,7 +2,6 @@ package com.aa.thrivetrack;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
@@ -13,6 +12,8 @@ import android.widget.Toast;
 import com.aa.thrivetrack.callback.OnFocusModeGoalInputCallback;
 import com.aa.thrivetrack.fragments.setup.IntroductionFragment;
 import com.aa.thrivetrack.fragments.setup.ModePickerFragment;
+import com.aa.thrivetrack.fragments.setup.GoalInputEndFragment;
+import com.aa.thrivetrack.fragments.setup.TaskInputExplanationFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ExploreModeGoalInputFragment;
 import com.aa.thrivetrack.fragments.setup.focus.FocusModeGoalInputFragment;
 import com.aa.thrivetrack.network.SessionStorage;
@@ -59,7 +60,7 @@ public class SetupActivity extends AppCompatActivity  {
         });
         /*****End of OnClickListeners*****/
     }
-
+    //input is already validated if this function gets triggered
     public void goToNextFragment(int index){
         switch (index){
             case 0:
@@ -76,7 +77,14 @@ public class SetupActivity extends AppCompatActivity  {
                 }
                 break;
             case 3:
+                if(SessionStorage.getModeSelected()=="focus"){
+                    toGoTo = new GoalInputEndFragment();
+                }
                 break;
+            case 4:
+                if(SessionStorage.getModeSelected()=="focus"){
+                    toGoTo = new TaskInputExplanationFragment();
+                }
         }
 
 
