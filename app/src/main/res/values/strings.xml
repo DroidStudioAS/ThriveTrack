@@ -15,4 +15,9 @@
     <string name="fifth_label">5)</string>
     <string name="task_input_title">Task Input</string>
     <string name="SetupEndMessage">Good Job!\nNow Lets Get Started!</string>
+    <string name="profile_label">My\nProfile</string>
+    <string name="goals_label">Goals</string>
+    <string name="todo_label">To Do\nList</string>
+    <string name="diary_label">Diary</string>
+    <string name="community_label">Community</string>
 </resources>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".IndexActivity">
 
     <TextView
@@ -11,57 +12,112 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="App Logo"
+        android:textColor="@color/text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/button2"
+        android:id="@+id/profileTrigger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintCircle="@id/circleCenter"
         app:layout_constraintCircleAngle="15"
         app:layout_constraintCircleRadius="300dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_menu"
-       />
+        tools:layout_editor_absoluteY="23dp" />
 
     <ImageView
-        android:id="@+id/button3"
+        android:id="@+id/goalsTrigger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintCircle="@id/circleCenter"
         app:layout_constraintCircleAngle="50"
         app:layout_constraintCircleRadius="300dp"
-        app:srcCompat="@drawable/ic_menu"
-       />
+        app:srcCompat="@drawable/ic_menu" />
 
     <ImageView
-        android:id="@+id/button4"
+        android:id="@+id/todoTrigger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintCircle="@id/circleCenter"
         app:layout_constraintCircleAngle="90"
         app:layout_constraintCircleRadius="300dp"
-        app:srcCompat="@drawable/ic_menu"
-       />
+        app:srcCompat="@drawable/ic_menu" />
 
     <ImageView
-        android:id="@+id/button5"
+        android:id="@+id/diaryTrigger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintCircle="@id/circleCenter"
         app:layout_constraintCircleAngle="130"
         app:layout_constraintCircleRadius="300dp"
-        app:srcCompat="@drawable/ic_menu"
-       />
+        app:srcCompat="@drawable/ic_menu" />
 
     <ImageView
-        android:id="@+id/button6"
+        android:id="@+id/communityTrigger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintCircle="@id/circleCenter"
         app:layout_constraintCircleAngle="165"
         app:layout_constraintCircleRadius="300dp"
-        app:srcCompat="@drawable/ic_menu"
-       />
+        app:srcCompat="@drawable/ic_menu" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_label"
+        android:textColor="@color/text"
+        app:layout_constraintBottom_toBottomOf="@+id/profileTrigger"
+        app:layout_constraintEnd_toEndOf="@+id/profileTrigger"
+        app:layout_constraintStart_toStartOf="@+id/profileTrigger"
+        app:layout_constraintTop_toTopOf="@+id/profileTrigger"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/goals_label"
+        android:textColor="@color/text"
+        app:layout_constraintBottom_toBottomOf="@+id/goalsTrigger"
+        app:layout_constraintEnd_toEndOf="@+id/goalsTrigger"
+        app:layout_constraintStart_toStartOf="@+id/goalsTrigger"
+        app:layout_constraintTop_toTopOf="@+id/goalsTrigger" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/todo_label"
+        android:gravity="center"
+        android:textColor="@color/text"
+        app:layout_constraintBottom_toBottomOf="@+id/todoTrigger"
+        app:layout_constraintEnd_toEndOf="@+id/todoTrigger"
+        app:layout_constraintStart_toStartOf="@+id/todoTrigger"
+        app:layout_constraintTop_toTopOf="@+id/todoTrigger" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/diary_label"
+        android:textColor="@color/text"
+        app:layout_constraintBottom_toBottomOf="@+id/diaryTrigger"
+        app:layout_constraintEnd_toEndOf="@+id/diaryTrigger"
+        app:layout_constraintStart_toStartOf="@+id/diaryTrigger"
+        app:layout_constraintTop_toTopOf="@+id/diaryTrigger" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/community_label"
+        android:textColor="@color/text"
+        app:layout_constraintBottom_toBottomOf="@+id/communityTrigger"
+        app:layout_constraintEnd_toEndOf="@+id/communityTrigger"
+        app:layout_constraintStart_toStartOf="@+id/communityTrigger"
+        app:layout_constraintTop_toTopOf="@+id/communityTrigger" />
 </androidx.constraintlayout.widget.ConstraintLayout>
