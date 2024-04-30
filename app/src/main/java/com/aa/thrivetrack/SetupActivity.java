@@ -51,107 +51,15 @@ public class SetupActivity extends AppCompatActivity  {
         nextFragmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //validate input
-                if(toGoTo instanceof ModePickerFragment){
-                    if (SessionStorage.getModeSelected()==""){
-                        Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-                else if(toGoTo instanceof FocusModeGoalInputFragment){
-                    focusModeCallback= (OnFocusModeGoalInputCallback) toGoTo;
-                    focusModeCallback.onInput();
-                    if(SessionStorage.getGoalInFocus().equals("")){
-                        Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-                else if(toGoTo instanceof ExploreModeGoalInputFragment){
-                    exploreModeCallback= (OnExploreModeGoalInputCallback) toGoTo;
-                    exploreModeCallback.onInput();
-
-                    if(!SessionStorage.validateExploreGoal(exploreModeInputStep)){
-                        Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    exploreModeInputStep++;
-                    if(exploreModeInputStep<=5){
-                        return;
-                    }
-                }else if(toGoTo instanceof TaskInputFragment){
-                    taskInputCallback = (OnTaskInputCallback) toGoTo;
-                    taskInputCallback.onInput();
-                    if(!SessionStorage.validateTasks()){
-                        Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }else if(toGoTo instanceof SelectGoalFragment){
-                    if(SessionStorage.getGoalInFocus().equals("")){
-                        Toast.makeText(getApplicationContext(), "Please Select A Goal", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-
-                //navigate to next fragment
-                goToNextFragment(currentFragment);
-                currentFragment++;
+              validateFragmentInput();
             }
         });
         /*****End of OnClickListeners*****/
     }
     //input is already validated if this function gets triggered
     public void goToNextFragment(int index){
-        Log.i("On:", String.valueOf(index));
-        switch (index){
-            case 0:
-                toGoTo = new IntroductionFragment();
-                break;
-            case 1:
-                toGoTo = new ModePickerFragment();
-                break;
-            case 2:
-                if(SessionStorage.getModeSelected()=="focus"){
-                    toGoTo = new FocusModeGoalInputFragment();
-                }else if (SessionStorage.getModeSelected()=="explore"){
-                    toGoTo=new ExploreModeGoalInputFragment();
-                }
-                break;
-            case 3:
-                if(SessionStorage.getModeSelected()=="focus"){
-                    toGoTo = new GoalInputEndFragment();
-                }else if (SessionStorage.getModeSelected()=="explore"){
-                    toGoTo=new ConfirmChoiceFragment();
-                }
-                break;
-            case 4:
-                if(SessionStorage.getModeSelected()=="focus"){
-                    toGoTo = new TaskInputExplanationFragment();
-                }else if(SessionStorage.getModeSelected()=="explore"){
-                    toGoTo = new SelectGoalFragment();
-                }
-                break;
-            case 5:
-                if(SessionStorage.getModeSelected()=="focus"){
-                    toGoTo = new TaskInputFragment();
-                }else if(SessionStorage.getModeSelected()=="explore"){
-                    toGoTo = new TaskInputExplanationFragment();
-                }
-                break;
-            case 6:
-                if(SessionStorage.getModeSelected()=="focus"){
-                    toGoTo = new SetupEndFragment();
-                }else if(SessionStorage.getModeSelected()=="explore"){
-                    toGoTo = new TaskInputFragment();
-                }
-                break;
-            case 7:
-                if(SessionStorage.getModeSelected()=="explore"){
-                    toGoTo = new SetupEndFragment();
-                }
-                break;
-
-        }
-
+       // Log.i("On:", String.valueOf(index));
+        determineFragment(index);
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -160,7 +68,103 @@ public class SetupActivity extends AppCompatActivity  {
                 .addToBackStack(null)
                 .commit();
     }
+    public  void validateFragmentInput(){
+        //validate input
+        if(toGoTo instanceof ModePickerFragment){
+            if (SessionStorage.getModeSelected().equals("")){
+                Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        else if(toGoTo instanceof FocusModeGoalInputFragment){
+            focusModeCallback= (OnFocusModeGoalInputCallback) toGoTo;
+            focusModeCallback.onInput();
+            if(SessionStorage.getGoalInFocus().equals("")){
+                Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        else if(toGoTo instanceof ExploreModeGoalInputFragment){
+            exploreModeCallback= (OnExploreModeGoalInputCallback) toGoTo;
+            exploreModeCallback.onInput();
 
+            if(!SessionStorage.validateExploreGoal(exploreModeInputStep)){
+                Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            exploreModeInputStep++;
+            if(exploreModeInputStep<=5){
+                return;
+            }
+        }else if(toGoTo instanceof TaskInputFragment){
+            taskInputCallback = (OnTaskInputCallback) toGoTo;
+            taskInputCallback.onInput();
+            if(!SessionStorage.validateTasks()){
+                Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }else if(toGoTo instanceof SelectGoalFragment){
+            if(SessionStorage.getGoalInFocus().equals("")){
+                Toast.makeText(getApplicationContext(), "Please Select A Goal", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        //navigate to next fragment
+        goToNextFragment(currentFragment);
+        currentFragment++;
+    }
+    public void determineFragment(int index){
+        switch (index){
+            case 0:
+                toGoTo = new IntroductionFragment();
+                break;
+            case 1:
+                toGoTo = new ModePickerFragment();
+                break;
+            case 2:
+                if(SessionStorage.getModeSelected().equals("focus")){
+                    toGoTo = new FocusModeGoalInputFragment();
+                }else if (SessionStorage.getModeSelected().equals("explore")){
+                    toGoTo=new ExploreModeGoalInputFragment();
+                }
+                break;
+            case 3:
+                if(SessionStorage.getModeSelected().equals("focus")){
+                    toGoTo = new GoalInputEndFragment();
+                }else if (SessionStorage.getModeSelected().equals("explore")){
+                    toGoTo=new ConfirmChoiceFragment();
+                }
+                break;
+            case 4:
+                if(SessionStorage.getModeSelected().equals("focus")){
+                    toGoTo = new TaskInputExplanationFragment();
+                }else if(SessionStorage.getModeSelected().equals("explore")){
+                    toGoTo = new SelectGoalFragment();
+                }
+                break;
+            case 5:
+                if(SessionStorage.getModeSelected().equals("focus")){
+                    toGoTo = new TaskInputFragment();
+                }else if(SessionStorage.getModeSelected().equals("explore")){
+                    toGoTo = new TaskInputExplanationFragment();
+                }
+                break;
+            case 6:
+                if(SessionStorage.getModeSelected().equals("focus")){
+                    toGoTo = new SetupEndFragment();
+                }else if(SessionStorage.getModeSelected().equals("explore")){
+                    toGoTo = new TaskInputFragment();
+                }
+                break;
+            case 7:
+                if(SessionStorage.getModeSelected().equals("explore")){
+                    toGoTo = new SetupEndFragment();
+                }
+                break;
+
+        }
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
