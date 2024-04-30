@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -178,19 +179,24 @@ public class SetupActivity extends AppCompatActivity  {
                 .commit();
     }
 
-    public static void registerUserGoalsAndTasks(){
+    public void registerUserGoalsAndTasks(){
         Log.i("username", SessionStorage.getUsername());
-        Log.i("Goal", SessionStorage.getGoalInFocus());
-        Log.i("task", SessionStorage.getFirstTask());
-        Log.i("task", SessionStorage.getSecondTask());
-        Log.i("task", SessionStorage.getThirdTask());
-        Log.i("task", SessionStorage.getFourthTask());
+
 
         Map<String ,String> params = new HashMap();
+        params.put("username",  SessionStorage.getUsername());
+        params.put("goal", SessionStorage.getGoalInFocus());
+        params.put("taskOne", SessionStorage.getFirstTask());
+        params.put("taskTwo", SessionStorage.getSecondTask());
+        params.put("taskThree", SessionStorage.getThirdTask());
+        params.put("taskFour", SessionStorage.getFourthTask());
 
         NetworkHelper.callPost(PATH_TO_WRITE, params);
         NetworkHelper.waitForReply();
-        Log.i("response", SessionStorage.getServerResponse());
+        if(SessionStorage.getServerResponse().equals("true")){
+           startActivity(new Intent(this, IndexActivity.class));
+        }
+        SessionStorage.resetServerResponse();
     }
 
 
