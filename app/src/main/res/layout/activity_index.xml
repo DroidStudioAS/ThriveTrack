@@ -10,68 +10,58 @@
         android:id="@+id/circleCenter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="App Logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageView
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:cornerRadius="50dp"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="139dp"
         app:layout_constraintCircle="@id/circleCenter"
+        app:layout_constraintCircleAngle="15"
         app:layout_constraintCircleRadius="300dp"
-        app:layout_constraintCircleAngle="30"
-        />
-    <Button
+        app:srcCompat="@drawable/ic_menu"
+       />
+
+    <ImageView
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:cornerRadius="50dp"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="139dp"
         app:layout_constraintCircle="@id/circleCenter"
+        app:layout_constraintCircleAngle="50"
         app:layout_constraintCircleRadius="300dp"
-        app:layout_constraintCircleAngle="60"
-        />
-    <Button
+        app:srcCompat="@drawable/ic_menu"
+       />
+
+    <ImageView
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:cornerRadius="50dp"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="139dp"
         app:layout_constraintCircle="@id/circleCenter"
-        app:layout_constraintCircleRadius="300dp"
         app:layout_constraintCircleAngle="90"
-        />
-    <Button
+        app:layout_constraintCircleRadius="300dp"
+        app:srcCompat="@drawable/ic_menu"
+       />
+
+    <ImageView
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:cornerRadius="50dp"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="139dp"
         app:layout_constraintCircle="@id/circleCenter"
+        app:layout_constraintCircleAngle="130"
         app:layout_constraintCircleRadius="300dp"
-        app:layout_constraintCircleAngle="120"
-        />
-    <Button
+        app:srcCompat="@drawable/ic_menu"
+       />
+
+    <ImageView
         android:id="@+id/button6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:cornerRadius="50dp"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="139dp"
         app:layout_constraintCircle="@id/circleCenter"
+        app:layout_constraintCircleAngle="165"
         app:layout_constraintCircleRadius="300dp"
-        app:layout_constraintCircleAngle="150"
-        />
+        app:srcCompat="@drawable/ic_menu"
+       />
 </androidx.constraintlayout.widget.ConstraintLayout>
