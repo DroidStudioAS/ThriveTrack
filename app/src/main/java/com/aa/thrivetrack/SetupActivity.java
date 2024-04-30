@@ -20,6 +20,7 @@ import com.aa.thrivetrack.fragments.setup.TaskInputExplanationFragment;
 import com.aa.thrivetrack.fragments.setup.TaskInputFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ConfirmChoiceFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ExploreModeGoalInputFragment;
+import com.aa.thrivetrack.fragments.setup.explore.SelectGoalFragment;
 import com.aa.thrivetrack.fragments.setup.focus.FocusModeGoalInputFragment;
 import com.aa.thrivetrack.network.SessionStorage;
 
@@ -120,7 +121,7 @@ public class SetupActivity extends AppCompatActivity  {
                 if(SessionStorage.getModeSelected()=="focus"){
                     toGoTo = new TaskInputExplanationFragment();
                 }else if(SessionStorage.getModeSelected()=="explore"){
-
+                    toGoTo = new SelectGoalFragment();
                 }
                 break;
             //todo:send explore users to taskinputexp fragment, and then taskinput
