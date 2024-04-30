@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.aa.thrivetrack.IndexActivity;
 import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.SetupActivity;
+import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
@@ -66,10 +67,13 @@ public class LoginFragment extends Fragment {
                     NetworkHelper.callGet(PATH_TO_FETCH_DATA, fetchParams,1);
                     NetworkHelper.waitForReply();
                     Log.i("response", SessionStorage.getServerResponse());
-                    //startActivity(new Intent(requireContext(), IndexActivity.class));
+                    startActivity(new Intent(requireContext(), IndexActivity.class));
                 }
                 SessionStorage.setUsername(usernameEt.getText().toString());
                 SessionStorage.resetServerResponse();
+                for(Task x : SessionStorage.TASKS){
+                    Log.i("task",x.toString());
+                }
 
             }
         });

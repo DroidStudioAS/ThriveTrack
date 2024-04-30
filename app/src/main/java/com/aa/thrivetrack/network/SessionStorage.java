@@ -3,8 +3,12 @@ package com.aa.thrivetrack.network;
 import android.util.JsonReader;
 import android.util.Log;
 
+import com.aa.thrivetrack.models.Task;
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 
 public class SessionStorage {
     private static String username = "";
@@ -24,6 +28,8 @@ public class SessionStorage {
    private static String secondTask = "";
    private static String thirdTask = "";
    private static String fourthTask = "";
+
+   public static ArrayList<Task> TASKS = new ArrayList();
 
 
     //GETTERS
@@ -92,11 +98,22 @@ public class SessionStorage {
             String responseToSet = responseToSetSplit.substring(0, responseToSetSplit.length() - 1);
             SERVER_RESPONSE = responseToSet;
         }else if(executionStatus==1){
-            String responseToSetSplit = serverResponse.split(":")[1];
-            SERVER_RESPONSE=responseToSetSplit;
+            String [] splitArray = serverResponse.split(",\"");
+            String goalResp = splitArray[0];
+            String taskResp = splitArray[1];
 
-            SessionStorage.setGoalInFocus(responseToSetSplit.split("=>")[1].split(",")[0]);
-            Log.i("goalinfocus", SessionStorage.getGoalInFocus());
+            setGoalInFocus(goalResp.split(":")[1].split("\"")[1]);
+
+            Gson gson = new Gson();
+            Task[] tasks = gson.fromJson(taskResp.substring(7, taskResp.length()-1), Task[].class);
+            for(Task x : tasks){
+                TASKS.add(x);
+            }
+            Log.i("length", String.valueOf(tasks.length));
+
+
+            SERVER_RESPONSE = serverResponse;
+
         }
     }
     public static void resetServerResponse(){
