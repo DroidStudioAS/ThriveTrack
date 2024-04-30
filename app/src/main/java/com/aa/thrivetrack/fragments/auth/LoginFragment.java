@@ -29,6 +29,7 @@ public class LoginFragment extends Fragment {
     EditText passwordEt;
 
     private static final String[] PATH_TO_LOGIN = new String[]{"authentication","login"};
+    private static final String[] PATH_TO_FETCH_DATA = new String[]{"fetch","user-data"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,14 +51,22 @@ public class LoginFragment extends Fragment {
                 params.put("username",usernameEt.getText().toString());
                 params.put("password", passwordEt.getText().toString());
 
-                NetworkHelper.callGet(PATH_TO_LOGIN, params);
+                NetworkHelper.callGet(PATH_TO_LOGIN, params,0);
                 NetworkHelper.waitForReply();
 
                 Log.i("server reponse", SessionStorage.getServerResponse());
                 if(SessionStorage.getServerResponse().equals("true")){
                     startActivity(new Intent(requireContext(), SetupActivity.class));
                 }else if(SessionStorage.getServerResponse().equals("false")){
-                    startActivity(new Intent(requireContext(), IndexActivity.class));
+                    SessionStorage.setUsername(usernameEt.getText().toString());
+                    SessionStorage.resetServerResponse();
+                    //fetch user data
+                    Map<String,String> fetchParams = new HashMap<>();
+                    fetchParams.put("username", SessionStorage.getUsername());
+                    NetworkHelper.callGet(PATH_TO_FETCH_DATA, fetchParams,1);
+                    NetworkHelper.waitForReply();
+                    Log.i("response", SessionStorage.getServerResponse());
+                    //startActivity(new Intent(requireContext(), IndexActivity.class));
                 }
                 SessionStorage.setUsername(usernameEt.getText().toString());
                 SessionStorage.resetServerResponse();

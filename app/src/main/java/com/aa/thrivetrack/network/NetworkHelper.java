@@ -39,7 +39,7 @@ public class NetworkHelper {
         }
     }
 
-    public static void callGet(String[] routeParams, Map<String,String> params){
+    public static void callGet(String[] routeParams, Map<String,String> params, int executionStatus){
         //build URL
         String path = buildUrl(routeParams);
         HttpUrl.Builder urlBuilder = HttpUrl.parse(path).newBuilder();
@@ -58,14 +58,14 @@ public class NetworkHelper {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-               SessionStorage.setServerResponse(response.body().string());
+               SessionStorage.setServerResponse(response.body().string(),executionStatus);
             }
         });
 
 
 
     }
-    public static void callPost(String[] routeParams, Map<String,String> params){
+    public static void callPost(String[] routeParams, Map<String,String> params, int executionStatus){
         String url = buildUrl(routeParams);
         FormBody.Builder formBuilder = new FormBody.Builder();
         for (Map.Entry<String,String> entry : params.entrySet()){
@@ -87,7 +87,7 @@ public class NetworkHelper {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                SessionStorage.setServerResponse(response.body().string());
+                SessionStorage.setServerResponse(response.body().string(),executionStatus);
             }
         });
 

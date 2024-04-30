@@ -191,7 +191,7 @@ public class SetupActivity extends AppCompatActivity  {
         params.put("taskThree", SessionStorage.getThirdTask());
         params.put("taskFour", SessionStorage.getFourthTask());
 
-        NetworkHelper.callPost(PATH_TO_WRITE, params);
+        NetworkHelper.callPost(PATH_TO_WRITE, params,0);
         NetworkHelper.waitForReply();
         if(SessionStorage.getServerResponse().equals("true")){
            startActivity(new Intent(this, IndexActivity.class));

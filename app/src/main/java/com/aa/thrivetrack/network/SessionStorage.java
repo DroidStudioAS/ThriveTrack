@@ -1,6 +1,7 @@
 package com.aa.thrivetrack.network;
 
 import android.util.JsonReader;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -85,11 +86,18 @@ public class SessionStorage {
         SessionStorage.username = username;
     }
 
-    public static void setServerResponse(String serverResponse) {
-        String responseToSetSplit = serverResponse.split(":")[1];
-        String responseToSet = responseToSetSplit.substring(0,responseToSetSplit.length() - 1);
+    public static void setServerResponse(String serverResponse, int executionStatus) {
+        if(executionStatus==0) {
+            String responseToSetSplit = serverResponse.split(":")[1];
+            String responseToSet = responseToSetSplit.substring(0, responseToSetSplit.length() - 1);
+            SERVER_RESPONSE = responseToSet;
+        }else if(executionStatus==1){
+            String responseToSetSplit = serverResponse.split(":")[1];
+            SERVER_RESPONSE=responseToSetSplit;
 
-        SERVER_RESPONSE = responseToSet;
+            SessionStorage.setGoalInFocus(responseToSetSplit.split("=>")[1].split(",")[0]);
+            Log.i("goalinfocus", SessionStorage.getGoalInFocus());
+        }
     }
     public static void resetServerResponse(){
         SERVER_RESPONSE="";

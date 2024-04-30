@@ -50,7 +50,7 @@ public class RegisterFragment extends Fragment {
                     params.put("username",usernameEt.getText().toString());
                     params.put("password", passwordEt.getText().toString());
 
-                    NetworkHelper.callPost(PATH_TO_REGISTER, params);
+                    NetworkHelper.callPost(PATH_TO_REGISTER, params,0);
                     NetworkHelper.waitForReply();
 
                     if(SessionStorage.getServerResponse().equals("true")){
