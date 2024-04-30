@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -84,6 +85,11 @@ public class SetupActivity extends AppCompatActivity  {
                         Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                }else if(toGoTo instanceof SelectGoalFragment){
+                    if(SessionStorage.getGoalInFocus().equals("")){
+                        Toast.makeText(getApplicationContext(), "Please Select A Goal", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
 
                 //navigate to next fragment
@@ -95,6 +101,7 @@ public class SetupActivity extends AppCompatActivity  {
     }
     //input is already validated if this function gets triggered
     public void goToNextFragment(int index){
+        Log.i("On:", String.valueOf(index));
         switch (index){
             case 0:
                 toGoTo = new IntroductionFragment();
@@ -116,7 +123,6 @@ public class SetupActivity extends AppCompatActivity  {
                     toGoTo=new ConfirmChoiceFragment();
                 }
                 break;
-                //todo: add select goal fragment for explore mode
             case 4:
                 if(SessionStorage.getModeSelected()=="focus"){
                     toGoTo = new TaskInputExplanationFragment();
@@ -124,20 +130,26 @@ public class SetupActivity extends AppCompatActivity  {
                     toGoTo = new SelectGoalFragment();
                 }
                 break;
-            //todo:send explore users to taskinputexp fragment, and then taskinput
             case 5:
                 if(SessionStorage.getModeSelected()=="focus"){
                     toGoTo = new TaskInputFragment();
                 }else if(SessionStorage.getModeSelected()=="explore"){
-
+                    toGoTo = new TaskInputExplanationFragment();
                 }
                 break;
             case 6:
                 if(SessionStorage.getModeSelected()=="focus"){
                     toGoTo = new SetupEndFragment();
                 }else if(SessionStorage.getModeSelected()=="explore"){
-
+                    toGoTo = new TaskInputFragment();
                 }
+                break;
+            case 7:
+                if(SessionStorage.getModeSelected()=="explore"){
+                    toGoTo = new SetupEndFragment();
+                }
+                break;
+
         }
 
 

@@ -44,6 +44,8 @@ public class SelectGoalFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     setAlpha(current,goals);
+                    SessionStorage.setGoalInFocus(current.getText().toString().trim());
+                    Log.i("goalinfocus", SessionStorage.getGoalInFocus());
                 }
             });
         }
