@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.StringReader;
 
 public class SessionStorage {
+    private static String username = "";
+
     private static String SERVER_RESPONSE = "";
 
     private static String MODE_SELECTED = "";
@@ -24,6 +26,11 @@ public class SessionStorage {
 
 
     //GETTERS
+
+    public static String getUsername() {
+        return username;
+    }
+
     public static String getServerResponse() {
         return SERVER_RESPONSE;
     }
@@ -73,6 +80,11 @@ public class SessionStorage {
     }
 
     //SETTERS
+
+    public static void setUsername(String username) {
+        SessionStorage.username = username;
+    }
+
     public static void setServerResponse(String serverResponse) {
         String responseToSetSplit = serverResponse.split(":")[1];
         String responseToSet = responseToSetSplit.substring(0,responseToSetSplit.length() - 1);

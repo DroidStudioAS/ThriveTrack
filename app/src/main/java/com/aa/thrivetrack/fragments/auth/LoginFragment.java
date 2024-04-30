@@ -57,7 +57,7 @@ public class LoginFragment extends Fragment {
                     Intent setupIntent = new Intent(requireContext(), SetupActivity.class);
                     startActivity(setupIntent);
                 }
-
+                SessionStorage.setUsername(usernameEt.getText().toString());
                 SessionStorage.resetServerResponse();
 
             }

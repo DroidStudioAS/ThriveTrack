@@ -54,7 +54,7 @@ public class RegisterFragment extends Fragment {
                     if(SessionStorage.getServerResponse().equals("true")){
                         Toast.makeText(getContext(), "Registered", Toast.LENGTH_SHORT).show();
                     }
-
+                    SessionStorage.setUsername(usernameEt.getText().toString());
                     SessionStorage.resetServerResponse();
                 }
             }

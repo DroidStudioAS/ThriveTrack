@@ -23,7 +23,11 @@ import com.aa.thrivetrack.fragments.setup.explore.ConfirmChoiceFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ExploreModeGoalInputFragment;
 import com.aa.thrivetrack.fragments.setup.explore.SelectGoalFragment;
 import com.aa.thrivetrack.fragments.setup.focus.FocusModeGoalInputFragment;
+import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SetupActivity extends AppCompatActivity  {
 
@@ -36,6 +40,9 @@ public class SetupActivity extends AppCompatActivity  {
     private OnFocusModeGoalInputCallback focusModeCallback;
     private OnExploreModeGoalInputCallback exploreModeCallback;
     private OnTaskInputCallback taskInputCallback;
+
+    private static final String[] PATH_TO_WRITE = new String[]{"write","user-goal-and-tasks"};
+
 
 
 
@@ -56,18 +63,7 @@ public class SetupActivity extends AppCompatActivity  {
         });
         /*****End of OnClickListeners*****/
     }
-    //input is already validated if this function gets triggered
-    public void goToNextFragment(int index){
-       // Log.i("On:", String.valueOf(index));
-        determineFragment(index);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragmentContainer, toGoTo)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .addToBackStack(null)
-                .commit();
-    }
     public  void validateFragmentInput(){
         //validate input
         if(toGoTo instanceof ModePickerFragment){
@@ -108,7 +104,11 @@ public class SetupActivity extends AppCompatActivity  {
                 Toast.makeText(getApplicationContext(), "Please Select A Goal", Toast.LENGTH_SHORT).show();
                 return;
             }
+        }else if(toGoTo instanceof SetupEndFragment){
+            registerUserGoalsAndTasks();
+            return;
         }
+
 
         //navigate to next fragment
         goToNextFragment(currentFragment);
@@ -165,6 +165,35 @@ public class SetupActivity extends AppCompatActivity  {
 
         }
     }
+    //input is already validated if this function gets triggered
+    public void goToNextFragment(int index){
+        // Log.i("On:", String.valueOf(index));
+        determineFragment(index);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, toGoTo)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public static void registerUserGoalsAndTasks(){
+        Log.i("username", SessionStorage.getUsername());
+        Log.i("Goal", SessionStorage.getGoalInFocus());
+        Log.i("task", SessionStorage.getFirstTask());
+        Log.i("task", SessionStorage.getSecondTask());
+        Log.i("task", SessionStorage.getThirdTask());
+        Log.i("task", SessionStorage.getFourthTask());
+
+        Map<String ,String> params = new HashMap();
+
+        NetworkHelper.callPost(PATH_TO_WRITE, params);
+        NetworkHelper.waitForReply();
+        Log.i("response", SessionStorage.getServerResponse());
+    }
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

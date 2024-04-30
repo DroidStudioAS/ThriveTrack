@@ -71,6 +71,7 @@ public class NetworkHelper {
         for (Map.Entry<String,String> entry : params.entrySet()){
             formBuilder.add(entry.getKey(), entry.getValue());
         }
+        Log.i("url", url);
 
         RequestBody body = formBuilder.build();
         Request postRequest = new Request.Builder()
