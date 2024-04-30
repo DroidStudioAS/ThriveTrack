@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.aa.thrivetrack.IndexActivity;
 import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.SetupActivity;
 import com.aa.thrivetrack.network.NetworkHelper;
@@ -54,8 +55,9 @@ public class LoginFragment extends Fragment {
 
                 Log.i("server reponse", SessionStorage.getServerResponse());
                 if(SessionStorage.getServerResponse().equals("true")){
-                    Intent setupIntent = new Intent(requireContext(), SetupActivity.class);
-                    startActivity(setupIntent);
+                    startActivity(new Intent(requireContext(), SetupActivity.class));
+                }else if(SessionStorage.getServerResponse().equals("false")){
+                    startActivity(new Intent(requireContext(), IndexActivity.class));
                 }
                 SessionStorage.setUsername(usernameEt.getText().toString());
                 SessionStorage.resetServerResponse();

@@ -54,8 +54,9 @@ public class RegisterFragment extends Fragment {
                     NetworkHelper.waitForReply();
 
                     if(SessionStorage.getServerResponse().equals("true")){
-                        Intent setupIntent = new Intent(requireContext(), SetupActivity.class);
-                        startActivity(setupIntent);
+                        startActivity(new Intent(requireContext(), SetupActivity.class));
+                    }else if(SessionStorage.getServerResponse().equals("false")){
+                        Toast.makeText(getContext(), "Username Taken", Toast.LENGTH_SHORT).show();
                     }
                     SessionStorage.setUsername(usernameEt.getText().toString());
                     SessionStorage.resetServerResponse();
