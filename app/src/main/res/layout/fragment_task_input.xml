@@ -38,8 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/fourth_label"
-        app:layout_constraintEnd_toEndOf="@+id/fourth"
-        app:layout_constraintStart_toStartOf="@+id/fourth"
+        app:layout_constraintEnd_toEndOf="@+id/fourthTaskEt"
+        app:layout_constraintStart_toStartOf="@+id/fourthTaskEt"
         app:layout_constraintTop_toBottomOf="@+id/thirdTaskEt" />
 
     <TextView
@@ -48,8 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/third_label"
-        app:layout_constraintEnd_toEndOf="@+id/fourth"
-        app:layout_constraintStart_toStartOf="@+id/fourth"
+        app:layout_constraintEnd_toEndOf="@+id/fourthTaskEt"
+        app:layout_constraintStart_toStartOf="@+id/fourthTaskEt"
         app:layout_constraintTop_toBottomOf="@+id/secondTaskEt" />
 
     <EditText
@@ -92,12 +92,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/second_label"
-        app:layout_constraintEnd_toEndOf="@+id/fourth"
-        app:layout_constraintStart_toStartOf="@+id/fourth"
+        app:layout_constraintEnd_toEndOf="@+id/fourthTaskEt"
+        app:layout_constraintStart_toStartOf="@+id/fourthTaskEt"
         app:layout_constraintTop_toBottomOf="@+id/firstTaskEt" />
 
     <EditText
-        android:id="@+id/fourth"
+        android:id="@+id/fourthTaskEt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"

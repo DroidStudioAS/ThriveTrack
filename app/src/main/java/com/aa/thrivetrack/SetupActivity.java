@@ -11,9 +11,11 @@ import android.widget.Toast;
 
 import com.aa.thrivetrack.callback.OnExploreModeGoalInputCallback;
 import com.aa.thrivetrack.callback.OnFocusModeGoalInputCallback;
+import com.aa.thrivetrack.callback.OnTaskInputCallback;
 import com.aa.thrivetrack.fragments.setup.IntroductionFragment;
 import com.aa.thrivetrack.fragments.setup.ModePickerFragment;
 import com.aa.thrivetrack.fragments.setup.GoalInputEndFragment;
+import com.aa.thrivetrack.fragments.setup.SetupEndFragment;
 import com.aa.thrivetrack.fragments.setup.TaskInputExplanationFragment;
 import com.aa.thrivetrack.fragments.setup.TaskInputFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ConfirmChoiceFragment;
@@ -31,6 +33,8 @@ public class SetupActivity extends AppCompatActivity  {
 
     private OnFocusModeGoalInputCallback focusModeCallback;
     private OnExploreModeGoalInputCallback exploreModeCallback;
+    private OnTaskInputCallback taskInputCallback;
+
 
 
     @Override
@@ -70,6 +74,13 @@ public class SetupActivity extends AppCompatActivity  {
                     }
                     exploreModeInputStep++;
                     if(exploreModeInputStep<=5){
+                        return;
+                    }
+                }else if(toGoTo instanceof TaskInputFragment){
+                    taskInputCallback = (OnTaskInputCallback) toGoTo;
+                    taskInputCallback.onInput();
+                    if(!SessionStorage.validateTasks()){
+                        Toast.makeText(getApplicationContext(), "Fill Out All The Info", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
@@ -116,6 +127,13 @@ public class SetupActivity extends AppCompatActivity  {
             case 5:
                 if(SessionStorage.getModeSelected()=="focus"){
                     toGoTo = new TaskInputFragment();
+                }else if(SessionStorage.getModeSelected()=="explore"){
+
+                }
+                break;
+            case 6:
+                if(SessionStorage.getModeSelected()=="focus"){
+                    toGoTo = new SetupEndFragment();
                 }else if(SessionStorage.getModeSelected()=="explore"){
 
                 }

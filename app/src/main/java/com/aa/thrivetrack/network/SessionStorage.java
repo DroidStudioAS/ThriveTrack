@@ -17,6 +17,12 @@ public class SessionStorage {
     private static String fourthExploreGoal = "";
     private static String fifthExploreGoal = "";
 
+   private static String firstTask = "";
+   private static String secondTask = "";
+   private static String thirdTask = "";
+   private static String fourthTask = "";
+
+
     //GETTERS
     public static String getServerResponse() {
         return SERVER_RESPONSE;
@@ -48,6 +54,22 @@ public class SessionStorage {
 
     public static String getFifthExploreGoal() {
         return fifthExploreGoal;
+    }
+
+    public static String getFirstTask() {
+        return firstTask;
+    }
+
+    public static String getSecondTask() {
+        return secondTask;
+    }
+
+    public static String getThirdTask() {
+        return thirdTask;
+    }
+
+    public static String getFourthTask() {
+        return fourthTask;
     }
 
     //SETTERS
@@ -89,6 +111,29 @@ public class SessionStorage {
         SessionStorage.fifthExploreGoal = fifthExploreGoal;
     }
 
+    public static void setFirstTask(String firstTask) {
+        SessionStorage.firstTask = firstTask;
+    }
+
+    public static void setSecondTask(String secondTask) {
+        SessionStorage.secondTask = secondTask;
+    }
+
+    public static void setThirdTask(String thirdTask) {
+        SessionStorage.thirdTask = thirdTask;
+    }
+
+    public static void setFourthTask(String fourthTask) {
+        SessionStorage.fourthTask = fourthTask;
+    }
+
+    public static void setTasks(String first, String second, String third, String fourth){
+        setFirstTask(first);
+        setSecondTask(second);
+        setThirdTask(third);
+        setFourthTask(fourth);
+    }
+
     public static boolean validateExploreGoal(int index){
         boolean isValidated = true;
         switch (index){
@@ -120,4 +165,15 @@ public class SessionStorage {
         }
         return isValidated;
     }
+
+    public static boolean validateTasks(){
+        boolean isValid = true;
+
+        if(firstTask.equals("") || secondTask.equals("") || thirdTask.equals("") || fourthTask.equals("")){
+            isValid=false;
+        }
+        return isValid;
+    }
+
+
 }
