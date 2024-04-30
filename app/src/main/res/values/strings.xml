@@ -14,4 +14,5 @@
     <string name="fourth_label">4)</string>
     <string name="fifth_label">5)</string>
     <string name="task_input_title">Task Input</string>
+    <string name="SetupEndMessage">Good Job!\nNow Lets Get Started!</string>
 </resources>

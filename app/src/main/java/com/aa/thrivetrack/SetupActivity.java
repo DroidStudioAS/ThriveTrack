@@ -15,6 +15,7 @@ import com.aa.thrivetrack.fragments.setup.IntroductionFragment;
 import com.aa.thrivetrack.fragments.setup.ModePickerFragment;
 import com.aa.thrivetrack.fragments.setup.GoalInputEndFragment;
 import com.aa.thrivetrack.fragments.setup.TaskInputExplanationFragment;
+import com.aa.thrivetrack.fragments.setup.TaskInputFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ConfirmChoiceFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ExploreModeGoalInputFragment;
 import com.aa.thrivetrack.fragments.setup.focus.FocusModeGoalInputFragment;
@@ -91,7 +92,7 @@ public class SetupActivity extends AppCompatActivity  {
                 break;
             case 2:
                 if(SessionStorage.getModeSelected()=="focus"){
-                    toGoTo = new com.aa.thrivetrack.fragments.setup.focus.FocusModeGoalInputFragment();
+                    toGoTo = new FocusModeGoalInputFragment();
                 }else if (SessionStorage.getModeSelected()=="explore"){
                     toGoTo=new ExploreModeGoalInputFragment();
                 }
@@ -103,9 +104,20 @@ public class SetupActivity extends AppCompatActivity  {
                     toGoTo=new ConfirmChoiceFragment();
                 }
                 break;
+                //todo: add select goal fragment for explore mode
             case 4:
                 if(SessionStorage.getModeSelected()=="focus"){
                     toGoTo = new TaskInputExplanationFragment();
+                }else if(SessionStorage.getModeSelected()=="explore"){
+
+                }
+                break;
+            //todo:send explore users to taskinputexp fragment, and then taskinput
+            case 5:
+                if(SessionStorage.getModeSelected()=="focus"){
+                    toGoTo = new TaskInputFragment();
+                }else if(SessionStorage.getModeSelected()=="explore"){
+
                 }
         }
 
