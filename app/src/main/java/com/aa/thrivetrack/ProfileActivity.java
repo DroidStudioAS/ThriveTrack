@@ -28,20 +28,8 @@ public class ProfileActivity extends AppCompatActivity {
         changePasswordTrigger=(TextView)findViewById(R.id.changePasswordTrigger);
         /******End Of Ui Initializations******/
         /******Start Of OnClickListeners******/
-        changeUsernameTrigger.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PatchDialog pd = new PatchDialog(ProfileActivity.this, "username");
-                pd.show();
-            }
-        });
-        changePasswordTrigger.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PatchDialog pd = new PatchDialog(ProfileActivity.this, "password");
-                pd.show();
-            }
-        });
+        changeUsernameTrigger.setOnClickListener(openDialog("username"));
+        changePasswordTrigger.setOnClickListener(openDialog("password"));
 
         /******End Of OnClickListeners******/
         setProfilePageContent();
@@ -51,6 +39,15 @@ public class ProfileActivity extends AppCompatActivity {
         User user = SessionStorage.USER_DATA.getUser();
         usernameTv.setText(SessionStorage.getUsername());
         userRankTv.setText(user.getUser_rank());
+    }
+    public View.OnClickListener openDialog(String mode){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PatchDialog pd = new PatchDialog(ProfileActivity.this, mode);
+                pd.show();
+            }
+        };
     }
 
 }
