@@ -26,6 +26,7 @@ import com.aa.thrivetrack.fragments.setup.explore.SelectGoalFragment;
 import com.aa.thrivetrack.fragments.setup.focus.FocusModeGoalInputFragment;
 import com.aa.thrivetrack.models.Data;
 import com.aa.thrivetrack.models.Task;
+import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
@@ -193,7 +194,20 @@ public class SetupActivity extends AppCompatActivity  {
 
         NetworkHelper.callPost(PATH_TO_WRITE, params,0);
         NetworkHelper.waitForReply();
+        Log.e("resp", SessionStorage.getServerResponse());
+
         if(SessionStorage.getServerResponse().equals("true")){
+            //build session data object
+            User user = new User(Integer.parseInt(SessionStorage.getUser_id()), "bronze");
+            Task[] tasks = new Task[]{
+                    new Task(SessionStorage.getFirstTask()),
+                    new Task(SessionStorage.getSecondTask()),
+                    new Task(SessionStorage.getThirdTask()),
+                    new Task(SessionStorage.getFourthTask())
+            };
+            Data data = new Data(SessionStorage.getGoalInFocus(), tasks, user);
+            SessionStorage.setUserData(data);
+
            startActivity(new Intent(this, IndexActivity.class));
         }
 

@@ -13,11 +13,14 @@ import java.util.ArrayList;
 
 public class SessionStorage {
     private static String username = "";
+    private static String user_id = "";
+
 
     private static String SERVER_RESPONSE = "";
 
     private static String MODE_SELECTED = "";
     private static String GOAL_IN_FOCUS = "";
+
 
     private static String firstExploreGoal = "";
     private static String secondExploreGoal = "";
@@ -42,6 +45,10 @@ public class SessionStorage {
 
     public static String getUsername() {
         return username;
+    }
+
+    public static String getUser_id() {
+        return user_id;
     }
 
     public static String getServerResponse() {
@@ -97,9 +104,15 @@ public class SessionStorage {
     public static void setUsername(String username) {
         SessionStorage.username = username;
     }
+
+    public static void setUser_id(String user_id) {
+        SessionStorage.user_id = user_id;
+    }
+
     /*
     *0- For a single line of data (msg:true/false)
     *1-For Parsing All the User data neccesary for the app to function (onlogin);
+    * 2-register
     */
     public static void setServerResponse(String serverResponse, int executionStatus) {
         if(executionStatus==0) {
@@ -111,7 +124,6 @@ public class SessionStorage {
           Data data = gson.fromJson(serverResponse,Data.class);
           USER_DATA=data;
           SERVER_RESPONSE=serverResponse;
-
         }
     }
 
@@ -121,6 +133,10 @@ public class SessionStorage {
 
     public static void setModeSelected(String modeSelected) {
         MODE_SELECTED = modeSelected;
+    }
+
+    public static void setUserData(Data userData) {
+        USER_DATA = userData;
     }
 
     public static void setGoalInFocus(String goalInFocus) {

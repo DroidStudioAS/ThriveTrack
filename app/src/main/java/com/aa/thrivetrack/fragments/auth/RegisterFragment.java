@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,9 +53,17 @@ public class RegisterFragment extends Fragment {
 
                     NetworkHelper.callPost(PATH_TO_REGISTER, params,0);
                     NetworkHelper.waitForReply();
-
-                    if(SessionStorage.getServerResponse().equals("true")){
+                    Log.i("response", SessionStorage.getServerResponse());
+                    int userId;
+                    try {
+                        userId=Integer.parseInt(SessionStorage.getServerResponse());
+                        SessionStorage.setUser_id(String.valueOf(userId));
+                    }catch (NumberFormatException e){
+                        Log.i("exc active", e.getLocalizedMessage());
+                    }
+                    if(!SessionStorage.getUser_id().equals("")){
                         startActivity(new Intent(requireContext(), SetupActivity.class));
+                        SessionStorage.resetServerResponse();
                     }else if(SessionStorage.getServerResponse().equals("false")){
                         Toast.makeText(getContext(), "Username Taken", Toast.LENGTH_SHORT).show();
                     }
