@@ -29,12 +29,17 @@ public class PatchDialog extends Dialog {
     Button confirmNewUsernameTrigger;
 
     Group changePasswordGroup;
+    EditText newPasswordEt;
+    EditText confirmPasswordEt;
+    Button newPasswordTrigger;
     //children
     String mode;
 
     PatchCallback patchCallback;
 
     private final String[] PATH_TO_EDIT_USERNAME = new String[]{"edit","patch","username"};
+    private final String[] PATH_TO_EDIT_PASSWORD = new String[]{"edit","patch","password"};
+
 
     public PatchDialog(@NonNull Context context) {
         super(context);
@@ -56,9 +61,13 @@ public class PatchDialog extends Dialog {
         confirmNewUsernameTrigger=(Button)findViewById(R.id.newUsernameTrigger);
 
         changePasswordGroup=(Group)findViewById(R.id.changePasswordGroup);
+        newPasswordEt=(EditText)findViewById(R.id.newPasswordEt);
+        confirmPasswordEt=(EditText)findViewById(R.id.confirmPasswordEt);
+        newPasswordTrigger=(Button)findViewById(R.id.newPasswordTrigger);
         /*****End Of Ui Initializations*****/
         /*****Start Of OnClickListeners*****/
         confirmNewUsernameTrigger.setOnClickListener(changeUsername());
+        newPasswordTrigger.setOnClickListener(changePassword());
         /*****End Of OnClickListeners*****/
 
         dialogSetter();
@@ -103,6 +112,40 @@ public class PatchDialog extends Dialog {
                     Toast.makeText(getContext(), "Username Already In Use", Toast.LENGTH_SHORT).show();
                 }
                 SessionStorage.resetServerResponse();
+            }
+        };
+    }
+    public View.OnClickListener changePassword(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newPassword = newPasswordEt.getText().toString().trim();
+                String confirmedPassword = confirmPasswordEt.getText().toString().trim();
+
+                if(newPassword.equals("") || confirmedPassword.equals("")){
+                    Toast.makeText(getContext(), "Fill It All Out", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(!newPassword.equals(confirmedPassword)){
+                    Toast.makeText(getContext(), "Passwords Dont Match", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Map<String,String> params = new HashMap<>();
+                params.put("username", SessionStorage.getUsername());
+                params.put("password", newPassword);
+
+                NetworkHelper.callPatch(PATH_TO_EDIT_PASSWORD, params, 0);
+                NetworkHelper.waitForReply();
+                if(SessionStorage.getServerResponse().equals("true")){
+                    Toast.makeText(getContext(), "Password Updated", Toast.LENGTH_SHORT).show();
+                    dismissDialog();
+                }else if(SessionStorage.getServerResponse().equals("false")){
+                    Toast.makeText(getContext(), "Update Failed", Toast.LENGTH_SHORT).show();
+                }
+                SessionStorage.resetServerResponse();
+
+
             }
         };
     }
