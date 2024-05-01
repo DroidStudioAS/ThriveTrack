@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.aa.thrivetrack.callback.PatchCallback;
 import com.aa.thrivetrack.dialogs.PatchDialog;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.SessionStorage;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements PatchCallback {
 
     TextView usernameTv;
     TextView userRankTv;
@@ -50,4 +51,8 @@ public class ProfileActivity extends AppCompatActivity {
         };
     }
 
+    @Override
+    public void onUsernameChanged(String username) {
+        usernameTv.setText(username);
+    }
 }
