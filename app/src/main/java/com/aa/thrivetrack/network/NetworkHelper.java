@@ -92,4 +92,31 @@ public class NetworkHelper {
         });
 
     }
+    public static void callPatch(String[] routeParams, Map<String,String> params, int executionStatus){
+        String url = buildUrl(routeParams);
+        FormBody.Builder formBuilder = new FormBody.Builder();
+        for (Map.Entry<String,String> entry : params.entrySet()){
+            formBuilder.add(entry.getKey(), entry.getValue());
+        }
+        Log.i("url", url);
+
+        RequestBody body = formBuilder.build();
+        Request postRequest = new Request.Builder()
+                .url(url)
+                .patch(body)
+                .build();
+
+        client.newCall(postRequest).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.i("Failed", e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                SessionStorage.setServerResponse(response.body().string(),executionStatus);
+            }
+        });
+
+    }
 }
