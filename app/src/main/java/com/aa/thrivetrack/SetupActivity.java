@@ -24,6 +24,8 @@ import com.aa.thrivetrack.fragments.setup.explore.ConfirmChoiceFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ExploreModeGoalInputFragment;
 import com.aa.thrivetrack.fragments.setup.explore.SelectGoalFragment;
 import com.aa.thrivetrack.fragments.setup.focus.FocusModeGoalInputFragment;
+import com.aa.thrivetrack.models.Data;
+import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
@@ -181,8 +183,6 @@ public class SetupActivity extends AppCompatActivity  {
 
     public void registerUserGoalsAndTasks(){
         Log.i("username", SessionStorage.getUsername());
-
-
         Map<String ,String> params = new HashMap();
         params.put("username",  SessionStorage.getUsername());
         params.put("goal", SessionStorage.getGoalInFocus());
@@ -196,6 +196,8 @@ public class SetupActivity extends AppCompatActivity  {
         if(SessionStorage.getServerResponse().equals("true")){
            startActivity(new Intent(this, IndexActivity.class));
         }
+
+
         SessionStorage.resetServerResponse();
     }
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aa.thrivetrack.callback.PatchCallback;
+import com.aa.thrivetrack.dialogs.DeleteDialog;
 import com.aa.thrivetrack.dialogs.PatchDialog;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.SessionStorage;
@@ -17,6 +18,7 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
     TextView userRankTv;
     TextView changeUsernameTrigger;
     TextView changePasswordTrigger;
+    TextView deleteTrigger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +29,19 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
         userRankTv = (TextView) findViewById(R.id.userRankTv);
         changeUsernameTrigger = (TextView)findViewById(R.id.changeUsernameTrigger);
         changePasswordTrigger=(TextView)findViewById(R.id.changePasswordTrigger);
+        deleteTrigger=(TextView)findViewById(R.id.deleteAcountTrigger);
         /******End Of Ui Initializations******/
         /******Start Of OnClickListeners******/
         changeUsernameTrigger.setOnClickListener(openDialog("username"));
         changePasswordTrigger.setOnClickListener(openDialog("password"));
+        deleteTrigger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteDialog dd = new DeleteDialog(ProfileActivity.this);
+                dd.show();
+            }
+        });
+
 
         /******End Of OnClickListeners******/
         setProfilePageContent();

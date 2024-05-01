@@ -23,4 +23,6 @@
     <string name="change_username_label">Change Username</string>
     <string name="change_password_label">Change Password</string>
     <string name="delete_account_label">Delete Account</string>
+    <string name="delete_warning">Are You Sure You Want To Delete Your Account?\nThis Is An Irreversible Process, That Will Delete All Of Your Data?\nPlus, Our Community Will Miss You :(</string>
+    <string name="enter_password_label">Enter Password</string>
 </resources>
