@@ -29,7 +29,7 @@ public class SessionStorage {
    private static String thirdTask = "";
    private static String fourthTask = "";
 
-   public static ArrayList<Task> TASKS = new ArrayList();
+   public static ArrayList<Task> USER_TASKS = new ArrayList();
 
 
     //GETTERS
@@ -91,13 +91,17 @@ public class SessionStorage {
     public static void setUsername(String username) {
         SessionStorage.username = username;
     }
-
+    /*
+    *0- For a single line of data (msg:something)
+    *1-For Parsing user goals and tasks
+    **/
     public static void setServerResponse(String serverResponse, int executionStatus) {
         if(executionStatus==0) {
             String responseToSetSplit = serverResponse.split(":")[1];
             String responseToSet = responseToSetSplit.substring(0, responseToSetSplit.length() - 1);
             SERVER_RESPONSE = responseToSet;
         }else if(executionStatus==1){
+            Log.i("serv resp", serverResponse);
             String [] splitArray = serverResponse.split(",\"");
             String goalResp = splitArray[0];
             String taskResp = splitArray[1];
@@ -107,7 +111,7 @@ public class SessionStorage {
             Gson gson = new Gson();
             Task[] tasks = gson.fromJson(taskResp.substring(7, taskResp.length()-1), Task[].class);
             for(Task x : tasks){
-                TASKS.add(x);
+                USER_TASKS.add(x);
             }
             Log.i("length", String.valueOf(tasks.length));
 
@@ -116,6 +120,7 @@ public class SessionStorage {
 
         }
     }
+
     public static void resetServerResponse(){
         SERVER_RESPONSE="";
     }

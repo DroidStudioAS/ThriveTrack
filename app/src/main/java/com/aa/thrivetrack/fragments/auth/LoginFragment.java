@@ -71,7 +71,7 @@ public class LoginFragment extends Fragment {
                 }
                 SessionStorage.setUsername(usernameEt.getText().toString());
                 SessionStorage.resetServerResponse();
-                for(Task x : SessionStorage.TASKS){
+                for(Task x : SessionStorage.USER_TASKS){
                     Log.i("task",x.toString());
                 }
 
