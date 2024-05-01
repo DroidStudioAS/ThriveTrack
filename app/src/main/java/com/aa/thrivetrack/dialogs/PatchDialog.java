@@ -29,10 +29,16 @@ public class PatchDialog extends Dialog {
     Button confirmNewUsernameTrigger;
 
     Group changePasswordGroup;
+    //children
     EditText newPasswordEt;
     EditText confirmPasswordEt;
     Button newPasswordTrigger;
+    Group changeGoalGroup;
     //children
+    EditText newGoalEt;
+    Button newGoalTrigger;
+
+
     String mode;
 
     PatchCallback patchCallback;
@@ -64,6 +70,10 @@ public class PatchDialog extends Dialog {
         newPasswordEt=(EditText)findViewById(R.id.newPasswordEt);
         confirmPasswordEt=(EditText)findViewById(R.id.confirmPasswordEt);
         newPasswordTrigger=(Button)findViewById(R.id.newPasswordTrigger);
+
+        changeGoalGroup = (Group)findViewById(R.id.changeGoalGroup);
+        newGoalEt = (EditText) findViewById(R.id.newGoalEt);
+        newGoalTrigger=(Button)findViewById(R.id.changeGoalTrigger);
         /*****End Of Ui Initializations*****/
         /*****Start Of OnClickListeners*****/
         confirmNewUsernameTrigger.setOnClickListener(changeUsername());
@@ -79,12 +89,20 @@ public class PatchDialog extends Dialog {
                 dialogTitle.setText(R.string.change_username_label);
                 changeUsernameGroup.setVisibility(View.VISIBLE);
                 changePasswordGroup.setVisibility(View.GONE);
+                changeGoalGroup.setVisibility(View.GONE);
                 break;
             case "password":
                 dialogTitle.setText(R.string.change_password_label);
                 changePasswordGroup.setVisibility(View.VISIBLE);
                 changeUsernameGroup.setVisibility(View.GONE);
+                changeGoalGroup.setVisibility(View.GONE);
                 break;
+            case "goal":
+                dialogTitle.setText("Change Goal:");
+                newGoalEt.setText(SessionStorage.getUserData().getGoal());
+                changeGoalGroup.setVisibility(View.VISIBLE);
+                changePasswordGroup.setVisibility(View.GONE);
+                changeUsernameGroup.setVisibility(View.GONE);
         }
     }
     public View.OnClickListener changeUsername(){
@@ -149,6 +167,7 @@ public class PatchDialog extends Dialog {
             }
         };
     }
+
 
     public void dismissDialog(){
         this.dismiss();

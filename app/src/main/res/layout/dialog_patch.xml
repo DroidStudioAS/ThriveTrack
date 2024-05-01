@@ -19,6 +19,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Group
+        android:id="@+id/changeGoalGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="changeGoalTrigger,newGoalEt,newGoalLabel"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="30dp" />
+
+    <androidx.constraintlayout.widget.Group
         android:id="@+id/changePasswordGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -115,4 +124,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEt" />
+
+    <Button
+        android:id="@+id/changeGoalTrigger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newGoalEt" />
+
+    <EditText
+        android:id="@+id/newGoalEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newGoalLabel" />
+
+    <TextView
+        android:id="@+id/newGoalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="Enter New Goal"
+        app:layout_constraintEnd_toEndOf="@+id/newGoalEt"
+        app:layout_constraintStart_toStartOf="@+id/newGoalEt"
+        app:layout_constraintTop_toBottomOf="@+id/newUsernameLabel" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

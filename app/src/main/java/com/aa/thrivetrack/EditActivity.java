@@ -13,10 +13,12 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.aa.thrivetrack.callback.PatchCallback;
+import com.aa.thrivetrack.dialogs.DialogHelper;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.SessionStorage;
 
-public class EditActivity extends AppCompatActivity {
+public class EditActivity extends AppCompatActivity implements PatchCallback {
     ConstraintLayout taskContainer;
     TextView editGoalTv;
     TextView editGoalTrigger;
@@ -30,7 +32,7 @@ public class EditActivity extends AppCompatActivity {
         editGoalTrigger = (TextView) findViewById(R.id.editGoalTrigger);
         /**End Of UI Initializations**/
         /**Start Of OnClickListenerss**/
-
+        editGoalTrigger.setOnClickListener(DialogHelper.openPatchDialog(EditActivity.this,"goal"));
         /**End Of OnClickListenerss**/
         editGoalTv.setText(SessionStorage.getUserData().getGoal());
 
@@ -106,6 +108,10 @@ public class EditActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onUsernameChanged(String username) {
+
+    }
 }
 
 
