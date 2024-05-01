@@ -3,6 +3,7 @@ package com.aa.thrivetrack.dialogs;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import com.aa.thrivetrack.R;
 public class PatchDialog extends Dialog {
     TextView dialogTitle;
     Group changeUsernameGroup;
+    Group changePasswordGroup;
     String mode;
 
     public PatchDialog(@NonNull Context context) {
@@ -29,19 +31,24 @@ public class PatchDialog extends Dialog {
         /*****Start Of Ui Initializations*****/
         dialogTitle=(TextView) findViewById(R.id.dialogTitle);
         changeUsernameGroup=(Group)findViewById(R.id.changeUsernameGroup);
+        changePasswordGroup=(Group)findViewById(R.id.changePasswordGroup);
         /*****End Of Ui Initializations*****/
 
 
-        titleSetter();
+        dialogSetter();
     }
 
-    public void titleSetter(){
+    public void dialogSetter(){
         switch (mode){
             case "username":
                 dialogTitle.setText(R.string.change_username_label);
+                changeUsernameGroup.setVisibility(View.VISIBLE);
+                changePasswordGroup.setVisibility(View.GONE);
                 break;
             case "password":
                 dialogTitle.setText(R.string.change_password_label);
+                changePasswordGroup.setVisibility(View.VISIBLE);
+                changeUsernameGroup.setVisibility(View.GONE);
                 break;
         }
     }

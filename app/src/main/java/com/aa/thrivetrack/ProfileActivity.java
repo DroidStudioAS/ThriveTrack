@@ -15,6 +15,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView usernameTv;
     TextView userRankTv;
     TextView changeUsernameTrigger;
+    TextView changePasswordTrigger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
         usernameTv=(TextView) findViewById(R.id.usernameTv);
         userRankTv = (TextView) findViewById(R.id.userRankTv);
         changeUsernameTrigger = (TextView)findViewById(R.id.changeUsernameTrigger);
+        changePasswordTrigger=(TextView)findViewById(R.id.changePasswordTrigger);
         /******End Of Ui Initializations******/
         /******Start Of OnClickListeners******/
         changeUsernameTrigger.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +35,14 @@ public class ProfileActivity extends AppCompatActivity {
                 pd.show();
             }
         });
+        changePasswordTrigger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PatchDialog pd = new PatchDialog(ProfileActivity.this, "password");
+                pd.show();
+            }
+        });
+
         /******End Of OnClickListeners******/
         setProfilePageContent();
     }
