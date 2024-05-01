@@ -63,7 +63,6 @@ public class RegisterFragment extends Fragment {
                     }
                     if(!SessionStorage.getUser_id().equals("")){
                         startActivity(new Intent(requireContext(), SetupActivity.class));
-                        SessionStorage.resetServerResponse();
                     }else if(SessionStorage.getServerResponse().equals("false")){
                         Toast.makeText(getContext(), "Username Taken", Toast.LENGTH_SHORT).show();
                     }
