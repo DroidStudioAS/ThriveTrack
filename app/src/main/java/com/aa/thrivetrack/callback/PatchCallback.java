@@ -1,5 +1,5 @@
 package com.aa.thrivetrack.callback;
 
 public interface PatchCallback {
-    void onUsernameChanged(String username);
+    void onChange(String newValue);
 }

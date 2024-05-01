@@ -109,8 +109,8 @@ public class EditActivity extends AppCompatActivity implements PatchCallback {
 
 
     @Override
-    public void onUsernameChanged(String username) {
-
+    public void onChange(String newValue) {
+        editGoalTv.setText(newValue);
     }
 }
 

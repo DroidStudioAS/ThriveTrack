@@ -45,6 +45,8 @@ public class PatchDialog extends Dialog {
 
     private final String[] PATH_TO_EDIT_USERNAME = new String[]{"edit","patch","username"};
     private final String[] PATH_TO_EDIT_PASSWORD = new String[]{"edit","patch","password"};
+    private final String[] PATH_TO_EDIT_GOAL = new String[]{"edit","patch","goal"};
+
 
 
     public PatchDialog(@NonNull Context context) {
@@ -78,6 +80,7 @@ public class PatchDialog extends Dialog {
         /*****Start Of OnClickListeners*****/
         confirmNewUsernameTrigger.setOnClickListener(changeUsername());
         newPasswordTrigger.setOnClickListener(changePassword());
+        newGoalTrigger.setOnClickListener(changeGoal());
         /*****End Of OnClickListeners*****/
 
         dialogSetter();
@@ -124,7 +127,7 @@ public class PatchDialog extends Dialog {
                 if(SessionStorage.getServerResponse().equals("true")){
                     Toast.makeText(getContext(), "Username Changed", Toast.LENGTH_SHORT).show();
                     SessionStorage.setUsername(newUsername);
-                    patchCallback.onUsernameChanged(newUsername);
+                    patchCallback.onChange(newUsername);
                     dismissDialog();
                 }else if(SessionStorage.getServerResponse().equals("false")){
                     Toast.makeText(getContext(), "Username Already In Use", Toast.LENGTH_SHORT).show();
@@ -163,6 +166,34 @@ public class PatchDialog extends Dialog {
                 }
                 SessionStorage.resetServerResponse();
 
+
+            }
+        };
+    }
+
+    public View.OnClickListener changeGoal(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newGoal = newGoalEt.getText().toString().trim();
+                if(newGoalEt.equals("")||newGoal.equals(SessionStorage.getUserData().getGoal())){
+                    Toast.makeText(getContext(), "Fill Out All Info", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Map<String,String> params = new HashMap<>();
+                params.put("user-id",String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
+                params.put("goal", newGoal);
+                NetworkHelper.callPatch(PATH_TO_EDIT_GOAL,params,0);
+                NetworkHelper.waitForReply();
+                if(SessionStorage.getServerResponse().equals("true")){
+                    SessionStorage.getUserData().setGoal(newGoal);
+                    Toast.makeText(getContext(), "Goal Changed", Toast.LENGTH_SHORT).show();
+                    patchCallback.onChange(newGoal);
+                    dismissDialog();
+                }else{
+                    Toast.makeText(getContext(), "Oops", Toast.LENGTH_SHORT).show();
+                }
+                SessionStorage.resetServerResponse();
 
             }
         };

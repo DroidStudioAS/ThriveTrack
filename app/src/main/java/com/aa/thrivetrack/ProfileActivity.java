@@ -57,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
 
 
     @Override
-    public void onUsernameChanged(String username) {
-        usernameTv.setText(username);
+    public void onChange(String newValue) {
+        usernameTv.setText(newValue);
     }
 }
