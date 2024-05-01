@@ -66,7 +66,8 @@ public class LoginFragment extends Fragment {
                     fetchParams.put("username", SessionStorage.getUsername());
                     NetworkHelper.callGet(PATH_TO_FETCH_DATA, fetchParams,1);
                     NetworkHelper.waitForReply();
-                    Log.i("response", SessionStorage.getServerResponse());
+
+                    Log.i("DATA", SessionStorage.getUserData().toString());
                     startActivity(new Intent(requireContext(), IndexActivity.class));
                 }
                 SessionStorage.setUsername(usernameEt.getText().toString());

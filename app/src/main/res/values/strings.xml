@@ -20,4 +20,7 @@
     <string name="todo_label">To Do\nList</string>
     <string name="diary_label">Diary</string>
     <string name="community_label">Community</string>
+    <string name="change_username_label">Change Username</string>
+    <string name="change_password_label">Change Password</string>
+    <string name="delete_account_label">Delete Account</string>
 </resources>

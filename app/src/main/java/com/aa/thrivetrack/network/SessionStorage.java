@@ -3,6 +3,7 @@ package com.aa.thrivetrack.network;
 import android.util.JsonReader;
 import android.util.Log;
 
+import com.aa.thrivetrack.models.Data;
 import com.aa.thrivetrack.models.Task;
 import com.google.gson.Gson;
 
@@ -30,9 +31,14 @@ public class SessionStorage {
    private static String fourthTask = "";
 
    public static ArrayList<Task> USER_TASKS = new ArrayList();
+   public static Data USER_DATA;
 
 
     //GETTERS
+
+    public static Data getUserData() {
+        return USER_DATA;
+    }
 
     public static String getUsername() {
         return username;
@@ -92,31 +98,19 @@ public class SessionStorage {
         SessionStorage.username = username;
     }
     /*
-    *0- For a single line of data (msg:something)
-    *1-For Parsing user goals and tasks
-    **/
+    *0- For a single line of data (msg:true/false)
+    *1-For Parsing All the User data neccesary for the app to function (onlogin);
+    */
     public static void setServerResponse(String serverResponse, int executionStatus) {
         if(executionStatus==0) {
             String responseToSetSplit = serverResponse.split(":")[1];
             String responseToSet = responseToSetSplit.substring(0, responseToSetSplit.length() - 1);
             SERVER_RESPONSE = responseToSet;
         }else if(executionStatus==1){
-            Log.i("serv resp", serverResponse);
-            String [] splitArray = serverResponse.split(",\"");
-            String goalResp = splitArray[0];
-            String taskResp = splitArray[1];
-
-            setGoalInFocus(goalResp.split(":")[1].split("\"")[1]);
-
-            Gson gson = new Gson();
-            Task[] tasks = gson.fromJson(taskResp.substring(7, taskResp.length()-1), Task[].class);
-            for(Task x : tasks){
-                USER_TASKS.add(x);
-            }
-            Log.i("length", String.valueOf(tasks.length));
-
-
-            SERVER_RESPONSE = serverResponse;
+          Gson gson = new Gson();
+          Data data = gson.fromJson(serverResponse,Data.class);
+          USER_DATA=data;
+          SERVER_RESPONSE=serverResponse;
 
         }
     }
