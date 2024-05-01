@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 public class IndexActivity extends AppCompatActivity {
     ImageView profileTrigger;
+    ImageView goalsTrigger;
 
 
     @Override
@@ -19,9 +20,11 @@ public class IndexActivity extends AppCompatActivity {
 
         /***Start Of Ui Initializations**/
         profileTrigger = (ImageView) findViewById(R.id.profileTrigger);
+        goalsTrigger = (ImageView) findViewById(R.id.goalsTrigger);
         /***End Of Ui Initializations**/
         /***Start Of OnClickListeners**/
         profileTrigger.setOnClickListener(pushTo(new Intent(this, ProfileActivity.class)));
+        goalsTrigger.setOnClickListener(pushTo(new Intent(this, EditActivity.class)));
         /***End Of OnClickListeners**/
 
 
