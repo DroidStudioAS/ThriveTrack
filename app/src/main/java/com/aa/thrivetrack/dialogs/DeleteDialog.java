@@ -131,11 +131,13 @@ public class DeleteDialog extends Dialog {
                 NetworkHelper.waitForReply();
                 if(SessionStorage.getServerResponse().equals("true")){
                     Toast.makeText(getContext(),"Task Deleted",Toast.LENGTH_SHORT).show();
+                    Task toRemove = new Task();
                     for(Task x : SessionStorage.getUserData().getTasks()){
                         if(x.getTaskText().equals(SessionStorage.getTaskToEdit().getTaskText())){
-                            SessionStorage.getUserData().getTasks().remove(x);
+                            toRemove=x;
                         }
                     }
+                    SessionStorage.getUserData().getTasks().remove(toRemove);
                     onDelete.onTaskDeleted();
                 }else{
                     Toast.makeText(getContext(),"Oops",Toast.LENGTH_SHORT).show();

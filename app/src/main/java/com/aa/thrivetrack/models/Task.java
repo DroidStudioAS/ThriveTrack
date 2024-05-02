@@ -2,6 +2,10 @@ package com.aa.thrivetrack.models;
 public class Task {
     private String task_text;
 
+    public Task() {
+
+    }
+
     public Task(String task_text) {
         this.task_text = task_text;
     }
