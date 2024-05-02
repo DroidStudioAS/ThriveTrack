@@ -15,7 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.Group;
 
 import com.aa.thrivetrack.R;
+import com.aa.thrivetrack.callback.OnTaskChanged;
 import com.aa.thrivetrack.callback.PatchCallback;
+import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
@@ -50,20 +52,25 @@ public class PatchDialog extends Dialog {
     String mode;
 
     PatchCallback patchCallback;
+    OnTaskChanged onTaskChanged;
 
     private final String[] PATH_TO_EDIT_USERNAME = new String[]{"edit","patch","username"};
     private final String[] PATH_TO_EDIT_PASSWORD = new String[]{"edit","patch","password"};
     private final String[] PATH_TO_EDIT_GOAL = new String[]{"edit","patch","goal"};
-
+    private final String[] PATH_TO_EDIT_TASK = new String[]{"edit","patch","task"};
 
 
     public PatchDialog(@NonNull Context context) {
         super(context);
     }
+
     public PatchDialog(@NonNull Context context, String mode){
         super(context);
         this.mode=mode;
         patchCallback=(PatchCallback)context;
+        if(mode.equals("task")){
+            onTaskChanged=(OnTaskChanged) context;
+        }
     }
 
     @SuppressLint("MissingInflatedId")
@@ -96,6 +103,7 @@ public class PatchDialog extends Dialog {
         confirmNewUsernameTrigger.setOnClickListener(changeUsername());
         newPasswordTrigger.setOnClickListener(changePassword());
         newGoalTrigger.setOnClickListener(changeGoal());
+        changeTaskTrigger.setOnClickListener(changeTask());
         /*****End Of OnClickListeners*****/
 
         dialogSetter();
@@ -220,6 +228,42 @@ public class PatchDialog extends Dialog {
                     Toast.makeText(getContext(), "Oops", Toast.LENGTH_SHORT).show();
                 }
                 SessionStorage.resetServerResponse();
+
+            }
+        };
+    }
+    public View.OnClickListener changeTask(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oldTaskText = SessionStorage.getTaskToEdit().getTaskText().trim();
+                String newTaskText = newTaskEt.getText().toString().trim();
+                //validate
+                if(newTaskText.equals("") || newTaskText.equals(oldTaskText)){
+                    Toast.makeText(getContext(),"Oops", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Map<String,String> params = new HashMap<>();
+                params.put("user-id",String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
+                params.put("task-text",oldTaskText);
+                params.put("new-text", newTaskText);
+
+                NetworkHelper.callPatch(PATH_TO_EDIT_TASK, params, 0);
+                NetworkHelper.waitForReply();
+                if(SessionStorage.getServerResponse().equals("true")){
+                    Toast.makeText(getContext(),"Task Updated", Toast.LENGTH_SHORT).show();
+                    for(Task x : SessionStorage.getUserData().getTasks()){
+                        if(x.getTaskText().equals(oldTaskText)){
+                            x.setTaskText(newTaskText);
+                        }
+                        onTaskChanged.onTaskChange(newTaskText);
+                        dismissDialog();
+                    }
+                }else{
+                    Toast.makeText(getContext(),"Oops", Toast.LENGTH_SHORT).show();
+                }
+                SessionStorage.resetServerResponse();
+
 
             }
         };

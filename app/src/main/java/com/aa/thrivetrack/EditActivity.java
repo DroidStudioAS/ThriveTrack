@@ -14,16 +14,19 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.aa.thrivetrack.callback.OnTaskChanged;
 import com.aa.thrivetrack.callback.PatchCallback;
 import com.aa.thrivetrack.dialogs.DialogHelper;
 import com.aa.thrivetrack.dialogs.PatchDialog;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.SessionStorage;
 
-public class EditActivity extends AppCompatActivity implements PatchCallback {
+public class EditActivity extends AppCompatActivity implements PatchCallback, OnTaskChanged {
     ConstraintLayout taskContainer;
     TextView editGoalTv;
     TextView editGoalTrigger;
+
+    int taskTvId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +119,7 @@ public class EditActivity extends AppCompatActivity implements PatchCallback {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    taskTvId=taskText.getId();
                     SessionStorage.setTaskToEdit(SessionStorage.getUserData().getTasks()[index]);
                     PatchDialog pd = new PatchDialog(EditActivity.this, "task");
                     pd.show();
@@ -131,6 +135,12 @@ public class EditActivity extends AppCompatActivity implements PatchCallback {
     @Override
     public void onChange(String newValue) {
         editGoalTv.setText(newValue);
+    }
+
+    @Override
+    public void onTaskChange(String task) {
+        TextView toEdit = findViewById(taskTvId);
+        toEdit.setText(task);
     }
 }
 

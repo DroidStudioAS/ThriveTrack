@@ -22,7 +22,8 @@
         android:id="@+id/changeTaskGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="newTaskEt,changeTaskTrigger,oldTaskLabel,oldTaskTv"
+        android:visibility="gone"
+        app:constraint_referenced_ids="newTaskEt,changeTaskTrigger,oldTaskLabel,oldTaskTv,newTaskLabel"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="30dp" />
 
@@ -62,6 +63,16 @@
         app:layout_constraintEnd_toEndOf="@+id/newUsernameEt"
         app:layout_constraintStart_toStartOf="@+id/newUsernameEt"
         app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
+
+    <TextView
+        android:id="@+id/newTaskLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Enter New Task:"
+        app:layout_constraintEnd_toEndOf="@+id/newTaskEt"
+        app:layout_constraintStart_toStartOf="@+id/newTaskEt"
+        app:layout_constraintTop_toBottomOf="@+id/oldTaskTv" />
 
     <EditText
         android:id="@+id/newUsernameEt"
@@ -202,15 +213,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/oldTaskLabel" />
-
-    <TextView
-        android:id="@+id/newTaskLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Enter New Task:"
-        app:layout_constraintEnd_toEndOf="@+id/newTaskEt"
-        app:layout_constraintStart_toStartOf="@+id/newTaskEt"
-        app:layout_constraintTop_toBottomOf="@+id/oldTaskTv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
