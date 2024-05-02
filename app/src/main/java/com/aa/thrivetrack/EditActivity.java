@@ -90,18 +90,11 @@ public class EditActivity extends AppCompatActivity implements PatchCallback, On
             taskText.setTextSize(18);
             taskText.setTextColor(getResources().getColor(R.color.black));
 
-            // Create a Group for ImageView and TextView
-            Group group = new Group(this);
-            group.setId(View.generateViewId());
-            group.addView(imageView);
-            group.addView(taskCounter);
-            group.addView(taskText);
 
             // Add the ImageView to the taskContainer
             taskContainer.addView(imageView);
             taskContainer.addView(taskCounter);
             taskContainer.addView(taskText);
-            taskContainer.addView(group);
 
 
             int margin = i % 2 == 0 ? 32 : 100;
