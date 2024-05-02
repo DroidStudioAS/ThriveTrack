@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.aa.thrivetrack.callback.OnDeleteTask;
 import com.aa.thrivetrack.callback.OnTaskChanged;
 import com.aa.thrivetrack.callback.PatchCallback;
+import com.aa.thrivetrack.dialogs.AddDialog;
 import com.aa.thrivetrack.dialogs.DialogHelper;
 import com.aa.thrivetrack.dialogs.PatchDialog;
 import com.aa.thrivetrack.models.Task;
@@ -27,6 +28,8 @@ public class EditActivity extends AppCompatActivity implements PatchCallback, On
     TextView editGoalTv;
     TextView editGoalTrigger;
 
+    TextView addTaskTrigger;
+
     int taskTvId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +39,18 @@ public class EditActivity extends AppCompatActivity implements PatchCallback, On
         taskContainer=(ConstraintLayout) findViewById(R.id.taskContainer);
         editGoalTv = (TextView) findViewById(R.id.editGoalTv);
         editGoalTrigger = (TextView) findViewById(R.id.editGoalTrigger);
+        addTaskTrigger=(TextView)findViewById(R.id.addTaskTrigger);
         /**End Of UI Initializations**/
         /**Start Of OnClickListenerss**/
         editGoalTrigger.setOnClickListener(DialogHelper.openPatchDialog(EditActivity.this,"goal"));
+        addTaskTrigger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddDialog ad = new AddDialog(EditActivity.this, "task");
+                ad.show();
+            }
+        });
+
         /**End Of OnClickListenerss**/
         editGoalTv.setText(SessionStorage.getUserData().getGoal());
 
