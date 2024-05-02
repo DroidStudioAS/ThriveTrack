@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="newTaskEt,changeTaskTrigger,oldTaskLabel,oldTaskTv,newTaskLabel"
+        app:constraint_referenced_ids="newTaskEt,changeTaskTrigger,oldTaskLabel,oldTaskTv,newTaskLabel,deleteTaskTrigger"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="30dp" />
 
@@ -63,6 +63,16 @@
         app:layout_constraintEnd_toEndOf="@+id/newUsernameEt"
         app:layout_constraintStart_toStartOf="@+id/newUsernameEt"
         app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
+
+    <Button
+        android:id="@+id/deleteTaskTrigger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:textColor="#E62323"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeTaskTrigger" />
 
     <TextView
         android:id="@+id/newTaskLabel"
@@ -191,8 +201,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:text="@string/confirm"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/deleteTaskTrigger"
+        app:layout_constraintStart_toStartOf="@+id/deleteTaskTrigger"
         app:layout_constraintTop_toBottomOf="@+id/newTaskEt" />
 
     <TextView

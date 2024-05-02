@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PatchDialog extends Dialog {
+    Context context;
+
     TextView dialogTitle;
     Group changeUsernameGroup;
     //children
@@ -46,6 +48,7 @@ public class PatchDialog extends Dialog {
     EditText newTaskEt;
     TextView oldTaskTv;
     Button changeTaskTrigger;
+    Button deleteTaskTrigger;
 
 
 
@@ -66,6 +69,7 @@ public class PatchDialog extends Dialog {
 
     public PatchDialog(@NonNull Context context, String mode){
         super(context);
+        this.context=context;
         this.mode=mode;
         patchCallback=(PatchCallback)context;
         if(mode.equals("task")){
@@ -98,12 +102,14 @@ public class PatchDialog extends Dialog {
         oldTaskTv = (TextView)findViewById(R.id.oldTaskTv);
         newTaskEt = (EditText)findViewById(R.id.newTaskEt);
         changeTaskTrigger = (Button)findViewById(R.id.changeTaskTrigger);
+        deleteTaskTrigger=(Button)findViewById(R.id.deleteTaskTrigger);
         /*****End Of Ui Initializations*****/
         /*****Start Of OnClickListeners*****/
         confirmNewUsernameTrigger.setOnClickListener(changeUsername());
         newPasswordTrigger.setOnClickListener(changePassword());
         newGoalTrigger.setOnClickListener(changeGoal());
         changeTaskTrigger.setOnClickListener(changeTask());
+        deleteTaskTrigger.setOnClickListener(displayDelete());
         /*****End Of OnClickListeners*****/
 
         dialogSetter();
@@ -265,6 +271,18 @@ public class PatchDialog extends Dialog {
                 SessionStorage.resetServerResponse();
 
 
+            }
+        };
+    }
+
+    public View.OnClickListener displayDelete(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteDialog dd = new DeleteDialog(context, "task");
+                dd.show();
+
+                dismissDialog();
             }
         };
     }

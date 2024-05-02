@@ -30,6 +30,10 @@ public class DeleteDialog extends Dialog {
     Button confirmUserDelete;
     String mode;
 
+    Group deleteTaskGroup;
+    TextView deleteTaskTv;
+    Button confirmTaskDelete;
+
     private Context context;
 
     private final String [] PATH_TO_DELETE = new String[]{"edit","delete","user"};
@@ -54,6 +58,10 @@ public class DeleteDialog extends Dialog {
         deleteUserGroup = (Group) findViewById(R.id.deleteUserGroup);
         passwordEt=(TextView) findViewById(R.id.passwordEt);
         confirmUserDelete =(Button) findViewById(R.id.confirmDeleteTrigger);
+
+        deleteTaskGroup=(Group)findViewById(R.id.deleteTaskGroup);
+        deleteTaskTv=(TextView)findViewById(R.id.taskToDeleteTv);
+        confirmTaskDelete=(Button)findViewById(R.id.confirmTaskDelete);
         /**End Of Ui initializations**/
         confirmUserDelete.setOnClickListener(deleteUser());
 
@@ -90,6 +98,13 @@ public class DeleteDialog extends Dialog {
             case "user":
                 deleteTitle.setText("Delete User");
                 deleteUserGroup.setVisibility(View.VISIBLE);
+                deleteTaskGroup.setVisibility(View.GONE);
+                break;
+            case "task":
+                deleteTitle.setText("Delete Task");
+                deleteTaskTv.setText(SessionStorage.getTaskToEdit().getTaskText());
+                deleteTaskGroup.setVisibility(View.VISIBLE);
+                deleteUserGroup.setVisibility(View.GONE);
 
         }
     }
