@@ -34,10 +34,17 @@ public class SessionStorage {
    private static String fourthTask = "";
 
    public static ArrayList<Task> USER_TASKS = new ArrayList();
-   public static Data USER_DATA;
+   private static Data USER_DATA;
+
+   private static Task taskToEdit;
 
 
     //GETTERS
+
+
+    public static Task getTaskToEdit() {
+        return taskToEdit;
+    }
 
     public static Data getUserData() {
         return USER_DATA;
@@ -184,6 +191,10 @@ public class SessionStorage {
         setSecondTask(second);
         setThirdTask(third);
         setFourthTask(fourth);
+    }
+
+    public static void setTaskToEdit(Task taskToEdit) {
+        SessionStorage.taskToEdit = taskToEdit;
     }
 
     public static boolean validateExploreGoal(int index){

@@ -19,6 +19,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Group
+        android:id="@+id/changeTaskGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="newTaskEt,changeTaskTrigger,oldTaskLabel,oldTaskTv"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="30dp" />
+
+    <androidx.constraintlayout.widget.Group
         android:id="@+id/changeGoalGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Confirm"
+        android:text="@string/confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newUsernameEt" />
@@ -120,7 +128,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Confirm"
+        android:text="@string/confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEt" />
@@ -130,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Confirm"
+        android:text="@string/confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newGoalEt" />
@@ -155,5 +163,46 @@
         app:layout_constraintEnd_toEndOf="@+id/newGoalEt"
         app:layout_constraintStart_toStartOf="@+id/newGoalEt"
         app:layout_constraintTop_toBottomOf="@+id/newUsernameLabel" />
+
+    <EditText
+        android:id="@+id/newTaskEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/oldTaskTv" />
+
+    <Button
+        android:id="@+id/changeTaskTrigger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="@string/confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newTaskEt" />
+
+    <TextView
+        android:id="@+id/oldTaskLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Editing Task:"
+        app:layout_constraintEnd_toEndOf="@+id/oldTaskTv"
+        app:layout_constraintStart_toStartOf="@+id/oldTaskTv"
+        app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
+
+    <TextView
+        android:id="@+id/oldTaskTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/oldTaskLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.aa.thrivetrack.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -38,6 +39,13 @@ public class PatchDialog extends Dialog {
     EditText newGoalEt;
     Button newGoalTrigger;
 
+    Group changeTaskGroup;
+    //children
+    EditText newTaskEt;
+    TextView oldTaskTv;
+    Button changeTaskTrigger;
+
+
 
     String mode;
 
@@ -58,12 +66,14 @@ public class PatchDialog extends Dialog {
         patchCallback=(PatchCallback)context;
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_patch);
         /*****Start Of Ui Initializations*****/
         dialogTitle=(TextView) findViewById(R.id.dialogTitle);
+
         changeUsernameGroup=(Group)findViewById(R.id.changeUsernameGroup);
         changeUsernameEt=(EditText)findViewById(R.id.newUsernameEt);
         confirmNewUsernameTrigger=(Button)findViewById(R.id.newUsernameTrigger);
@@ -76,6 +86,11 @@ public class PatchDialog extends Dialog {
         changeGoalGroup = (Group)findViewById(R.id.changeGoalGroup);
         newGoalEt = (EditText) findViewById(R.id.newGoalEt);
         newGoalTrigger=(Button)findViewById(R.id.changeGoalTrigger);
+
+        changeTaskGroup = (Group) findViewById(R.id.changeTaskGroup);
+        oldTaskTv = (TextView)findViewById(R.id.oldTaskLabel);
+        newTaskEt = (EditText)findViewById(R.id.newTaskEt);
+        changeTaskTrigger = (Button)findViewById(R.id.changeTaskTrigger);
         /*****End Of Ui Initializations*****/
         /*****Start Of OnClickListeners*****/
         confirmNewUsernameTrigger.setOnClickListener(changeUsername());
@@ -93,12 +108,14 @@ public class PatchDialog extends Dialog {
                 changeUsernameGroup.setVisibility(View.VISIBLE);
                 changePasswordGroup.setVisibility(View.GONE);
                 changeGoalGroup.setVisibility(View.GONE);
+                changeTaskGroup.setVisibility(View.GONE);
                 break;
             case "password":
                 dialogTitle.setText(R.string.change_password_label);
                 changePasswordGroup.setVisibility(View.VISIBLE);
                 changeUsernameGroup.setVisibility(View.GONE);
                 changeGoalGroup.setVisibility(View.GONE);
+                changeTaskGroup.setVisibility(View.GONE);
                 break;
             case "goal":
                 dialogTitle.setText("Change Goal:");
@@ -106,6 +123,16 @@ public class PatchDialog extends Dialog {
                 changeGoalGroup.setVisibility(View.VISIBLE);
                 changePasswordGroup.setVisibility(View.GONE);
                 changeUsernameGroup.setVisibility(View.GONE);
+                changeTaskGroup.setVisibility(View.GONE);
+                break;
+            case "task":
+                dialogTitle.setText("Change Task:");
+                oldTaskTv.setText(SessionStorage.getTaskToEdit().getTaskText());
+                changeTaskGroup.setVisibility(View.VISIBLE);
+                changeGoalGroup.setVisibility(View.GONE);
+                changePasswordGroup.setVisibility(View.GONE);
+                changeUsernameGroup.setVisibility(View.GONE);
+
         }
     }
     public View.OnClickListener changeUsername(){
@@ -170,7 +197,6 @@ public class PatchDialog extends Dialog {
             }
         };
     }
-
     public View.OnClickListener changeGoal(){
         return new View.OnClickListener() {
             @Override

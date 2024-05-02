@@ -50,7 +50,7 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
     }
 
     public void setProfilePageContent(){
-        User user = SessionStorage.USER_DATA.getUser();
+        User user = SessionStorage.getUserData().getUser();
         usernameTv.setText(SessionStorage.getUsername());
         userRankTv.setText(user.getUser_rank());
     }

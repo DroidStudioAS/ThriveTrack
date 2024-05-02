@@ -3,6 +3,7 @@ package com.aa.thrivetrack;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.constraintlayout.widget.Group;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.aa.thrivetrack.callback.PatchCallback;
 import com.aa.thrivetrack.dialogs.DialogHelper;
+import com.aa.thrivetrack.dialogs.PatchDialog;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.SessionStorage;
 
@@ -41,18 +43,19 @@ public class EditActivity extends AppCompatActivity implements PatchCallback {
 
     }
 
-    public void generateTasksOnUi(){
+    public void generateTasksOnUi() {
         int previousViewId = R.id.taskContainer;
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(taskContainer);
-        for (int i = 0; i<SessionStorage.getUserData().getTasks().length; i++) {
+        for (int i = 0; i < SessionStorage.getUserData().getTasks().length; i++) {
             //elements
             ImageView imageView = new ImageView(this);
             TextView taskCounter = new TextView(this);
             TextView taskText = new TextView(this);
+            int index = i;
 
             //set Text
-            taskCounter.setText(String.valueOf(i+1));
+            taskCounter.setText(String.valueOf(i + 1));
             taskText.setText(SessionStorage.getUserData().getTasks()[i].getTaskText());
 
             //set the image
@@ -71,19 +74,27 @@ public class EditActivity extends AppCompatActivity implements PatchCallback {
             taskText.setTextSize(18);
             taskText.setTextColor(getResources().getColor(R.color.black));
 
-
+            // Create a Group for ImageView and TextView
+            Group group = new Group(this);
+            group.setId(View.generateViewId());
+            group.addView(imageView);
+            group.addView(taskCounter);
+            group.addView(taskText);
 
             // Add the ImageView to the taskContainer
             taskContainer.addView(imageView);
             taskContainer.addView(taskCounter);
             taskContainer.addView(taskText);
-            int margin = i%2==0? 32:100;
+            taskContainer.addView(group);
+
+
+            int margin = i % 2 == 0 ? 32 : 100;
 
             // Set constraints to create a vertical chain
             constraintSet.connect(imageView.getId(), ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, margin);
-            if(i==0) {
+            if (i == 0) {
                 constraintSet.connect(imageView.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
-            }else{
+            } else {
                 constraintSet.connect(imageView.getId(), ConstraintSet.TOP, previousViewId, ConstraintSet.BOTTOM);
             }
             constraintSet.constrainWidth(imageView.getId(), 300); // Set width constraint
@@ -101,10 +112,19 @@ public class EditActivity extends AppCompatActivity implements PatchCallback {
             constraintSet.connect(taskText.getId(), ConstraintSet.BOTTOM, imageView.getId(), ConstraintSet.BOTTOM);
             // Update previousViewId to the ID of the current ImageView
             previousViewId = imageView.getId();
-        }
+            //setOnClickListener For the group
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SessionStorage.setTaskToEdit(SessionStorage.getUserData().getTasks()[index]);
+                    PatchDialog pd = new PatchDialog(EditActivity.this, "task");
+                    pd.show();
+                }
+            });
 
-        // Apply constraints to the taskContainer
-        constraintSet.applyTo(taskContainer);
+            // Apply constraints to the taskContainer
+            constraintSet.applyTo(taskContainer);
+        }
     }
 
 
