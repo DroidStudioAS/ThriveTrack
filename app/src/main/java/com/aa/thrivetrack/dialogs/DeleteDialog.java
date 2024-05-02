@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.Group;
 
 import com.aa.thrivetrack.AuthenticationActivity;
 import com.aa.thrivetrack.R;
@@ -21,8 +22,13 @@ import java.util.Map;
 
 public class DeleteDialog extends Dialog {
 
+    TextView deleteTitle;
+
+    Group deleteUserGroup;
+    //children
     TextView passwordEt;
-    Button confirmDelete;
+    Button confirmUserDelete;
+    String mode;
 
     private Context context;
 
@@ -32,16 +38,30 @@ public class DeleteDialog extends Dialog {
         super(context);
         this.context=context;
     }
+    public DeleteDialog(@NonNull Context context, String mode) {
+        super(context);
+        this.context=context;
+        this.mode=mode;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_delete);
         /**Start Of Ui initializations**/
+        deleteTitle=(TextView)findViewById(R.id.deleteTitle);
+
+        deleteUserGroup = (Group) findViewById(R.id.deleteUserGroup);
         passwordEt=(TextView) findViewById(R.id.passwordEt);
-        confirmDelete=(Button) findViewById(R.id.confirmDeleteTrigger);
+        confirmUserDelete =(Button) findViewById(R.id.confirmDeleteTrigger);
         /**End Of Ui initializations**/
-        confirmDelete.setOnClickListener(new View.OnClickListener() {
+        confirmUserDelete.setOnClickListener(deleteUser());
+
+        setDialog();
+    }
+
+    public View.OnClickListener deleteUser(){
+        return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String password = passwordEt.getText().toString().trim();
@@ -62,6 +82,15 @@ public class DeleteDialog extends Dialog {
                 SessionStorage.resetServerResponse();
 
             }
-        });
+        };
+    }
+
+    public void setDialog(){
+        switch (mode){
+            case "user":
+                deleteTitle.setText("Delete User");
+                deleteUserGroup.setVisibility(View.VISIBLE);
+
+        }
     }
 }

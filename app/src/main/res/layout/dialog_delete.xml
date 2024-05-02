@@ -8,6 +8,15 @@
     android:layout_margin="15dp"
     android:padding="15dp">
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/deleteUserGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="deleteUserPasswordLabel,passwordEt,confirmDeleteTrigger,deleteWarningTv"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="14dp" />
+
     <TextView
         android:id="@+id/deleteUserPasswordLabel"
         android:layout_width="wrap_content"
@@ -31,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/deleteTitle" />
 
     <EditText
         android:id="@+id/passwordEt"
@@ -52,4 +61,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEt" />
+
+    <TextView
+        android:id="@+id/deleteTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

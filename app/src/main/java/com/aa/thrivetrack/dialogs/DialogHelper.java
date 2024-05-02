@@ -16,14 +16,4 @@ public class DialogHelper {
             }
         };
     }
-    public static View.OnClickListener openPatchDialog(Context context, String mode, Task task){
-        SessionStorage.setTaskToEdit(task);
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PatchDialog pd = new PatchDialog(context, mode);
-                pd.show();
-            }
-        };
-    }
 }

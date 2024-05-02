@@ -39,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
         deleteTrigger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DeleteDialog dd = new DeleteDialog(ProfileActivity.this);
+                DeleteDialog dd = new DeleteDialog(ProfileActivity.this,"user");
                 dd.show();
             }
         });
