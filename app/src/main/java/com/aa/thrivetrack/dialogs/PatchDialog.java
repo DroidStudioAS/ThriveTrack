@@ -279,10 +279,9 @@ public class PatchDialog extends Dialog {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dismissDialog();
                 DeleteDialog dd = new DeleteDialog(context, "task");
                 dd.show();
-
-                dismissDialog();
             }
         };
     }
