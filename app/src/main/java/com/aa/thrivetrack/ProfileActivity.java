@@ -21,6 +21,7 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
     TextView changeUsernameTrigger;
     TextView changePasswordTrigger;
     TextView deleteTrigger;
+    TextView streakTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,10 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
         changeUsernameTrigger = (TextView)findViewById(R.id.changeUsernameTrigger);
         changePasswordTrigger=(TextView)findViewById(R.id.changePasswordTrigger);
         deleteTrigger=(TextView)findViewById(R.id.deleteAcountTrigger);
+        streakTv = (TextView) findViewById(R.id.userStreakTv);
         /******End Of Ui Initializations******/
+        String streakString = "You Have A " + String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()) + " Day Streak";
+        streakTv.setText(streakString);
         /******Start Of OnClickListeners******/
         changeUsernameTrigger.setOnClickListener(DialogHelper.openPatchDialog(ProfileActivity.this, "username"));
         changePasswordTrigger.setOnClickListener(DialogHelper.openPatchDialog(ProfileActivity.this,"password"));

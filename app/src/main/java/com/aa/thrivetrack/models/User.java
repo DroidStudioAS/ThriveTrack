@@ -3,6 +3,7 @@ package com.aa.thrivetrack.models;
 public class User {
     int user_id;
     String user_rank;
+    int user_streak;
 
     public User() {
     }
@@ -26,6 +27,14 @@ public class User {
 
     public void setUser_rank(String user_rank) {
         this.user_rank = user_rank;
+    }
+
+    public int getUser_streak() {
+        return user_streak;
+    }
+
+    public void setUser_streak(int user_streak) {
+        this.user_streak = user_streak;
     }
 
     @Override
