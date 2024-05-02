@@ -205,8 +205,8 @@ public class SetupActivity extends AppCompatActivity  {
             tasks.add(new Task(SessionStorage.getSecondTask()));
             tasks.add(new Task(SessionStorage.getThirdTask()));
             tasks.add(new Task(SessionStorage.getFourthTask()));
-
             Data data = new Data(SessionStorage.getGoalInFocus(), tasks, user);
+
             SessionStorage.setUserData(data);
 
            startActivity(new Intent(this, IndexActivity.class));

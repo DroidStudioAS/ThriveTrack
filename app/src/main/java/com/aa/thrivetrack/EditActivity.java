@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.aa.thrivetrack.callback.OnDeleteTask;
 import com.aa.thrivetrack.callback.OnTaskChanged;
 import com.aa.thrivetrack.callback.PatchCallback;
 import com.aa.thrivetrack.dialogs.DialogHelper;
@@ -21,7 +22,7 @@ import com.aa.thrivetrack.dialogs.PatchDialog;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.SessionStorage;
 
-public class EditActivity extends AppCompatActivity implements PatchCallback, OnTaskChanged {
+public class EditActivity extends AppCompatActivity implements PatchCallback, OnTaskChanged, OnDeleteTask {
     ConstraintLayout taskContainer;
     TextView editGoalTv;
     TextView editGoalTrigger;
@@ -141,6 +142,11 @@ public class EditActivity extends AppCompatActivity implements PatchCallback, On
     public void onTaskChange(String task) {
         TextView toEdit = findViewById(taskTvId);
         toEdit.setText(task);
+    }
+
+    @Override
+    public void onTaskDeleted() {
+        recreate();
     }
 }
 

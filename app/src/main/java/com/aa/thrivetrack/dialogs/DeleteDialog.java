@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.Group;
 
 import com.aa.thrivetrack.AuthenticationActivity;
 import com.aa.thrivetrack.R;
+import com.aa.thrivetrack.callback.OnDeleteTask;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
@@ -39,6 +40,7 @@ public class DeleteDialog extends Dialog {
     Button confirmTaskDelete;
 
     private Context context;
+    OnDeleteTask onDelete;
 
     private final String [] PATH_TO_DELETE_USER = new String[]{"edit","delete","user"};
     private final String [] PATH_TO_DELETE_TASK = new String[]{"edit","delete","task"};
@@ -52,6 +54,9 @@ public class DeleteDialog extends Dialog {
         super(context);
         this.context=context;
         this.mode=mode;
+        if(mode.equals("task")){
+            onDelete=(OnDeleteTask) context;
+        }
     }
 
     @Override
@@ -131,6 +136,7 @@ public class DeleteDialog extends Dialog {
                             SessionStorage.getUserData().getTasks().remove(x);
                         }
                     }
+                    onDelete.onTaskDeleted();
                 }else{
                     Toast.makeText(getContext(),"Oops",Toast.LENGTH_SHORT).show();
                 }
