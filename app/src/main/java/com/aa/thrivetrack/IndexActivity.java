@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class IndexActivity extends AppCompatActivity {
     ImageView profileTrigger;
     ImageView goalsTrigger;
+    ImageView todoTrigger;
 
 
     @Override
@@ -21,10 +23,12 @@ public class IndexActivity extends AppCompatActivity {
         /***Start Of Ui Initializations**/
         profileTrigger = (ImageView) findViewById(R.id.profileTrigger);
         goalsTrigger = (ImageView) findViewById(R.id.goalsTrigger);
+        todoTrigger=(ImageView)findViewById(R.id.todoTrigger);
         /***End Of Ui Initializations**/
         /***Start Of OnClickListeners**/
         profileTrigger.setOnClickListener(pushTo(new Intent(this, ProfileActivity.class)));
         goalsTrigger.setOnClickListener(pushTo(new Intent(this, EditActivity.class)));
+        todoTrigger.setOnClickListener(pushTo(new Intent(this, ToDoActivity.class)));
         /***End Of OnClickListeners**/
 
 
