@@ -168,13 +168,11 @@
         android:id="@+id/newTaskEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/oldTaskTv" />
+        app:layout_constraintTop_toBottomOf="@+id/newTaskLabel" />
 
     <Button
         android:id="@+id/changeTaskTrigger"
@@ -204,5 +202,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/oldTaskLabel" />
+
+    <TextView
+        android:id="@+id/newTaskLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Enter New Task:"
+        app:layout_constraintEnd_toEndOf="@+id/newTaskEt"
+        app:layout_constraintStart_toStartOf="@+id/newTaskEt"
+        app:layout_constraintTop_toBottomOf="@+id/oldTaskTv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

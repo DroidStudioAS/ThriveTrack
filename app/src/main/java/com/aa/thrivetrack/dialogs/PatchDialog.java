@@ -88,7 +88,7 @@ public class PatchDialog extends Dialog {
         newGoalTrigger=(Button)findViewById(R.id.changeGoalTrigger);
 
         changeTaskGroup = (Group) findViewById(R.id.changeTaskGroup);
-        oldTaskTv = (TextView)findViewById(R.id.oldTaskLabel);
+        oldTaskTv = (TextView)findViewById(R.id.oldTaskTv);
         newTaskEt = (EditText)findViewById(R.id.newTaskEt);
         changeTaskTrigger = (Button)findViewById(R.id.changeTaskTrigger);
         /*****End Of Ui Initializations*****/
