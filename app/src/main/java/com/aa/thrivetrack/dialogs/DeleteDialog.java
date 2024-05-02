@@ -14,10 +14,14 @@ import androidx.constraintlayout.widget.Group;
 
 import com.aa.thrivetrack.AuthenticationActivity;
 import com.aa.thrivetrack.R;
+import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DeleteDialog extends Dialog {
@@ -36,7 +40,9 @@ public class DeleteDialog extends Dialog {
 
     private Context context;
 
-    private final String [] PATH_TO_DELETE = new String[]{"edit","delete","user"};
+    private final String [] PATH_TO_DELETE_USER = new String[]{"edit","delete","user"};
+    private final String [] PATH_TO_DELETE_TASK = new String[]{"edit","delete","task"};
+
 
     public DeleteDialog(@NonNull Context context) {
         super(context);
@@ -64,35 +70,10 @@ public class DeleteDialog extends Dialog {
         confirmTaskDelete=(Button)findViewById(R.id.confirmTaskDelete);
         /**End Of Ui initializations**/
         confirmUserDelete.setOnClickListener(deleteUser());
+        confirmTaskDelete.setOnClickListener(deleteTask());
 
         setDialog();
     }
-
-    public View.OnClickListener deleteUser(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String password = passwordEt.getText().toString().trim();
-                if(password.equals("")){
-                    Toast.makeText(getContext(),"Enter Password", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Map<String,String> params = new HashMap<>();
-                params.put("user-id",String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
-                params.put("password", password);
-
-                NetworkHelper.callDelete(PATH_TO_DELETE,params,0);
-                NetworkHelper.waitForReply();
-                if(SessionStorage.getServerResponse().equals("true")){
-                    Toast.makeText(getContext(),"Account Deleted", Toast.LENGTH_SHORT).show();
-                    context.startActivity(new Intent(context, AuthenticationActivity.class));
-                }
-                SessionStorage.resetServerResponse();
-
-            }
-        };
-    }
-
     public void setDialog(){
         switch (mode){
             case "user":
@@ -108,4 +89,54 @@ public class DeleteDialog extends Dialog {
 
         }
     }
+
+
+    public View.OnClickListener deleteUser(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String password = passwordEt.getText().toString().trim();
+                if(password.equals("")){
+                    Toast.makeText(getContext(),"Enter Password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Map<String,String> params = new HashMap<>();
+                params.put("user-id",String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
+                params.put("password", password);
+
+                NetworkHelper.callDelete(PATH_TO_DELETE_USER,params,0);
+                NetworkHelper.waitForReply();
+                if(SessionStorage.getServerResponse().equals("true")){
+                    Toast.makeText(getContext(),"Account Deleted", Toast.LENGTH_SHORT).show();
+                    context.startActivity(new Intent(context, AuthenticationActivity.class));
+                }
+                SessionStorage.resetServerResponse();
+
+            }
+        };
+    }
+    public View.OnClickListener deleteTask(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, String> params = new HashMap<>();
+                params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
+                params.put("task-text",SessionStorage.getTaskToEdit().getTaskText());
+                NetworkHelper.callDelete(PATH_TO_DELETE_TASK, params, 0);
+                NetworkHelper.waitForReply();
+                if(SessionStorage.getServerResponse().equals("true")){
+                    Toast.makeText(getContext(),"Task Deleted",Toast.LENGTH_SHORT).show();
+                    for(Task x : SessionStorage.getUserData().getTasks()){
+                        if(x.getTaskText().equals(SessionStorage.getTaskToEdit().getTaskText())){
+                            SessionStorage.getUserData().getTasks().remove(x);
+                        }
+                    }
+                }else{
+                    Toast.makeText(getContext(),"Oops",Toast.LENGTH_SHORT).show();
+                }
+                SessionStorage.resetServerResponse();
+            }
+        };
+    }
+
 }

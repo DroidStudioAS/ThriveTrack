@@ -1,10 +1,11 @@
 package com.aa.thrivetrack.models;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Data {
     String goal;
-    Task[] tasks;
+    ArrayList<Task> tasks;
     User user;
 
     public Data() {
@@ -14,12 +15,12 @@ public class Data {
     public String toString() {
         return "Data{" +
                 "goal='" + goal + '\'' +
-                ", tasks=" + Arrays.toString(tasks) +
+                ", tasks=" +
                 ", user=" + user.toString() +
                 '}';
     }
 
-    public Data(String goal, Task[] tasks, User user) {
+    public Data(String goal, ArrayList<Task> tasks, User user) {
         this.goal = goal;
         this.tasks = tasks;
         this.user = user;
@@ -33,11 +34,11 @@ public class Data {
         this.goal = goal;
     }
 
-    public Task[] getTasks() {
+    public ArrayList<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(Task[] tasks) {
+    public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 

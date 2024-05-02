@@ -50,7 +50,7 @@ public class EditActivity extends AppCompatActivity implements PatchCallback, On
         int previousViewId = R.id.taskContainer;
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(taskContainer);
-        for (int i = 0; i < SessionStorage.getUserData().getTasks().length; i++) {
+        for (int i = 0; i < SessionStorage.getUserData().getTasks().size(); i++) {
             //elements
             ImageView imageView = new ImageView(this);
             TextView taskCounter = new TextView(this);
@@ -59,7 +59,7 @@ public class EditActivity extends AppCompatActivity implements PatchCallback, On
 
             //set Text
             taskCounter.setText(String.valueOf(i + 1));
-            taskText.setText(SessionStorage.getUserData().getTasks()[i].getTaskText());
+            taskText.setText(SessionStorage.getUserData().getTasks().get(i).getTaskText());
 
             //set the image
             imageView.setImageResource(R.drawable.ic_menu);
@@ -120,7 +120,7 @@ public class EditActivity extends AppCompatActivity implements PatchCallback, On
                 @Override
                 public void onClick(View v) {
                     taskTvId=taskText.getId();
-                    SessionStorage.setTaskToEdit(SessionStorage.getUserData().getTasks()[index]);
+                    SessionStorage.setTaskToEdit(SessionStorage.getUserData().getTasks().get(index));
                     PatchDialog pd = new PatchDialog(EditActivity.this, "task");
                     pd.show();
                 }

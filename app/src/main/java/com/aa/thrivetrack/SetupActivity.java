@@ -30,6 +30,7 @@ import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -199,12 +200,12 @@ public class SetupActivity extends AppCompatActivity  {
         if(SessionStorage.getServerResponse().equals("true")){
             //build session data object
             User user = new User(Integer.parseInt(SessionStorage.getUser_id()), "bronze");
-            Task[] tasks = new Task[]{
-                    new Task(SessionStorage.getFirstTask()),
-                    new Task(SessionStorage.getSecondTask()),
-                    new Task(SessionStorage.getThirdTask()),
-                    new Task(SessionStorage.getFourthTask())
-            };
+            ArrayList<Task> tasks = new ArrayList<>();
+            tasks.add(new Task(SessionStorage.getFirstTask()));
+            tasks.add(new Task(SessionStorage.getSecondTask()));
+            tasks.add(new Task(SessionStorage.getThirdTask()));
+            tasks.add(new Task(SessionStorage.getFourthTask()));
+
             Data data = new Data(SessionStorage.getGoalInFocus(), tasks, user);
             SessionStorage.setUserData(data);
 
