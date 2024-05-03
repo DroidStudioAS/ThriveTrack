@@ -3,6 +3,7 @@ package com.aa.thrivetrack.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,24 +36,54 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         int startIndex = position * itemsPerPage;
         int endIndex = Math.min(startIndex + itemsPerPage, articles.size());
 
+        TextView[] blogPostViews = new TextView[]{
+                holder.itemView.findViewById(R.id.blogPost1),
+                holder.itemView.findViewById(R.id.blogPost2),
+                holder.itemView.findViewById(R.id.blogPost3)
+        };
 
-        TextView blogPost1 = holder.itemView.findViewById(R.id.blogPost1);
-        TextView blogPost2 = holder.itemView.findViewById(R.id.blogPost2);
-        TextView blogPost3 = holder.itemView.findViewById(R.id.blogPost3);
-        TextView[] tvs = new TextView[]{blogPost1,blogPost2,blogPost3};
+        TextView[] likeTvViews = new TextView[]{
+                holder.itemView.findViewById(R.id.likeTv1),
+                holder.itemView.findViewById(R.id.likeTv2),
+                holder.itemView.findViewById(R.id.likeTv3)
+        };
 
-        for (TextView tv : tvs){
-            int index = startIndex + java.util.Arrays.asList(tvs).indexOf(tv);
-            if(index<endIndex){
-                Article currentItem = articles.get(index);
-                tv.setText(currentItem.getArticle_title());
-                tv.setVisibility(View.VISIBLE);
-            }else{
-                tv.setVisibility(View.GONE);
+        TextView[] commentTvViews = new TextView[]{
+                holder.itemView.findViewById(R.id.commentTv1),
+                holder.itemView.findViewById(R.id.commentTv2),
+                holder.itemView.findViewById(R.id.commentTv3)
+        };
+        ImageView[] likeIcons = new ImageView[]{
+                holder.itemView.findViewById(R.id.likeIcon1),
+                holder.itemView.findViewById(R.id.likeIcon2),
+                holder.itemView.findViewById(R.id.likeIcon3)
+        };
+        ImageView[] commentIcons = new ImageView[]{
+                holder.itemView.findViewById(R.id.commentIcon1),
+                holder.itemView.findViewById(R.id.commentIcon2),
+                holder.itemView.findViewById(R.id.commentIcon3)
+        };
+
+        for (int i = 0; i < blogPostViews.length; i++) {
+            if (startIndex + i < endIndex) {
+                Article currentItem = articles.get(startIndex + i);
+                blogPostViews[i].setVisibility(View.VISIBLE);
+                likeTvViews[i].setVisibility(View.VISIBLE);
+                commentTvViews[i].setVisibility(View.VISIBLE);
+                likeIcons[i].setVisibility(View.VISIBLE);
+                commentIcons[i].setVisibility(View.VISIBLE);
+
+                blogPostViews[i].setText(currentItem.getArticle_title());
+                likeTvViews[i].setText(String.valueOf(currentItem.getArticle_likes()));
+                commentTvViews[i].setText(String.valueOf(currentItem.getCommentCount()));
+            } else {
+                blogPostViews[i].setVisibility(View.GONE);
+                likeTvViews[i].setVisibility(View.GONE);
+                commentTvViews[i].setVisibility(View.GONE);
+                likeIcons[i].setVisibility(View.GONE);
+                commentIcons[i].setVisibility(View.GONE);
             }
-
         }
-
     }
 
     @Override
