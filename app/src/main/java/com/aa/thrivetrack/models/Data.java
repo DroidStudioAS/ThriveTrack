@@ -7,6 +7,7 @@ public class Data {
     String goal;
     ArrayList<Task> tasks;
     User user;
+    ArrayList<Diary> diary;
 
     public Data() {
     }
@@ -48,5 +49,13 @@ public class Data {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public ArrayList<Diary> getDiary() {
+        return diary;
+    }
+
+    public void setDiary(ArrayList<Diary> diary) {
+        this.diary = diary;
     }
 }

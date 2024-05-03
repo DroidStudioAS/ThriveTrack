@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.aa.thrivetrack.models.Data;
+import com.aa.thrivetrack.models.Diary;
+import com.aa.thrivetrack.network.SessionStorage;
 
 public class IndexActivity extends AppCompatActivity {
     ImageView profileTrigger;
@@ -34,9 +36,11 @@ public class IndexActivity extends AppCompatActivity {
         goalsTrigger.setOnClickListener(pushTo(new Intent(this, EditActivity.class)));
         todoTrigger.setOnClickListener(pushTo(new Intent(this, ToDoActivity.class)));
         diaryTrigger.setOnClickListener(pushTo(new Intent(this, DiaryActivity.class)));
-
         /***End Of OnClickListeners**/
 
+        for(Diary x : SessionStorage.getUserData().getDiary()){
+            Log.i("diary", x.toString());
+        }
 
 
     }
