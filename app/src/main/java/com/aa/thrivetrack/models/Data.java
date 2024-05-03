@@ -21,10 +21,11 @@ public class Data {
                 '}';
     }
 
-    public Data(String goal, ArrayList<Task> tasks, User user) {
+    public Data(String goal, ArrayList<Task> tasks, User user, ArrayList<Diary> diary) {
         this.goal = goal;
         this.tasks = tasks;
         this.user = user;
+        this.diary=diary;
     }
 
     public String getGoal() {

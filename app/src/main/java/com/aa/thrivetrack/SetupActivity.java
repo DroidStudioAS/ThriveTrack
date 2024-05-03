@@ -25,6 +25,7 @@ import com.aa.thrivetrack.fragments.setup.explore.ExploreModeGoalInputFragment;
 import com.aa.thrivetrack.fragments.setup.explore.SelectGoalFragment;
 import com.aa.thrivetrack.fragments.setup.focus.FocusModeGoalInputFragment;
 import com.aa.thrivetrack.models.Data;
+import com.aa.thrivetrack.models.Diary;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.NetworkHelper;
@@ -205,7 +206,8 @@ public class SetupActivity extends AppCompatActivity  {
             tasks.add(new Task(SessionStorage.getSecondTask()));
             tasks.add(new Task(SessionStorage.getThirdTask()));
             tasks.add(new Task(SessionStorage.getFourthTask()));
-            Data data = new Data(SessionStorage.getGoalInFocus(), tasks, user);
+            ArrayList<Diary> diary = new ArrayList<>();
+            Data data = new Data(SessionStorage.getGoalInFocus(), tasks, user,diary);
 
             SessionStorage.setUserData(data);
 

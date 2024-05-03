@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+//todo: cover the case where user has 2 acounts on the same device for shared preferences;
 public class ToDoActivity extends AppCompatActivity {
 
     ConstraintLayout todoContainer;
