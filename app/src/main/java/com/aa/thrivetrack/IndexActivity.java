@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IndexActivity extends AppCompatActivity {
+
     ImageView profileTrigger;
     ImageView goalsTrigger;
     ImageView todoTrigger;
