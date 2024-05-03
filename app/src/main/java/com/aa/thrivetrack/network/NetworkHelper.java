@@ -38,7 +38,6 @@ public class NetworkHelper {
             Log.i("waiting","...");
         }
     }
-
     public static void callGet(String[] routeParams, Map<String,String> params, int executionStatus){
         //build URL
         String path = buildUrl(routeParams);

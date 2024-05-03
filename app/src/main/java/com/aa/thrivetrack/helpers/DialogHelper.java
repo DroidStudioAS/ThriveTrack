@@ -1,8 +1,9 @@
-package com.aa.thrivetrack.dialogs;
+package com.aa.thrivetrack.helpers;
 
 import android.content.Context;
 import android.view.View;
 
+import com.aa.thrivetrack.dialogs.PatchDialog;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.SessionStorage;
 

@@ -2,15 +2,13 @@ package com.aa.thrivetrack;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.aa.thrivetrack.callback.PatchCallback;
 import com.aa.thrivetrack.dialogs.DeleteDialog;
-import com.aa.thrivetrack.dialogs.DialogHelper;
-import com.aa.thrivetrack.dialogs.PatchDialog;
+import com.aa.thrivetrack.helpers.DialogHelper;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.SessionStorage;
 

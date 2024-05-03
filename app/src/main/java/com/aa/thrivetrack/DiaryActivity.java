@@ -41,6 +41,18 @@ public class DiaryActivity extends AppCompatActivity {
         saveTodaysInput=(Button) findViewById(R.id.saveTodaysDiary);
         /**Of Ui Initializations**/
 
+        sharedPreferences=getSharedPreferences(SessionStorage.getUsername(), MODE_PRIVATE);
+        String todaysInput = sharedPreferences.getString("todays_diary", "");
+        diaryInput.setText(todaysInput);
+
+        saveTodaysInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("todays_diary", diaryInput.getText().toString());
+                editor.apply();
+            }
+        });
         populateUi();
 
     }

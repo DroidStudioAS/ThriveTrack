@@ -3,15 +3,11 @@ package com.aa.thrivetrack;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.constraintlayout.widget.Group;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.aa.thrivetrack.callback.OnAddTask;
@@ -19,9 +15,8 @@ import com.aa.thrivetrack.callback.OnDeleteTask;
 import com.aa.thrivetrack.callback.OnTaskChanged;
 import com.aa.thrivetrack.callback.PatchCallback;
 import com.aa.thrivetrack.dialogs.AddDialog;
-import com.aa.thrivetrack.dialogs.DialogHelper;
+import com.aa.thrivetrack.helpers.DialogHelper;
 import com.aa.thrivetrack.dialogs.PatchDialog;
-import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.SessionStorage;
 
 public class EditActivity extends AppCompatActivity implements PatchCallback, OnTaskChanged, OnDeleteTask, OnAddTask {
