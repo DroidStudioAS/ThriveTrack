@@ -2,6 +2,7 @@ package com.aa.thrivetrack.models;
 public class Comment {
     int comment_id;
     int article_id;
+    int comment_likes;
 
     String comment_text;
     String user_username;
@@ -45,5 +46,13 @@ public class Comment {
 
     public void setUser_rank(String user_rank) {
         this.user_rank = user_rank;
+    }
+
+    public int getComment_likes() {
+        return comment_likes;
+    }
+
+    public void setComment_likes(int comment_likes) {
+        this.comment_likes = comment_likes;
     }
 }

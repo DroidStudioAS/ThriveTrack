@@ -90,4 +90,15 @@ public class Article {
         }
         return comments;
     }
+    public Comment getTopRatedComment(){
+        Comment topComment = new Comment();
+        for(Comment comment : this.getPostComments()){
+            if(comment.user_rank.equals("diamond")){
+                if(comment.getComment_likes()>topComment.getComment_likes()){
+                    topComment=comment;
+                }
+            }
+        }
+        return topComment;
+    }
 }
