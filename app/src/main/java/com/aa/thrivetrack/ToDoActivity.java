@@ -8,8 +8,11 @@ import androidx.constraintlayout.widget.Guideline;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.aa.thrivetrack.helpers.DateHelper;
 import com.aa.thrivetrack.models.Data;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.SessionStorage;
@@ -23,6 +26,8 @@ public class ToDoActivity extends AppCompatActivity {
     TextView todaysDateTv;
     Guideline checkboxGuideline;
 
+    int checkedCount = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +37,7 @@ public class ToDoActivity extends AppCompatActivity {
         todaysDateTv=(TextView) findViewById(R.id.todaysDateTv);
         checkboxGuideline=(Guideline) findViewById(R.id.checkboxGuideline);
         /**End Of Ui Initializations**/
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-        String formatedDate = dateFormat.format(new Date());
-        todaysDateTv.setText(String.valueOf(formatedDate));
+        todaysDateTv.setText(DateHelper.buildTodaysDate());
 
 
         populateUI();
@@ -64,8 +67,22 @@ public class ToDoActivity extends AppCompatActivity {
             todoContainer.addView(toAdd);
             previousViewId=toAdd.getId();
 
+            toAdd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked){
+                        checkedCount++;
+                    }else{
+                        checkedCount--;
+                    }
+                    //increase streak;
+                    if(checkedCount==SessionStorage.getUserData().getTasks().size()){
+                        Toast.makeText(getApplicationContext(), "here it is", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
         }
         constraintSet.applyTo(todoContainer);
-
     }
 }
