@@ -46,9 +46,8 @@ public class ToDoActivity extends AppCompatActivity {
         sharedPreferences=getSharedPreferences("tasks", MODE_PRIVATE);
 
         checkedCount=sharedPreferences.getInt("checked_count",0);
-
-
         populateUI();
+        checkAndSetLastCompareDate();
     }
 
     public void populateUI(){
@@ -96,6 +95,16 @@ public class ToDoActivity extends AppCompatActivity {
 
         }
         constraintSet.applyTo(todoContainer);
+    }
+    public void checkAndSetLastCompareDate(){
+        String lastCompareDate = sharedPreferences.getString("date","");
+        if(!lastCompareDate.equals(DateHelper.buildTodaysDate())){
+            //new day
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.putString("date", DateHelper.buildTodaysDate());
+            editor.apply();
+        }
     }
     public void setViewIdAndText(CheckBox toAdd, Task task){
         toAdd.setId(View.generateViewId());
