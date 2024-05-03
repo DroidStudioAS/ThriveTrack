@@ -89,25 +89,8 @@ public class ToDoActivity extends AppCompatActivity {
                     }
                     editor.putInt("checked_count", checkedCount);
                     editor.apply();
-                    Log.i("checked count", String.valueOf(checkedCount));
-                    //increase streak;
-                    if(checkedCount==SessionStorage.getUserData().getTasks().size()){
-                        editor.putBoolean("tasks_completed", true);
-                        editor.apply();
-                        todaysTasksCompleted=true;
-                        SessionStorage.getUserData().getUser().setUser_streak(SessionStorage.getUserData().getUser().getUser_streak()+1);
-                        Toast.makeText(getApplicationContext(), "here it is", Toast.LENGTH_SHORT).show();
-                        callApi=true;
-                    }
-                    if(todaysTasksCompleted && checkedCount!=SessionStorage.getUserData().getTasks().size()){
-                        editor.putBoolean("tasks_completed", false);
-                        editor.apply();
-                        todaysTasksCompleted=false;
-                        SessionStorage.getUserData().getUser().setUser_streak(SessionStorage.getUserData().getUser().getUser_streak()-1);
-                        callApi=true;
-                    }
-
-                    Log.i("Streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()));
+                    //Handle streak;
+                    handleLocalStreakChange(checkedCount);
                     updateUserStreak(callApi);
                 }
             });
@@ -138,6 +121,24 @@ public class ToDoActivity extends AppCompatActivity {
 
         constraintSet.constrainWidth(toAdd.getId(), ConstraintSet.WRAP_CONTENT);
         constraintSet.constrainHeight(toAdd.getId(), ConstraintSet.MATCH_CONSTRAINT);
+    }
+    public void handleLocalStreakChange(int checkedCount){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if(checkedCount==SessionStorage.getUserData().getTasks().size()){
+            editor.putBoolean("tasks_completed", true);
+            editor.apply();
+            todaysTasksCompleted=true;
+            SessionStorage.getUserData().getUser().setUser_streak(SessionStorage.getUserData().getUser().getUser_streak()+1);
+            Toast.makeText(getApplicationContext(), "here it is", Toast.LENGTH_SHORT).show();
+            callApi=true;
+        }
+        if(todaysTasksCompleted && checkedCount!=SessionStorage.getUserData().getTasks().size()){
+            editor.putBoolean("tasks_completed", false);
+            editor.apply();
+            todaysTasksCompleted=false;
+            SessionStorage.getUserData().getUser().setUser_streak(SessionStorage.getUserData().getUser().getUser_streak()-1);
+            callApi=true;
+        }
     }
     public void updateUserStreak(boolean callApi){
         if (!callApi){
