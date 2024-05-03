@@ -18,6 +18,11 @@ import com.aa.thrivetrack.SetupActivity;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +55,8 @@ public class RegisterFragment extends Fragment {
                     Map<String ,String> params = new HashMap();
                     params.put("username",usernameEt.getText().toString());
                     params.put("password", passwordEt.getText().toString());
+                    params.put("streak-start", buildDate());
+                    params.put("streak-end", buildDate());
 
                     NetworkHelper.callPost(PATH_TO_REGISTER, params,0);
                     NetworkHelper.waitForReply();
@@ -87,5 +94,10 @@ public class RegisterFragment extends Fragment {
         }
 
         return inputValid;
+    }
+    public String buildDate(){
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        //Log.i("formated date", String.valueOf(date));
+        return date;
     }
 }
