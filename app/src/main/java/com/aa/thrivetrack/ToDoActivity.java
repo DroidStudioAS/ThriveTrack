@@ -54,9 +54,6 @@ public class ToDoActivity extends AppCompatActivity {
 
         checkedCount=sharedPreferences.getInt("checked_count",0);
         todaysTasksCompleted=sharedPreferences.getBoolean("tasks_completed", false);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("date", DateHelper.buildTodaysDate());
-        editor.apply();
         populateUI();
         checkAndSetLastCompareDate();
         Log.i("completed", String.valueOf(todaysTasksCompleted));
