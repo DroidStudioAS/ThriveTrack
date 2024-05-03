@@ -74,6 +74,7 @@ public class DiaryActivity extends AppCompatActivity {
                 params.put("entry-text", entryText);
 
                 todayEntered=sharedPreferences.getBoolean("diary_entered",false);
+
                 String[] routePath = !todayEntered ? PATH_TO_INSERT_ENTRY : PATH_TO_UPDATE_ENTRY;
                 if(todayEntered){
                     NetworkHelper.callPatch(routePath, params, 0);

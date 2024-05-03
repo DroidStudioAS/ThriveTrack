@@ -11,13 +11,20 @@ import android.widget.Toast;
 
 import com.aa.thrivetrack.models.Data;
 import com.aa.thrivetrack.models.Diary;
+import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class IndexActivity extends AppCompatActivity {
     ImageView profileTrigger;
     ImageView goalsTrigger;
     ImageView todoTrigger;
     ImageView diaryTrigger;
+    ImageView blogTrigger;
+
+    private static final String[] PATH_TO_FETCH_BLOG = new String[]{"fetch","blog"};
 
 
     @Override
@@ -30,17 +37,24 @@ public class IndexActivity extends AppCompatActivity {
         goalsTrigger = (ImageView) findViewById(R.id.goalsTrigger);
         todoTrigger=(ImageView)findViewById(R.id.todoTrigger);
         diaryTrigger=(ImageView)findViewById(R.id.diaryTrigger);
+        blogTrigger=(ImageView)findViewById(R.id.communityTrigger);
         /***End Of Ui Initializations**/
         /***Start Of OnClickListeners**/
         profileTrigger.setOnClickListener(pushTo(new Intent(this, ProfileActivity.class)));
         goalsTrigger.setOnClickListener(pushTo(new Intent(this, EditActivity.class)));
         todoTrigger.setOnClickListener(pushTo(new Intent(this, ToDoActivity.class)));
         diaryTrigger.setOnClickListener(pushTo(new Intent(this, DiaryActivity.class)));
+        blogTrigger.setOnClickListener(pushTo(new Intent(this, BlogActivity.class)));
         /***End Of OnClickListeners**/
+        //fetch blog
+        Map<String, String> params = new HashMap<>();
+        NetworkHelper.callGet(PATH_TO_FETCH_BLOG, params, 2);
+        NetworkHelper.waitForReply();
+        Log.i("response",SessionStorage.getBlog().toString());
+        SessionStorage.resetServerResponse();
 
-        for(Diary x : SessionStorage.getUserData().getDiary()){
-            Log.i("diary", x.toString());
-        }
+
+
 
 
     }

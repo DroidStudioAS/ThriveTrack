@@ -3,6 +3,7 @@ package com.aa.thrivetrack.network;
 import android.util.JsonReader;
 import android.util.Log;
 
+import com.aa.thrivetrack.models.Blog;
 import com.aa.thrivetrack.models.Data;
 import com.aa.thrivetrack.models.Task;
 import com.google.gson.Gson;
@@ -35,6 +36,7 @@ public class SessionStorage {
 
    public static ArrayList<Task> USER_TASKS = new ArrayList();
    private static Data USER_DATA;
+   private static Blog BLOG;
 
    private static Task taskToEdit;
 
@@ -122,23 +124,29 @@ public class SessionStorage {
         return todaysTasksCompleted;
     }
 
-
+    public static Blog getBlog() {
+        return BLOG;
+    }
 
     /*
     *0- For a single line of data (msg:true/false)
     *1-For Parsing All the User data neccesary for the app to function (onlogin);
-    * 2-register
+    * 2-BLOG POSTS
     */
     public static void setServerResponse(String serverResponse, int executionStatus) {
+        Gson gson = new Gson();
         if(executionStatus==0) {
             String responseToSetSplit = serverResponse.split(":")[1];
             String responseToSet = responseToSetSplit.substring(0, responseToSetSplit.length() - 1);
             SERVER_RESPONSE = responseToSet;
         }else if(executionStatus==1){
-          Gson gson = new Gson();
           Data data = gson.fromJson(serverResponse,Data.class);
           USER_DATA=data;
           SERVER_RESPONSE=serverResponse;
+        }else if(executionStatus==2){
+            Blog blog = gson.fromJson(serverResponse, Blog.class);
+            setBlog(blog);
+            SERVER_RESPONSE=serverResponse;
         }
     }
 
@@ -199,6 +207,10 @@ public class SessionStorage {
         setSecondTask(second);
         setThirdTask(third);
         setFourthTask(fourth);
+    }
+
+    public static void setBlog(Blog BLOG) {
+        SessionStorage.BLOG = BLOG;
     }
 
     public static void setTaskToEdit(Task taskToEdit) {
