@@ -54,6 +54,9 @@ public class ToDoActivity extends AppCompatActivity {
 
         checkedCount=sharedPreferences.getInt("checked_count",0);
         todaysTasksCompleted=sharedPreferences.getBoolean("tasks_completed", false);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("date", DateHelper.buildTodaysDate());
+        editor.apply();
         populateUI();
         checkAndSetLastCompareDate();
         Log.i("completed", String.valueOf(todaysTasksCompleted));
@@ -101,6 +104,11 @@ public class ToDoActivity extends AppCompatActivity {
     public void checkAndSetLastCompareDate(){
         String lastCompareDate = sharedPreferences.getString("date","");
         if(!lastCompareDate.equals(DateHelper.buildTodaysDate())){
+            //reset streak if yesterday was not completed
+            if(!todaysTasksCompleted){
+                SessionStorage.getUserData().getUser().setUser_streak(0);
+                updateUserStreak(true);
+            }
             //new day
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
@@ -147,6 +155,7 @@ public class ToDoActivity extends AppCompatActivity {
         Map<String,String> params = new HashMap<>();
         params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
         params.put("streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()));
+        params.put("end-date", DateHelper.buildTodaysDate());
         NetworkHelper.callPatch(PATH_TO_EDIT_STREAK, params, 0);
         NetworkHelper.waitForReply();
         if(SessionStorage.getServerResponse().equals("true")){
