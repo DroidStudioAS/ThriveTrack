@@ -51,7 +51,7 @@ public class ToDoActivity extends AppCompatActivity {
         /**End Of Ui Initializations**/
         todaysDateTv.setText(DateHelper.buildTodaysDate());
 
-        sharedPreferences=getSharedPreferences("tasks", MODE_PRIVATE);
+        sharedPreferences=getSharedPreferences(SessionStorage.getUsername(), MODE_PRIVATE);
 
         checkedCount=sharedPreferences.getInt("checked_count",0);
         todaysTasksCompleted=sharedPreferences.getBoolean("tasks_completed", false);
