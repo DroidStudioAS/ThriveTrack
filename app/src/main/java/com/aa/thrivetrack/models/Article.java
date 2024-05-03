@@ -2,6 +2,8 @@ package com.aa.thrivetrack.models;
 
 import com.aa.thrivetrack.network.SessionStorage;
 
+import java.util.ArrayList;
+
 public class Article {
     int article_id;
     String article_title;
@@ -78,5 +80,14 @@ public class Article {
             }
         }
         return commentCount;
+    }
+    public ArrayList<Comment> getPostComments(){
+        ArrayList<Comment> comments = new ArrayList<>();
+        for(Comment comment : SessionStorage.getBlog().getComments()){
+            if(comment.getArticle_id()==this.getArticle_id()){
+                comments.add(comment);
+            }
+        }
+        return comments;
     }
 }
