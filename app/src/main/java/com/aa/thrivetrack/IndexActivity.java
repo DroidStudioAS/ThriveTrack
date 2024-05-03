@@ -9,10 +9,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.aa.thrivetrack.models.Data;
+
 public class IndexActivity extends AppCompatActivity {
     ImageView profileTrigger;
     ImageView goalsTrigger;
     ImageView todoTrigger;
+    ImageView diaryTrigger;
 
 
     @Override
@@ -24,11 +27,14 @@ public class IndexActivity extends AppCompatActivity {
         profileTrigger = (ImageView) findViewById(R.id.profileTrigger);
         goalsTrigger = (ImageView) findViewById(R.id.goalsTrigger);
         todoTrigger=(ImageView)findViewById(R.id.todoTrigger);
+        diaryTrigger=(ImageView)findViewById(R.id.diaryTrigger);
         /***End Of Ui Initializations**/
         /***Start Of OnClickListeners**/
         profileTrigger.setOnClickListener(pushTo(new Intent(this, ProfileActivity.class)));
         goalsTrigger.setOnClickListener(pushTo(new Intent(this, EditActivity.class)));
         todoTrigger.setOnClickListener(pushTo(new Intent(this, ToDoActivity.class)));
+        diaryTrigger.setOnClickListener(pushTo(new Intent(this, DiaryActivity.class)));
+
         /***End Of OnClickListeners**/
 
 
