@@ -17,10 +17,13 @@ import android.widget.Toast;
 import com.aa.thrivetrack.helpers.DateHelper;
 import com.aa.thrivetrack.models.Data;
 import com.aa.thrivetrack.models.Task;
+import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ToDoActivity extends AppCompatActivity {
 
@@ -31,6 +34,10 @@ public class ToDoActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
 
     int checkedCount;
+    boolean callApi;
+    boolean todaysTasksCompleted;
+
+    private static final String[] PATH_TO_EDIT_STREAK = new String[]{"edit","patch","user-streak"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +53,10 @@ public class ToDoActivity extends AppCompatActivity {
         sharedPreferences=getSharedPreferences("tasks", MODE_PRIVATE);
 
         checkedCount=sharedPreferences.getInt("checked_count",0);
+        todaysTasksCompleted=sharedPreferences.getBoolean("tasks_completed", false);
         populateUI();
         checkAndSetLastCompareDate();
+        Log.i("completed", String.valueOf(todaysTasksCompleted));
     }
 
     public void populateUI(){
@@ -69,6 +78,7 @@ public class ToDoActivity extends AppCompatActivity {
             toAdd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    callApi=false;
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean(task.getTaskText(),isChecked);
                     editor.apply();
@@ -82,14 +92,23 @@ public class ToDoActivity extends AppCompatActivity {
                     Log.i("checked count", String.valueOf(checkedCount));
                     //increase streak;
                     if(checkedCount==SessionStorage.getUserData().getTasks().size()){
-                        SessionStorage.setTodaysTasksCompleted(true);
+                        editor.putBoolean("tasks_completed", true);
+                        editor.apply();
+                        todaysTasksCompleted=true;
                         SessionStorage.getUserData().getUser().setUser_streak(SessionStorage.getUserData().getUser().getUser_streak()+1);
                         Toast.makeText(getApplicationContext(), "here it is", Toast.LENGTH_SHORT).show();
+                        callApi=true;
                     }
-                    if(SessionStorage.isTodaysTasksCompleted() && checkedCount!=SessionStorage.getUserData().getTasks().size()){
+                    if(todaysTasksCompleted && checkedCount!=SessionStorage.getUserData().getTasks().size()){
+                        editor.putBoolean("tasks_completed", false);
+                        editor.apply();
+                        todaysTasksCompleted=false;
                         SessionStorage.getUserData().getUser().setUser_streak(SessionStorage.getUserData().getUser().getUser_streak()-1);
-                        SessionStorage.setTodaysTasksCompleted(false);
+                        callApi=true;
                     }
+
+                    Log.i("Streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()));
+                    updateUserStreak(callApi);
                 }
             });
 
@@ -120,4 +139,20 @@ public class ToDoActivity extends AppCompatActivity {
         constraintSet.constrainWidth(toAdd.getId(), ConstraintSet.WRAP_CONTENT);
         constraintSet.constrainHeight(toAdd.getId(), ConstraintSet.MATCH_CONSTRAINT);
     }
+    public void updateUserStreak(boolean callApi){
+        if (!callApi){
+            return;
+        }
+        Map<String,String> params = new HashMap<>();
+        params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
+        params.put("streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()));
+        NetworkHelper.callPatch(PATH_TO_EDIT_STREAK, params, 0);
+        NetworkHelper.waitForReply();
+        if(SessionStorage.getServerResponse().equals("true")){
+            Toast.makeText(getApplicationContext(),"Your Streak Has Been Updated! Keep It Up", Toast.LENGTH_SHORT).show();
+        }
+         SessionStorage.resetServerResponse();
+
+    }
+
 }
