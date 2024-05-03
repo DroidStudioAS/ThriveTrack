@@ -55,6 +55,11 @@ public class DiaryActivity extends AppCompatActivity {
         String todaysInput = sharedPreferences.getString("todays_diary", "");
         todayEntered=sharedPreferences.getBoolean("diary_entered", false);
         diaryInput.setText(todaysInput);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("date", DateHelper.buildTodaysDate());
+
+        resetSharedPreferences();
+        Log.i("todayentered", String.valueOf(todayEntered));
 
         saveTodaysInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,11 +72,8 @@ public class DiaryActivity extends AppCompatActivity {
                 params.put("date", DateHelper.buildTodaysDate());
                 params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
                 params.put("entry-text", entryText);
-                Log.i("date", DateHelper.buildTodaysDate());
-                Log.i("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
-                Log.i("entry-text", entryText);
 
-                String date =sharedPreferences.getString("date","");
+                todayEntered=sharedPreferences.getBoolean("diary_entered",false);
                 String[] routePath = !todayEntered ? PATH_TO_INSERT_ENTRY : PATH_TO_UPDATE_ENTRY;
                 if(todayEntered){
                     NetworkHelper.callPatch(routePath, params, 0);
@@ -79,10 +81,6 @@ public class DiaryActivity extends AppCompatActivity {
                     NetworkHelper.callPost(routePath, params, 0);
                 }
                 NetworkHelper.waitForReply();
-
-                Log.e("response", SessionStorage.getServerResponse());
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 if(SessionStorage.getServerResponse().equals("true")){
                     Toast.makeText(getApplicationContext(), "Diary Entry Added", Toast.LENGTH_SHORT).show();
@@ -115,34 +113,51 @@ public class DiaryActivity extends AppCompatActivity {
             dateView.setId(View.generateViewId());
             diaryText.setId(View.generateViewId());
             //config views
-            dateView.setText(entry.getEntry_date());
-            diaryText.setText(entry.getEntry_text());
-
-            dateView.setGravity(Gravity.CENTER);
-            diaryText.setGravity(Gravity.CENTER);
-            dateView.setTextSize(22);
-            diaryText.setTextSize(16);
+            configureViews(entry,dateView,diaryText);
             //add views
             diaryContainer.addView(dateView);
             diaryContainer.addView(diaryText);
             //constraints
-            constraintSet.connect(dateView.getId(), ConstraintSet.TOP, previousViewId,ConstraintSet.BOTTOM);
-            constraintSet.connect(dateView.getId(), ConstraintSet.START, ConstraintSet.PARENT_ID,ConstraintSet.START);
-            constraintSet.connect(dateView.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID,ConstraintSet.END);
-
-            constraintSet.constrainHeight(dateView.getId(), ConstraintSet.WRAP_CONTENT);
-            constraintSet.constrainWidth(dateView.getId(), ConstraintSet.MATCH_CONSTRAINT);
-
-            constraintSet.connect(diaryText.getId(), ConstraintSet.TOP, dateView.getId(),ConstraintSet.BOTTOM);
-            constraintSet.connect(diaryText.getId(), ConstraintSet.START, ConstraintSet.PARENT_ID,ConstraintSet.START);
-            constraintSet.connect(diaryText.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID,ConstraintSet.END);
-
-            constraintSet.constrainHeight(diaryText.getId(), ConstraintSet.WRAP_CONTENT);
-            constraintSet.constrainWidth(diaryText.getId(), ConstraintSet.MATCH_CONSTRAINT);
-
+            setConstraints(constraintSet,dateView,diaryText,previousViewId);
             previousViewId=diaryText.getId();
             constraintSet.applyTo(diaryContainer);
 
+        }
+    }
+    public void configureViews(Diary entry, TextView dateView, TextView diaryText){
+        dateView.setText(entry.getEntry_date());
+        diaryText.setText(entry.getEntry_text());
+        dateView.setGravity(Gravity.CENTER);
+        diaryText.setGravity(Gravity.CENTER);
+        dateView.setTextSize(22);
+        diaryText.setTextSize(16);
+    }
+    public void setConstraints(ConstraintSet constraintSet, TextView dateView, TextView diaryText, int previousViewId){
+        constraintSet.connect(dateView.getId(), ConstraintSet.TOP, previousViewId,ConstraintSet.BOTTOM);
+        constraintSet.connect(dateView.getId(), ConstraintSet.START, ConstraintSet.PARENT_ID,ConstraintSet.START);
+        constraintSet.connect(dateView.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID,ConstraintSet.END);
+
+        constraintSet.constrainHeight(dateView.getId(), ConstraintSet.WRAP_CONTENT);
+        constraintSet.constrainWidth(dateView.getId(), ConstraintSet.MATCH_CONSTRAINT);
+
+        constraintSet.connect(diaryText.getId(), ConstraintSet.TOP, dateView.getId(),ConstraintSet.BOTTOM);
+        constraintSet.connect(diaryText.getId(), ConstraintSet.START, ConstraintSet.PARENT_ID,ConstraintSet.START);
+        constraintSet.connect(diaryText.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID,ConstraintSet.END);
+
+        constraintSet.constrainHeight(diaryText.getId(), ConstraintSet.WRAP_CONTENT);
+        constraintSet.constrainWidth(diaryText.getId(), ConstraintSet.MATCH_CONSTRAINT);
+
+    }
+    public void resetSharedPreferences(){
+        String lastCompareDate = sharedPreferences.getString("date","");
+        if(!lastCompareDate.equals(DateHelper.buildTodaysDate())){
+            //new day
+            Log.i("active", "resetSharedPref");
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.remove("todays_diary");
+            editor.putBoolean("diary_entered", false);
+            editor.putString("date", DateHelper.buildTodaysDate());
+            editor.apply();
         }
     }
 }
