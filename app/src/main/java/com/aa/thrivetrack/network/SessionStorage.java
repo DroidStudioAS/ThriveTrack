@@ -38,6 +38,8 @@ public class SessionStorage {
 
    private static Task taskToEdit;
 
+   private static boolean todaysTasksCompleted = false;
+
 
     //GETTERS
 
@@ -115,6 +117,12 @@ public class SessionStorage {
     public static void setUser_id(String user_id) {
         SessionStorage.user_id = user_id;
     }
+
+    public static boolean isTodaysTasksCompleted() {
+        return todaysTasksCompleted;
+    }
+
+
 
     /*
     *0- For a single line of data (msg:true/false)
@@ -195,6 +203,9 @@ public class SessionStorage {
 
     public static void setTaskToEdit(Task taskToEdit) {
         SessionStorage.taskToEdit = taskToEdit;
+    }
+    public static void setTodaysTasksCompleted(boolean todaysTasksCompleted) {
+        SessionStorage.todaysTasksCompleted = todaysTasksCompleted;
     }
 
     public static boolean validateExploreGoal(int index){

@@ -5,7 +5,6 @@ public class Task {
     public Task() {
 
     }
-
     public Task(String task_text) {
         this.task_text = task_text;
     }

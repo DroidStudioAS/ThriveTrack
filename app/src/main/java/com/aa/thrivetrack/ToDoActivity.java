@@ -5,7 +5,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.constraintlayout.widget.Guideline;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -26,7 +28,9 @@ public class ToDoActivity extends AppCompatActivity {
     TextView todaysDateTv;
     Guideline checkboxGuideline;
 
-    int checkedCount = 0;
+    private SharedPreferences sharedPreferences;
+
+    int checkedCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,10 @@ public class ToDoActivity extends AppCompatActivity {
         checkboxGuideline=(Guideline) findViewById(R.id.checkboxGuideline);
         /**End Of Ui Initializations**/
         todaysDateTv.setText(DateHelper.buildTodaysDate());
+
+        sharedPreferences=getSharedPreferences("tasks", MODE_PRIVATE);
+
+        checkedCount=sharedPreferences.getInt("checked_count",0);
 
 
         populateUI();
@@ -51,18 +59,10 @@ public class ToDoActivity extends AppCompatActivity {
 
         for(Task task : SessionStorage.getUserData().getTasks()){
             CheckBox toAdd = new CheckBox(this);
-            //generate ids
-            toAdd.setId(View.generateViewId());
-            //typography
-            toAdd.setText(task.getTaskText());
-            toAdd.setTextSize(32);
+            //generate id and typography
+            setViewIdAndText(toAdd, task);
             //constraints
-            constraintSet.connect(toAdd.getId(), ConstraintSet.TOP, previousViewId, ConstraintSet.BOTTOM, 60);
-            constraintSet.connect(toAdd.getId(), ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START);
-            constraintSet.connect(toAdd.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END);
-
-            constraintSet.constrainWidth(toAdd.getId(), ConstraintSet.WRAP_CONTENT);
-            constraintSet.constrainHeight(toAdd.getId(), ConstraintSet.MATCH_CONSTRAINT);
+            setConstraints(constraintSet, toAdd, previousViewId);
             //add elements
             todoContainer.addView(toAdd);
             previousViewId=toAdd.getId();
@@ -70,19 +70,45 @@ public class ToDoActivity extends AppCompatActivity {
             toAdd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean(task.getTaskText(),isChecked);
+                    editor.apply();
                     if (isChecked){
                         checkedCount++;
                     }else{
                         checkedCount--;
                     }
+                    editor.putInt("checked_count", checkedCount);
+                    editor.apply();
+                    Log.i("checked count", String.valueOf(checkedCount));
                     //increase streak;
                     if(checkedCount==SessionStorage.getUserData().getTasks().size()){
+                        SessionStorage.setTodaysTasksCompleted(true);
+                        SessionStorage.getUserData().getUser().setUser_streak(SessionStorage.getUserData().getUser().getUser_streak()+1);
                         Toast.makeText(getApplicationContext(), "here it is", Toast.LENGTH_SHORT).show();
+                    }
+                    if(SessionStorage.isTodaysTasksCompleted() && checkedCount!=SessionStorage.getUserData().getTasks().size()){
+                        SessionStorage.getUserData().getUser().setUser_streak(SessionStorage.getUserData().getUser().getUser_streak()-1);
+                        SessionStorage.setTodaysTasksCompleted(false);
                     }
                 }
             });
 
         }
         constraintSet.applyTo(todoContainer);
+    }
+    public void setViewIdAndText(CheckBox toAdd, Task task){
+        toAdd.setId(View.generateViewId());
+        toAdd.setText(task.getTaskText());
+        toAdd.setTextSize(32);
+        toAdd.setChecked(sharedPreferences.getBoolean(task.getTaskText(), false));
+    }
+    public void setConstraints(ConstraintSet constraintSet,View toAdd, int previousViewId){
+        constraintSet.connect(toAdd.getId(), ConstraintSet.TOP, previousViewId, ConstraintSet.BOTTOM, 60);
+        constraintSet.connect(toAdd.getId(), ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START);
+        constraintSet.connect(toAdd.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END);
+
+        constraintSet.constrainWidth(toAdd.getId(), ConstraintSet.WRAP_CONTENT);
+        constraintSet.constrainHeight(toAdd.getId(), ConstraintSet.MATCH_CONSTRAINT);
     }
 }
