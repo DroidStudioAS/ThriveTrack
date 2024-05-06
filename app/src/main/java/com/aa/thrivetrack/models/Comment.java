@@ -8,6 +8,18 @@ public class Comment {
     String user_username;
     String user_rank;
 
+    public Comment() {
+    }
+
+    public Comment(int comment_id, int article_id, int comment_likes, String comment_text, String user_username, String user_rank) {
+        this.comment_id = comment_id;
+        this.article_id = article_id;
+        this.comment_likes = comment_likes;
+        this.comment_text = comment_text;
+        this.user_username = user_username;
+        this.user_rank = user_rank;
+    }
+
     public int getComment_id() {
         return comment_id;
     }
@@ -54,5 +66,17 @@ public class Comment {
 
     public void setComment_likes(int comment_likes) {
         this.comment_likes = comment_likes;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "comment_id=" + comment_id +
+                ", article_id=" + article_id +
+                ", comment_likes=" + comment_likes +
+                ", comment_text='" + comment_text + '\'' +
+                ", user_username='" + user_username + '\'' +
+                ", user_rank='" + user_rank + '\'' +
+                '}';
     }
 }

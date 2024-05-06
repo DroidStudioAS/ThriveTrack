@@ -3,10 +3,14 @@ package com.aa.thrivetrack.blog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aa.thrivetrack.R;
+import com.aa.thrivetrack.models.Article;
+import com.aa.thrivetrack.models.Comment;
+import com.aa.thrivetrack.network.SessionStorage;
 
 public class ArticleActivity extends AppCompatActivity {
 
@@ -39,6 +43,25 @@ public class ArticleActivity extends AppCompatActivity {
         viewAllCommentsTrigger = (TextView) findViewById(R.id.viewAllCommentsTrigger);
         articleTextTv = (TextView) findViewById(R.id.articleTextTv);
 
+        setArticle();
 
+    }
+
+    public void setArticle(){
+        Article article = SessionStorage.getArticleInFocus();
+        //header
+        articleImageIv.setImageDrawable(article.getArticleDrawable(ArticleActivity.this));
+        articleTitleTv.setText(article.getArticle_title());
+        articleTitleTv.bringToFront();
+        //article text
+        articleTextTv.setText(article.getArticle_text());
+        //comment and like section
+        commentCountTv.setText(String.valueOf(article.getCommentCount()));
+        likeTv.setText(String.valueOf(article.getArticle_likes()));
+        //featured comment
+        Comment featured = article.getTopRatedComment();
+        Log.e("featured", featured.toString());
+        commentUsernameTv.setText(featured.getUser_username());
+        featuredCommentTv.setText(featured.getComment_text());
     }
 }
