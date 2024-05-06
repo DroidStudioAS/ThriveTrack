@@ -2,6 +2,7 @@ package com.aa.thrivetrack.models;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import com.aa.thrivetrack.network.SessionStorage;
 
@@ -98,6 +99,7 @@ public class Article {
                 comments.add(comment);
             }
         }
+        Log.e("commnets length", String.valueOf(comments.size()));
         return comments;
     }
     public Comment getTopRatedComment(){
@@ -109,6 +111,9 @@ public class Article {
                 }
             }
         }
-        return topComment;
+        return topComment.getComment_id()==0 ?
+                new Comment(-1, this.article_id, 2400, "This is the best app in the universe", "Smiljanic19A", "diamond")
+                :
+                topComment;
     }
 }
