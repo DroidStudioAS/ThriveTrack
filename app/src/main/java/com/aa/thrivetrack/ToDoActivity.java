@@ -7,7 +7,6 @@ import androidx.constraintlayout.widget.Guideline;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -15,14 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aa.thrivetrack.helpers.DateHelper;
-import com.aa.thrivetrack.helpers.SharedPreferencesHelper;
-import com.aa.thrivetrack.models.Data;
+import com.aa.thrivetrack.helpers.StreakHelper;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,7 +55,6 @@ public class ToDoActivity extends AppCompatActivity {
         checkAndSetLastCompareDate();
 
         populateUI();
-        SharedPreferencesHelper.spLog(ToDoActivity.this);
 
     }
 
@@ -164,6 +159,7 @@ public class ToDoActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Your Streak Has Been Updated! Keep It Up", Toast.LENGTH_SHORT).show();
         }
          SessionStorage.resetServerResponse();
+        StreakHelper.changeUserRank(SessionStorage.getUserData().getUser(), ToDoActivity.this);
 
     }
 
