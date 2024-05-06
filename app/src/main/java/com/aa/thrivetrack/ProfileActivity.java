@@ -3,6 +3,7 @@ package com.aa.thrivetrack;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import com.aa.thrivetrack.dialogs.DeleteDialog;
 import com.aa.thrivetrack.helpers.DialogHelper;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.SessionStorage;
+import com.applandeo.materialcalendarview.CalendarView;
 
 public class ProfileActivity extends AppCompatActivity implements PatchCallback {
 
@@ -20,6 +22,8 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
     TextView changePasswordTrigger;
     TextView deleteTrigger;
     TextView streakTv;
+
+    protected CalendarView calendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
         changePasswordTrigger=(TextView)findViewById(R.id.changePasswordTrigger);
         deleteTrigger=(TextView)findViewById(R.id.deleteAcountTrigger);
         streakTv = (TextView) findViewById(R.id.userStreakTv);
+        calendarView=(CalendarView)findViewById(R.id.calendarView);
         /******End Of Ui Initializations******/
         String streakString = "You Have A " + String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()) + " Day Streak";
         streakTv.setText(streakString);
@@ -45,6 +50,8 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
                 dd.show();
             }
         });
+
+        Log.e("streak", SessionStorage.getUserData().getStreaks().toString());
 
 
         /******End Of OnClickListeners******/

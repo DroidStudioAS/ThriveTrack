@@ -8,6 +8,7 @@ public class Data {
     ArrayList<Task> tasks;
     User user;
     ArrayList<Diary> diary;
+    ArrayList<Streak> streak;
 
     public Data() {
     }
@@ -58,5 +59,13 @@ public class Data {
 
     public void setDiary(ArrayList<Diary> diary) {
         this.diary = diary;
+    }
+
+    public ArrayList<Streak> getStreaks() {
+        return streak;
+    }
+
+    public void setStreaks(ArrayList<Streak> streaks) {
+        this.streak = streaks;
     }
 }
