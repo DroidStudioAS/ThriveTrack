@@ -18,6 +18,8 @@ public class Comment {
       new Comment(-1, -1, 4019, "OMG AMAZING!!", "HelloKity56", "diamond")
     };
 
+
+
     public Comment() {
     }
 
@@ -77,6 +79,7 @@ public class Comment {
     public void setComment_likes(int comment_likes) {
         this.comment_likes = comment_likes;
     }
+
     public static Comment returnRandomComment(){
         int min = 0;
         int max = RANDOM_COMMENTS.length - 1;
@@ -85,6 +88,8 @@ public class Comment {
         int randomNumber = random.nextInt(max+1);
         return RANDOM_COMMENTS[randomNumber];
     }
+
+
 
     @Override
     public String toString() {

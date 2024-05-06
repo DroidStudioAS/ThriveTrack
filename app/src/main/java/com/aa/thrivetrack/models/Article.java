@@ -112,7 +112,7 @@ public class Article {
             }
         }
         return topComment.getComment_id()==0 ?
-               Comment.returnRandomComment()
+                Comment.returnRandomComment()
                 :
                 topComment;
     }
