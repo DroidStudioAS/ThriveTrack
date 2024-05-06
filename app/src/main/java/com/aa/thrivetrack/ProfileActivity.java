@@ -9,10 +9,14 @@ import android.widget.TextView;
 
 import com.aa.thrivetrack.callback.PatchCallback;
 import com.aa.thrivetrack.dialogs.DeleteDialog;
+import com.aa.thrivetrack.helpers.DateHelper;
 import com.aa.thrivetrack.helpers.DialogHelper;
+import com.aa.thrivetrack.models.Data;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.SessionStorage;
 import com.applandeo.materialcalendarview.CalendarView;
+
+import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity implements PatchCallback {
 
@@ -52,6 +56,9 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
         });
 
         Log.e("streak", SessionStorage.getUserData().getStreaks().toString());
+
+        ArrayList<String> datesInRange = DateHelper.datesInRange(SessionStorage.getUserData().getStreaks().get(0).getStreak_start(),
+                SessionStorage.getUserData().getStreaks().get(0).getStreak_end());
 
 
         /******End Of OnClickListeners******/
