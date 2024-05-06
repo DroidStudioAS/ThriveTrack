@@ -18,7 +18,10 @@ import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.blog.ArticleActivity;
 import com.aa.thrivetrack.models.Article;
 import com.aa.thrivetrack.models.Blog;
+import com.aa.thrivetrack.models.Comment;
 import com.aa.thrivetrack.network.SessionStorage;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -41,83 +44,30 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull BlogAdapter.ViewHolder holder, int position) {
-        int itemsPerPage = 3;
-        int startIndex = position * itemsPerPage;
-        int endIndex = Math.min(startIndex + itemsPerPage, articles.size());
+        // Get the article at the given position
+        Article article = articles.get(position);
 
-        TextView[] blogPostViews = new TextView[]{
-                holder.itemView.findViewById(R.id.blogPost1),
-                holder.itemView.findViewById(R.id.blogPost2),
-                holder.itemView.findViewById(R.id.blogPost3)
-        };
+        // Bind data to the views
+        TextView blogTitleholder = holder.itemView.findViewById(R.id.blogPost1);
+        TextView likeTv = holder.itemView.findViewById(R.id.likeTv1);
+        TextView commentTv = holder.itemView.findViewById(R.id.commentTv1);
+        TextView featuredCommentTv = holder.itemView.findViewById(R.id.featuredComment);
+        TextView featuredUsernameTv = holder.itemView.findViewById(R.id.featuredUsernameTv);
+        ImageView blogPhoto = holder.itemView.findViewById(R.id.imageView);
 
-        TextView[] likeTvViews = new TextView[]{
-                holder.itemView.findViewById(R.id.likeTv1),
-                holder.itemView.findViewById(R.id.likeTv2),
-                holder.itemView.findViewById(R.id.likeTv3)
-        };
-
-        TextView[] commentTvViews = new TextView[]{
-                holder.itemView.findViewById(R.id.commentTv1),
-                holder.itemView.findViewById(R.id.commentTv2),
-                holder.itemView.findViewById(R.id.commentTv3)
-        };
-        ImageView[] blogPhotos = new ImageView[]{
-                holder.itemView.findViewById(R.id.imageView),
-                holder.itemView.findViewById(R.id.imageView2),
-                holder.itemView.findViewById(R.id.imageView3)
-        };
-        ImageView[] likeIcons = new ImageView[]{
-                holder.itemView.findViewById(R.id.likeIcon1),
-                holder.itemView.findViewById(R.id.likeIcon2),
-                holder.itemView.findViewById(R.id.likeIcon3)
-        };
-        ImageView[] commentIcons = new ImageView[]{
-                holder.itemView.findViewById(R.id.commentIcon1),
-                holder.itemView.findViewById(R.id.commentIcon2),
-                holder.itemView.findViewById(R.id.commentIcon3)
-        };
-
-        for (int i = 0; i < blogPostViews.length; i++) {
-            if (startIndex + i < endIndex) {
-                Article currentItem = articles.get(startIndex + i);
-                Drawable drawable = currentItem.getArticleDrawable(context);
-
-                blogPostViews[i].setVisibility(View.VISIBLE);
-                likeTvViews[i].setVisibility(View.VISIBLE);
-                commentTvViews[i].setVisibility(View.VISIBLE);
-                likeIcons[i].setVisibility(View.VISIBLE);
-                commentIcons[i].setVisibility(View.VISIBLE);
-                blogPhotos[i].setVisibility(View.VISIBLE);
-
-                blogPostViews[i].setText(currentItem.getArticle_title());
-                blogPhotos[i].setImageDrawable(drawable);
-                likeTvViews[i].setText(String.valueOf(currentItem.getArticle_likes()));
-                commentTvViews[i].setText(String.valueOf(currentItem.getCommentCount()));
-                blogPostViews[i].bringToFront();
-                blogPostViews[i].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        SessionStorage.setArticleInFocus(currentItem);
-                        context.startActivity(new Intent(context, ArticleActivity.class));
-                    }
-                });
-
-            } else {
-                blogPostViews[i].setVisibility(View.GONE);
-                likeTvViews[i].setVisibility(View.GONE);
-                commentTvViews[i].setVisibility(View.GONE);
-                likeIcons[i].setVisibility(View.GONE);
-                commentIcons[i].setVisibility(View.GONE);
-                blogPhotos[i].setVisibility(View.GONE);
-            }
-
-        }
+        blogTitleholder.setText(article.getArticle_title());
+        blogPhoto.setImageDrawable(article.getArticleDrawable(context));
+        commentTv.setText(String.valueOf(article.getCommentCount()));
+        likeTv.setText(String.valueOf(article.getArticle_likes()));
+        blogTitleholder.bringToFront();
+        Comment topRated = article.getTopRatedComment();
+        featuredCommentTv.setText(topRated.getComment_text());
+        featuredUsernameTv.setText(topRated.getUser_username());
     }
 
     @Override
     public int getItemCount() {
-        return (articles.size() + 2) / 3;
+        return articles.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(@NonNull View itemView) {

@@ -20,7 +20,7 @@ public class BlogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_blog);
         /**Start Of UI Initializations**/
         blogContainer=(RecyclerView) findViewById(R.id.blogContainer);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         blogContainer.setLayoutManager(layoutManager);
 
         blogAdapter=new BlogAdapter(SessionStorage.getBlog().getArticles(), BlogActivity.this);
