@@ -22,7 +22,7 @@ public class BlogActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         blogContainer.setLayoutManager(layoutManager);
 
-        blogAdapter=new BlogAdapter(SessionStorage.getBlog().getArticles());
+        blogAdapter=new BlogAdapter(SessionStorage.getBlog().getArticles(), BlogActivity.this);
         blogContainer.setAdapter(blogAdapter);
         /**End Of UI Initializations**/
 

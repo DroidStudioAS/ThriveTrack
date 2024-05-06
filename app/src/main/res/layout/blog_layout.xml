@@ -12,6 +12,7 @@
         android:gravity="center"
         android:padding="25dp"
         android:text="TextView"
+        android:textColor="@color/teal_200"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,6 +27,7 @@
         android:gravity="center"
         android:padding="25dp"
         android:text="TextView"
+        android:textColor="@color/teal_200"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blogPost2" />
@@ -37,11 +39,51 @@
         android:gravity="center"
         android:padding="25dp"
         android:text="TextView"
+        android:textColor="@color/teal_200"
         android:textSize="50sp"
         app:layout_constraintBottom_toTopOf="@+id/blogPost2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/commentIcon1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/blogPost1" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/commentIcon2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/blogPost2" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/commentIcon3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/blogPost3" />
 
     <ImageView
         android:id="@+id/likeIcon1"
