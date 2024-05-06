@@ -9,7 +9,7 @@
     tools:context=".fragments.blog.CommentFragment">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/articleIv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
@@ -20,13 +20,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/articleTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="@color/text"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="@+id/articleIv"
+        app:layout_constraintEnd_toEndOf="@+id/articleIv"
+        app:layout_constraintStart_toStartOf="@+id/articleIv"
+        app:layout_constraintTop_toTopOf="@+id/articleIv" />
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4">
+        app:layout_constraintTop_toBottomOf="@+id/articleIv">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/commentsContainer"
