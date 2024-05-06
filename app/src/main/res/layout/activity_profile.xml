@@ -103,10 +103,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userStreakTv">
-
-        <CalendarView
-            android:id="@+id/calendarView"
+        <com.applandeo.materialcalendarview.CalendarView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+        />
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

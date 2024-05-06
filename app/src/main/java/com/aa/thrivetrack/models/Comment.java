@@ -1,4 +1,7 @@
 package com.aa.thrivetrack.models;
+
+import java.util.Random;
+
 public class Comment {
     int comment_id;
     int article_id;
@@ -7,6 +10,13 @@ public class Comment {
     String comment_text;
     String user_username;
     String user_rank;
+
+    private static final Comment[] RANDOM_COMMENTS = new Comment[]{
+      new Comment(-1, -1, 2456, "This is the best app ever it helped me so much!", "Smiljanic19A", "diamond"),
+      new Comment(-1, -1, 2568, "Very Interesting!", "GGG", "diamond"),
+      new Comment(-1, -1, 3212, "Changed My Life!", "BronzeBomber", "diamond"),
+      new Comment(-1, -1, 4019, "OMG AMAZING!!", "HelloKity56", "diamond")
+    };
 
     public Comment() {
     }
@@ -66,6 +76,14 @@ public class Comment {
 
     public void setComment_likes(int comment_likes) {
         this.comment_likes = comment_likes;
+    }
+    public static Comment returnRandomComment(){
+        int min = 0;
+        int max = RANDOM_COMMENTS.length - 1;
+        Random random = new Random();
+
+        int randomNumber = random.nextInt(max+1);
+        return RANDOM_COMMENTS[randomNumber];
     }
 
     @Override

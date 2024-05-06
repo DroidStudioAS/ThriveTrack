@@ -23,7 +23,6 @@ public class ArticleActivity extends AppCompatActivity {
     TextView featuredCommentTv;
     TextView commentUsernameTv;
     TextView viewAllCommentsTrigger;
-    TextView articleTextTv;
 
 
 
@@ -41,7 +40,6 @@ public class ArticleActivity extends AppCompatActivity {
         featuredCommentTv = (TextView) findViewById(R.id.featuredCommentTv);
         commentUsernameTv = (TextView) findViewById(R.id.commentUsernameTv);
         viewAllCommentsTrigger = (TextView) findViewById(R.id.viewAllCommentsTrigger);
-        articleTextTv = (TextView) findViewById(R.id.articleTextTv);
 
         setArticle();
 
@@ -53,8 +51,6 @@ public class ArticleActivity extends AppCompatActivity {
         articleImageIv.setImageDrawable(article.getArticleDrawable(ArticleActivity.this));
         articleTitleTv.setText(article.getArticle_title());
         articleTitleTv.bringToFront();
-        //article text
-        articleTextTv.setText(article.getArticle_text());
         //comment and like section
         commentCountTv.setText(String.valueOf(article.getCommentCount()));
         likeTv.setText(String.valueOf(article.getArticle_likes()));

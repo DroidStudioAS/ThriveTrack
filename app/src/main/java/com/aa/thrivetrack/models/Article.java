@@ -112,7 +112,7 @@ public class Article {
             }
         }
         return topComment.getComment_id()==0 ?
-                new Comment(-1, this.article_id, 2400, "This is the best app in the universe", "Smiljanic19A", "diamond")
+               Comment.returnRandomComment()
                 :
                 topComment;
     }
