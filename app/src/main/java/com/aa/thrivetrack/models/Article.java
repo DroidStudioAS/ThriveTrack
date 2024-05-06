@@ -1,11 +1,14 @@
 package com.aa.thrivetrack.models;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+
 import com.aa.thrivetrack.network.SessionStorage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Article implements Serializable {
+public class Article {
     int article_id;
     String article_title;
     String article_date;
@@ -71,6 +74,12 @@ public class Article implements Serializable {
 
     public void setArticle_likes(int article_likes) {
         this.article_likes = article_likes;
+    }
+
+    public Drawable getArticleDrawable(Context context){
+        String uri = "@drawable/"+this.getArticle_image();
+        int imageRes = context.getResources().getIdentifier(uri,null,context.getPackageName());
+        return context.getResources().getDrawable(imageRes);
     }
 
     public int getCommentCount(){

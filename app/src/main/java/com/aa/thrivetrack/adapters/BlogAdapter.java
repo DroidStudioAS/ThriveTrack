@@ -81,10 +81,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         for (int i = 0; i < blogPostViews.length; i++) {
             if (startIndex + i < endIndex) {
                 Article currentItem = articles.get(startIndex + i);
-                String uri = "@drawable/"+currentItem.getArticle_image();
-                int imageRes = context.getResources().getIdentifier(uri,null,context.getPackageName());
-                @SuppressLint("UseCompatLoadingForDrawables")
-                Drawable drawable = context.getResources().getDrawable(imageRes);
+                Drawable drawable = currentItem.getArticleDrawable(context);
 
                 blogPostViews[i].setVisibility(View.VISIBLE);
                 likeTvViews[i].setVisibility(View.VISIBLE);
