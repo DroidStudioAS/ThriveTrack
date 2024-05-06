@@ -3,6 +3,7 @@ package com.aa.thrivetrack.network;
 import android.util.JsonReader;
 import android.util.Log;
 
+import com.aa.thrivetrack.models.Article;
 import com.aa.thrivetrack.models.Blog;
 import com.aa.thrivetrack.models.Data;
 import com.aa.thrivetrack.models.Task;
@@ -37,6 +38,8 @@ public class SessionStorage {
    public static ArrayList<Task> USER_TASKS = new ArrayList();
    private static Data USER_DATA;
    private static Blog BLOG;
+
+   private static Article ARTICLE_IN_FOCUS;
 
    private static Task taskToEdit;
 
@@ -110,6 +113,9 @@ public class SessionStorage {
         return fourthTask;
     }
 
+    public static Article getArticleInFocus() {
+        return ARTICLE_IN_FOCUS;
+    }
     //SETTERS
 
     public static void setUsername(String username) {
@@ -211,6 +217,10 @@ public class SessionStorage {
 
     public static void setBlog(Blog BLOG) {
         SessionStorage.BLOG = BLOG;
+    }
+
+    public static void setArticleInFocus(Article articleInFocus) {
+        ARTICLE_IN_FOCUS = articleInFocus;
     }
 
     public static void setTaskToEdit(Task taskToEdit) {

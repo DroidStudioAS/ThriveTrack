@@ -7,10 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.aa.thrivetrack.models.Data;
-import com.aa.thrivetrack.models.Diary;
+import com.aa.thrivetrack.blog.BlogActivity;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 

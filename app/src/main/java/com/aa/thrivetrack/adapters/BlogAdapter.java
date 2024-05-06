@@ -2,6 +2,7 @@ package com.aa.thrivetrack.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,8 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aa.thrivetrack.R;
+import com.aa.thrivetrack.blog.ArticleActivity;
 import com.aa.thrivetrack.models.Article;
 import com.aa.thrivetrack.models.Blog;
+import com.aa.thrivetrack.network.SessionStorage;
 
 import java.util.List;
 
@@ -95,6 +98,13 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
                 likeTvViews[i].setText(String.valueOf(currentItem.getArticle_likes()));
                 commentTvViews[i].setText(String.valueOf(currentItem.getCommentCount()));
                 blogPostViews[i].bringToFront();
+                blogPostViews[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SessionStorage.setArticleInFocus(currentItem);
+                        context.startActivity(new Intent(context, ArticleActivity.class));
+                    }
+                });
 
             } else {
                 blogPostViews[i].setVisibility(View.GONE);

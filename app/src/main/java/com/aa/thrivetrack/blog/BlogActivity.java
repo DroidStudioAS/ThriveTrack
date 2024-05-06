@@ -1,4 +1,4 @@
-package com.aa.thrivetrack;
+package com.aa.thrivetrack.blog;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.adapters.BlogAdapter;
 import com.aa.thrivetrack.network.SessionStorage;
 

@@ -2,9 +2,10 @@ package com.aa.thrivetrack.models;
 
 import com.aa.thrivetrack.network.SessionStorage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Article {
+public class Article implements Serializable {
     int article_id;
     String article_title;
     String article_date;
