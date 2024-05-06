@@ -108,6 +108,13 @@
         <com.applandeo.materialcalendarview.CalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            app:abbreviationsBarColor="#403e3e"
+            app:headerColor="#403e3e"
+            app:abbreviationsLabelsColor="@color/white"
+            app:pagesColor="#403e3e"
+            app:daysLabelsColor="@color/white"
+            app:todayLabelColor="@color/white"/>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
