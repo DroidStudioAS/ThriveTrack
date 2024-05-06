@@ -1,9 +1,13 @@
 package com.aa.thrivetrack.blog;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,13 +28,15 @@ public class ArticleActivity extends AppCompatActivity {
     TextView commentUsernameTv;
     TextView viewAllCommentsTrigger;
 
+    FragmentContainerView fragmentContainer;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
-
+         /**Start Of Ui Intitializations**/
         articleImageIv = (ImageView)findViewById(R.id.articleImageIv);
         userRankImageIv = (ImageView)findViewById(R.id.userRankImageIv);
 
@@ -41,6 +47,10 @@ public class ArticleActivity extends AppCompatActivity {
         commentUsernameTv = (TextView) findViewById(R.id.commentUsernameTv);
         viewAllCommentsTrigger = (TextView) findViewById(R.id.viewAllCommentsTrigger);
 
+        fragmentContainer=(FragmentContainerView)findViewById(R.id.allCommentsContainer);
+        /**End Of Ui Intitializations**/
+        viewAllCommentsTrigger.setOnClickListener(displayComments());
+        articleImageIv.setOnClickListener(displayComments());
         setArticle();
 
     }
@@ -59,5 +69,26 @@ public class ArticleActivity extends AppCompatActivity {
         Log.e("featured", featured.toString());
         commentUsernameTv.setText(featured.getUser_username());
         featuredCommentTv.setText(featured.getComment_text());
+    }
+
+    public View.OnClickListener displayComments(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(fragmentContainer.getVisibility()==View.VISIBLE){
+                    Animation fadeOut = AnimationUtils.loadAnimation(ArticleActivity.this, R.anim.fade_out);
+                    fragmentContainer.setVisibility(View.GONE);
+                    fragmentContainer.startAnimation(fadeOut);
+                    viewAllCommentsTrigger.setText("View All Comments");
+                    return;
+                }
+                Animation fadeIn = AnimationUtils.loadAnimation(ArticleActivity.this, R.anim.fade_in);
+                fragmentContainer.setVisibility(View.VISIBLE);
+                fragmentContainer.startAnimation(fadeIn);
+                fragmentContainer.bringToFront();
+                viewAllCommentsTrigger.bringToFront();
+                viewAllCommentsTrigger.setText("Hide All Comments");
+            }
+        };
     }
 }
