@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aa.thrivetrack.helpers.DateHelper;
+import com.aa.thrivetrack.helpers.SharedPreferencesHelper;
 import com.aa.thrivetrack.models.Data;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.NetworkHelper;
@@ -55,9 +56,11 @@ public class ToDoActivity extends AppCompatActivity {
 
         checkedCount=sharedPreferences.getInt("checked_count",0);
         todaysTasksCompleted=sharedPreferences.getBoolean("tasks_completed", false);
-        populateUI();
         checkAndSetLastCompareDate();
-        Log.i("completed", String.valueOf(todaysTasksCompleted));
+
+        populateUI();
+        SharedPreferencesHelper.spLog(ToDoActivity.this);
+
     }
 
     public void populateUI(){
@@ -106,6 +109,7 @@ public class ToDoActivity extends AppCompatActivity {
             if(!todaysTasksCompleted){
                 SessionStorage.getUserData().getUser().setUser_streak(0);
                 updateUserStreak(true);
+                Toast.makeText(getApplicationContext(), "Streak Reset", Toast.LENGTH_SHORT).show();
             }
             //new day
             SharedPreferences.Editor editor = sharedPreferences.edit();
