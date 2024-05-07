@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aa.thrivetrack.callback.OnExploreModeGoalInputCallback;
@@ -40,7 +41,7 @@ public class SetupActivity extends AppCompatActivity  {
     int currentFragment = 1;
     int exploreModeInputStep = 1;
 
-    Button nextFragmentButton;
+    TextView nextFragmentButton;
     Fragment toGoTo = new Fragment();
 
     private OnFocusModeGoalInputCallback focusModeCallback;
@@ -57,7 +58,7 @@ public class SetupActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
         /*****Start of Ui Initializations*****/
-        nextFragmentButton=(Button)findViewById(R.id.fragmentTransitionTrigger);
+        nextFragmentButton=(TextView) findViewById(R.id.fragmentTransitionTrigger);
         /*****End of Ui Initializations*****/
 
         /*****Start of OnClickListeners*****/
