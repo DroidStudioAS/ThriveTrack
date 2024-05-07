@@ -7,11 +7,11 @@
         <item name="colorPrimaryVariant">@color/background</item>
         <item name="colorOnPrimary">@color/text</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondary</item>
-        <item name="colorSecondaryVariant">@color/secondary</item>
-        <item name="colorOnSecondary">@color/secondary</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/background</item>
+        <item name="colorControlNormal">@color/white</item>
+
         <!-- Customize your theme here. -->
     </style>
     <style name="FullscreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
