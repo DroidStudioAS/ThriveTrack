@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".blog.BlogActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/commentContainer"
+        android:name="com.aa.thrivetrack.fragments.blog.CommentFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_comment" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/blogContainer"
         android:layout_width="0dp"

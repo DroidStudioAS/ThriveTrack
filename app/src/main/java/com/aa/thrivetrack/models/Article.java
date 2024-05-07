@@ -116,4 +116,16 @@ public class Article {
                 :
                 topComment;
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "article_id=" + article_id +
+                ", article_title='" + article_title + '\'' +
+                ", article_date='" + article_date + '\'' +
+                ", article_image='" + article_image + '\'' +
+                ", article_text='" + article_text + '\'' +
+                ", article_likes=" + article_likes +
+                '}';
+    }
 }

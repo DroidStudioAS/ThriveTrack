@@ -45,7 +45,7 @@ public class ArticleActivity extends AppCompatActivity {
         commentCountTv = (TextView) findViewById(R.id.commentTv);
         featuredCommentTv = (TextView) findViewById(R.id.featuredCommentTv);
         commentUsernameTv = (TextView) findViewById(R.id.commentUsernameTv);
-        viewAllCommentsTrigger = (TextView) findViewById(R.id.viewAllCommentsTrigger);
+        viewAllCommentsTrigger = (TextView) findViewById(R.id.viewAllComments);
 
         fragmentContainer=(FragmentContainerView)findViewById(R.id.allCommentsContainer);
         /**End Of Ui Intitializations**/
