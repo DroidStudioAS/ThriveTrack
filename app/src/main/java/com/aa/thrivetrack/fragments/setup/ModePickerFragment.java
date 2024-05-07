@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.network.SessionStorage;
@@ -16,8 +17,8 @@ import com.aa.thrivetrack.network.SessionStorage;
 public class ModePickerFragment extends Fragment {
     String modeInFocus = "";
 
-    Button focusButton;
-    Button exploreButton;
+    TextView focusButton;
+    TextView exploreButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,8 +26,8 @@ public class ModePickerFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mode_picker, container, false);
         /*****Start of Ui Initializations*****/
-        focusButton = (Button)view.findViewById(R.id.focusButton);
-        exploreButton = (Button)view.findViewById(R.id.exploreButton);
+        focusButton = (TextView)view.findViewById(R.id.focusButton);
+        exploreButton = (TextView)view.findViewById(R.id.exploreButton);
         /*****End of Ui Initializations*****/
 
         /*****Start of OnClickListeners*****/

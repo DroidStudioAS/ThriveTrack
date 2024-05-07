@@ -14,36 +14,42 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Select Your Mode"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <TextView
         android:id="@+id/focusButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_margin="15dp"
         android:alpha="0.5"
-        android:text="Focus \n Mode"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/exploreButton"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:background="@drawable/success_background"
+        android:fontFamily="@font/rubik_mono_one"
+        android:gravity="center"
+        android:text="Focus\nMode"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/exploreButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Button
+    <TextView
         android:id="@+id/exploreButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_margin="15dp"
         android:alpha="0.5"
-        android:text="Explore \n Mode"
+        android:background="@drawable/success_background"
+        android:fontFamily="@font/rubik_mono_one"
+        android:gravity="center"
+        android:text="Explore\nMode"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/focusButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/focusButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
