@@ -22,17 +22,6 @@ public class AuthenticationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
-        authAdapter=new AuthenticationAdapter(getSupportFragmentManager());
-
-        /*******Ui Initializations Start******/
-        viewPager = (ViewPager) findViewById(R.id.authViewPager);
-        tabLayout = (TabLayout) findViewById(R.id.pagerTabs);
-        /*******Ui Initializations End******/
-
-        /***Set Up ViewPager****/
-        viewPager.setAdapter(authAdapter);
-        tabLayout.setupWithViewPager(viewPager);
-        /***ViewPager Setup finished****/
 
 
     }

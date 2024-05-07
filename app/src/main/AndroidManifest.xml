@@ -79,6 +79,7 @@
                 android:value="" />
         </activity>
         <activity
+            android:theme="@style/FullscreenTheme"
             android:name=".AuthenticationActivity"
             android:exported="true">
             <meta-data
@@ -91,6 +92,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
