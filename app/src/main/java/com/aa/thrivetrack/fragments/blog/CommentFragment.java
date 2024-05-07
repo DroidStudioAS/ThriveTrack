@@ -4,7 +4,10 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +15,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aa.thrivetrack.R;
+import com.aa.thrivetrack.adapters.CommentAdapter;
+import com.aa.thrivetrack.callback.OnArticleClicked;
 import com.aa.thrivetrack.network.SessionStorage;
 
-public class CommentFragment extends Fragment {
+public class CommentFragment extends Fragment implements OnArticleClicked {
 
     ConstraintLayout commentContainer;
 
     ImageView articleIv;
     TextView articleTv;
+
+    RecyclerView recyclerView;
+    CommentAdapter commentAdapter;
 
     public CommentFragment() {
         // Required empty public constructor
@@ -34,13 +42,26 @@ public class CommentFragment extends Fragment {
         commentContainer=(ConstraintLayout)view.findViewById(R.id.commentsContainer);
         articleIv=(ImageView) view.findViewById(R.id.articleIv);
         articleTv=(TextView) view.findViewById(R.id.articleTv);
+        recyclerView=(RecyclerView)view.findViewById(R.id.commentRv);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
         /**End Of Ui Initializations**/
         setUi();
         return view;
     }
 
     public void setUi(){
-        articleIv.setImageDrawable(SessionStorage.getArticleInFocus().getArticleDrawable(getActivity().getApplicationContext()));
-        articleTv.setText(SessionStorage.getArticleInFocus().getArticle_title());
+        if(SessionStorage.getArticleInFocus()!=null){
+            articleIv.setImageDrawable(SessionStorage.getArticleInFocus().getArticleDrawable(getActivity().getApplicationContext()));
+            articleTv.setText(SessionStorage.getArticleInFocus().getArticle_title());
+            commentAdapter = new CommentAdapter(SessionStorage.getArticleInFocus().getPostComments(), getContext());
+            recyclerView.setAdapter(commentAdapter);
+        }
+    }
+
+    @Override
+    public void onArticleClick() {
+        Log.i("callback active", "on article clicked");
     }
 }
