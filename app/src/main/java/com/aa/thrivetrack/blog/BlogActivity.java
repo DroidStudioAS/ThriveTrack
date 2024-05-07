@@ -34,7 +34,6 @@ public class BlogActivity extends AppCompatActivity implements OnAllCommentsClic
         setContentView(R.layout.activity_blog);
         /**Start Of UI Initializations**/
         commentContainer=(FragmentContainerView) findViewById(R.id.commentContainer);
-
         blogContainer=(RecyclerView) findViewById(R.id.blogContainer);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -54,6 +53,8 @@ public class BlogActivity extends AppCompatActivity implements OnAllCommentsClic
     public void onAllCommentsClicked() {
         Log.i("Callback active", "OnAllCommentsClicked");
         Log.i("Article In Focus", SessionStorage.getArticleInFocus().toString());
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.commentContainer, new CommentFragment()).commit();
 
         if(commentContainer.getVisibility()==View.VISIBLE){
             Animation fadeOut = AnimationUtils.loadAnimation(BlogActivity.this, R.anim.fade_out);

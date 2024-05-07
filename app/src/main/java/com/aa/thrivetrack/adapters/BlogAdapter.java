@@ -68,7 +68,6 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
             public void onClick(View v) {
                 SessionStorage.setArticleInFocus(article);
                 Log.i("article", SessionStorage.getArticleInFocus().toString());
-
                 onAllCommentsClicked.onAllCommentsClicked();
 
             }
