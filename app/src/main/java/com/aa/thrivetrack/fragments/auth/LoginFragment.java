@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aa.thrivetrack.IndexActivity;
@@ -25,7 +26,7 @@ import java.util.Map;
 
 public class LoginFragment extends Fragment {
 
-    Button loginTrigger;
+    TextView loginTrigger;
     EditText usernameEt;
     EditText passwordEt;
 
@@ -38,7 +39,7 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         /*****Start Of Ui Initializations****/
-        loginTrigger=view.findViewById(R.id.loginTrigger);
+        loginTrigger=(TextView)view.findViewById(R.id.loginTrigger);
         usernameEt = (EditText)view.findViewById(R.id.loginUsernameEt);
         passwordEt=  (EditText)view.findViewById(R.id.loginPasswordEt);
         /*****End Of Ui Initializations****/
