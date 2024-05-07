@@ -65,7 +65,7 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
             }
         });
 
-        Log.e("streak", SessionStorage.getUserData().getStreaks().toString());
+
 
         ArrayList<String> datesInRange = DateHelper.datesInRange(SessionStorage.getUserData().getStreaks().get(0).getStreak_start(),
                 SessionStorage.getUserData().getStreaks().get(0).getStreak_end());
