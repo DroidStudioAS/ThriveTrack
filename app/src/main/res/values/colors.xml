@@ -12,7 +12,7 @@
     <color name="primary">#0D47A1</color>
     <color name="secondary">#512DA8</color>
     <color name="accent">#00796B</color>
-    <color name="background">#424242</color>
+    <color name="background">#403E3E</color>
     <color name="text">#EEEEEE</color>
-    <color name="accentgreen">#b8fa0b</color>
+    <color name="accentgreen">#B3E139</color>
 </resources>
