@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aa.thrivetrack.R;
@@ -29,7 +30,7 @@ import java.util.Map;
 
 public class RegisterFragment extends Fragment {
 
-    Button registerTrigger;
+    TextView registerTrigger;
 
     EditText usernameEt;
     EditText passwordEt;
@@ -43,7 +44,7 @@ public class RegisterFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         /*****Start Of Ui Initializations****/
-        registerTrigger = (Button) view.findViewById(R.id.registerTrigger);
+        registerTrigger = (TextView) view.findViewById(R.id.registerTrigger);
         usernameEt = (EditText)view.findViewById(R.id.registerUsernameEt);
         passwordEt = (EditText)view.findViewById(R.id.registerPassowordEt);
         confirmPasswordEt = (EditText) view.findViewById(R.id.registerConfirmPasswordEt);
