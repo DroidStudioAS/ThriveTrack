@@ -6,8 +6,8 @@
     <string name="password_label">Password</string>
     <string name="confirm_password_label">Confirm Password</string>
     <string name="focus_mode_title">What Is The 1 Goal That Will Completely Change Your Life If You Achieve It?</string>
-    <string name="setup_end_title">Good Job! \nYou Have Taken The First Step To Becoming Your New Self!</string>
-    <string name="tasks_explenation">Now, Write 4 Things You Should Do Every Day, In Order To Achieve This Goal. You Can Always Edit, Delete or Add More Goals Later On</string>
+    <string name="setup_end_title">You Have Taken The First Step To Becoming Your New Self!</string>
+    <string name="tasks_explenation">Now, Write 4 Tasks You Should Do Every Day, In Order To Achieve This Goal. You Can Always Edit, Delete or Add More Tasks Later On!</string>
     <string name="first_label">1)</string>
     <string name="second_label">2)</string>
     <string name="third_label">3)</string>
