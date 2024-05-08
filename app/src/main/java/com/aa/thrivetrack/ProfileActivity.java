@@ -102,7 +102,6 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
 
     public void setProfilePageContent(){
         User user = SessionStorage.getUserData().getUser();
-        SessionStorage.getUserData().getUser().setUser_rank("gold");
         usernameTv.setText(SessionStorage.getUsername());
         userRankTv.setText(user.getUser_rank());
         userBadgeIv.setImageDrawable(getUserBadge());
