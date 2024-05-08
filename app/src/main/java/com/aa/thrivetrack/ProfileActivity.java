@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aa.thrivetrack.callback.PatchCallback;
@@ -37,6 +38,8 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
     TextView deleteTrigger;
     TextView streakTv;
 
+    ImageView userBadgeIv;
+
     protected CalendarView calendarView;
 
     @Override
@@ -51,6 +54,7 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
         deleteTrigger=(TextView)findViewById(R.id.deleteAcountTrigger);
         streakTv = (TextView) findViewById(R.id.userStreakTv);
         calendarView=(CalendarView) findViewById(R.id.calendarView);
+        userBadgeIv=(ImageView)findViewById(R.id.userRankIv);
         /******End Of Ui Initializations******/
         String streakString = "You Have A " + String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()) + " Day Streak";
         streakTv.setText(streakString);
@@ -98,13 +102,34 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
 
     public void setProfilePageContent(){
         User user = SessionStorage.getUserData().getUser();
+        SessionStorage.getUserData().getUser().setUser_rank("gold");
         usernameTv.setText(SessionStorage.getUsername());
         userRankTv.setText(user.getUser_rank());
+        userBadgeIv.setImageDrawable(getUserBadge());
     }
 
 
     @Override
     public void onChange(String newValue) {
         usernameTv.setText(newValue);
+    }
+
+    public Drawable getUserBadge(){
+        Drawable drawable = getDrawable(R.drawable.basic);
+        switch (SessionStorage.getUserData().getUser().getUser_rank()){
+            case "bronze":
+                drawable= getDrawable(R.drawable.bronze);
+                break;
+            case "silver":
+                drawable= getDrawable(R.drawable.silver);
+                break;
+            case "gold":
+                drawable=getDrawable(R.drawable.gold);
+                break;
+            case "diamond":
+                drawable=getDrawable(R.drawable.diamond);
+                break;
+        }
+        return  drawable;
     }
 }

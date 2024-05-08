@@ -164,6 +164,7 @@
         android:layout_marginTop="10dp"
         android:text="My Profile"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/profileTrigger"
         app:layout_constraintTop_toTopOf="@+id/profileTrigger" />
@@ -175,6 +176,7 @@
         android:layout_marginStart="10dp"
         android:text="Goal List"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/goalsTrigger"
         app:layout_constraintStart_toEndOf="@+id/goalsTrigger" />
@@ -186,6 +188,7 @@
         android:layout_marginStart="10dp"
         android:text="ToDo List"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/todoTrigger"
         app:layout_constraintStart_toEndOf="@+id/todoTrigger" />
@@ -197,6 +200,7 @@
         android:layout_marginStart="10dp"
         android:text="Diary"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/diaryTrigger"
         app:layout_constraintStart_toEndOf="@+id/diaryTrigger" />
@@ -208,6 +212,7 @@
         android:layout_marginStart="10dp"
         android:text="Blog"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/communityTrigger"
         app:layout_constraintStart_toEndOf="@+id/communityTrigger" />

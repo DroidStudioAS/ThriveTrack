@@ -4,28 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ProfileActivity">
 
     <TextView
         android:id="@+id/usernameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="TextView"
+        android:textColor="@color/accentgreen"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/userRankIv"
-        app:layout_constraintEnd_toStartOf="@+id/userRankIv"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/userRankIv"
         app:layout_constraintTop_toTopOf="@+id/userRankIv" />
 
     <ImageView
         android:id="@+id/userRankIv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/usernameTv"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_menu" />
 
@@ -34,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textColor="@color/accentgreen"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/userRankIv"
         app:layout_constraintStart_toStartOf="@+id/userRankIv"
@@ -46,6 +48,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="You Have A x Day Streak!"
+        android:textColor="@color/white"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +65,10 @@
         android:id="@+id/changeUsernameTrigger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/login_button"
+        android:backgroundTint="@color/accentgreen"
         android:text="@string/change_username_label"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/changePasswordTrigger"
@@ -75,7 +81,10 @@
         android:id="@+id/changePasswordTrigger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/login_button"
+        android:backgroundTint="@color/accentgreen"
         android:text="@string/change_password_label"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/deleteAcountTrigger"
@@ -88,7 +97,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/delete_account_label"
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,10 +121,10 @@
             android:layout_height="match_parent"
             android:background="@color/black"
             app:abbreviationsBarColor="#403e3e"
-            app:headerColor="#403e3e"
             app:abbreviationsLabelsColor="@color/white"
-            app:pagesColor="#403e3e"
             app:daysLabelsColor="@color/white"
-            app:todayLabelColor="@color/white"/>
+            app:headerColor="#403e3e"
+            app:pagesColor="#403e3e"
+            app:todayLabelColor="@color/white" />
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
