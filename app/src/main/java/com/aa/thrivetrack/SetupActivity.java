@@ -159,6 +159,9 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                     toGoTo = new TaskInputExplanationFragment();
                 }else if(SessionStorage.getModeSelected().equals("explore")){
                     toGoTo = new SelectGoalFragment();
+                    nextFragmentButton.setPadding(100,0,100,0);
+                    nextFragmentButton.setBackgroundResource(R.drawable.next_button_with_color);
+                    nextFragmentButton.setTextColor(Color.BLACK);
                 }
                 break;
             case 5:
