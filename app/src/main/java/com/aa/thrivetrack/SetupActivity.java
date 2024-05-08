@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aa.thrivetrack.callback.OnContinueClicked;
 import com.aa.thrivetrack.callback.OnExploreModeGoalInputCallback;
 import com.aa.thrivetrack.callback.OnFocusModeGoalInputCallback;
 import com.aa.thrivetrack.callback.OnTaskInputCallback;
@@ -36,12 +37,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SetupActivity extends AppCompatActivity  {
+public class SetupActivity extends AppCompatActivity implements OnContinueClicked {
 
     int currentFragment = 1;
     int exploreModeInputStep = 1;
 
     TextView nextFragmentButton;
+    TextView exampleButton;
     Fragment toGoTo = new Fragment();
 
     private OnFocusModeGoalInputCallback focusModeCallback;
@@ -59,7 +61,10 @@ public class SetupActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_setup);
         /*****Start of Ui Initializations*****/
         nextFragmentButton=(TextView) findViewById(R.id.fragmentTransitionTrigger);
+        exampleButton=(TextView)findViewById(R.id.exampleTrigger);
         /*****End of Ui Initializations*****/
+        nextFragmentButton.setVisibility(View.INVISIBLE);
+        exampleButton.setVisibility(View.INVISIBLE);
 
         /*****Start of OnClickListeners*****/
         nextFragmentButton.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +133,8 @@ public class SetupActivity extends AppCompatActivity  {
                 break;
             case 1:
                 toGoTo = new ModePickerFragment();
+                exampleButton.setVisibility(View.VISIBLE);
+                nextFragmentButton.setVisibility(View.VISIBLE);
                 break;
             case 2:
                 if(SessionStorage.getModeSelected().equals("focus")){
@@ -224,5 +231,10 @@ public class SetupActivity extends AppCompatActivity  {
     public void onBackPressed() {
         super.onBackPressed();
         currentFragment--;
+    }
+
+    @Override
+    public void onContinueClicked() {
+        validateFragmentInput();
     }
 }
