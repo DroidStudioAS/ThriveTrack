@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.constraintlayout.widget.Guideline;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -117,6 +118,7 @@ public class ToDoActivity extends AppCompatActivity {
         toAdd.setId(View.generateViewId());
         toAdd.setText(task.getTaskText());
         toAdd.setTextSize(32);
+        toAdd.setTextColor(Color.WHITE);
         toAdd.setChecked(sharedPreferences.getBoolean(task.getTaskText(), false));
     }
     public void setConstraints(ConstraintSet constraintSet,View toAdd, int previousViewId){
