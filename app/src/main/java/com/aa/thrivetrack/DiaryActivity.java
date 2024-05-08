@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.constraintlayout.widget.Guideline;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -31,7 +32,7 @@ public class DiaryActivity extends AppCompatActivity {
 
     TextView dateTv;
     EditText diaryInput;
-    Button saveTodaysInput;
+    TextView saveTodaysInput;
 
     private SharedPreferences sharedPreferences;
     boolean todayEntered;
@@ -48,7 +49,7 @@ public class DiaryActivity extends AppCompatActivity {
         diaryGuideline=(Guideline)findViewById(R.id.diaryGuideline);
         dateTv=(TextView) findViewById(R.id.dateTv);
         diaryInput=(EditText) findViewById(R.id.todaysInput);
-        saveTodaysInput=(Button) findViewById(R.id.saveTodaysDiary);
+        saveTodaysInput=(TextView) findViewById(R.id.saveTodaysDiary);
         /**Of Ui Initializations**/
 
         sharedPreferences=getSharedPreferences(SessionStorage.getUsername(), MODE_PRIVATE);
@@ -132,6 +133,8 @@ public class DiaryActivity extends AppCompatActivity {
         diaryText.setGravity(Gravity.CENTER);
         dateView.setTextSize(22);
         diaryText.setTextSize(16);
+        dateView.setTextColor(Color.WHITE);
+        diaryText.setTextColor(Color.WHITE);
     }
     public void setConstraints(ConstraintSet constraintSet, TextView dateView, TextView diaryText, int previousViewId){
         constraintSet.connect(dateView.getId(), ConstraintSet.TOP, previousViewId,ConstraintSet.BOTTOM);

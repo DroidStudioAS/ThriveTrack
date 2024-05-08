@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -70,8 +71,11 @@ public class EditActivity extends AppCompatActivity implements PatchCallback, On
             taskCounter.setText(String.valueOf(i + 1));
             taskText.setText(SessionStorage.getUserData().getTasks().get(i).getTaskText());
 
-            //set the image
-            imageView.setImageResource(R.drawable.ic_menu);
+            if(i%2==0){
+                imageView.setImageResource(R.drawable.green_circle);
+            }else{
+                imageView.setImageResource(R.drawable.grey_circle);
+            }
 
             // Generate a unique ID for the UI Elements
             imageView.setId(View.generateViewId());
@@ -79,12 +83,12 @@ public class EditActivity extends AppCompatActivity implements PatchCallback, On
             taskText.setId(View.generateViewId());
             //typography
             taskCounter.setGravity(Gravity.CENTER);
-            taskCounter.setTextSize(18);
-            taskCounter.setTextColor(getResources().getColor(R.color.text));
+            taskCounter.setTextSize(30);
+            taskCounter.setTextColor(getColor(R.color.background));
 
             taskText.setGravity(Gravity.CENTER);
             taskText.setTextSize(18);
-            taskText.setTextColor(getResources().getColor(R.color.black));
+            taskText.setTextColor(Color.WHITE);
 
 
             // Add the ImageView to the taskContainer
