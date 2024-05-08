@@ -16,6 +16,7 @@ import com.aa.thrivetrack.callback.PatchCallback;
 import com.aa.thrivetrack.dialogs.DeleteDialog;
 import com.aa.thrivetrack.helpers.DateHelper;
 import com.aa.thrivetrack.helpers.DialogHelper;
+import com.aa.thrivetrack.helpers.StreakHelper;
 import com.aa.thrivetrack.models.Data;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.SessionStorage;
@@ -104,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
         User user = SessionStorage.getUserData().getUser();
         usernameTv.setText(SessionStorage.getUsername());
         userRankTv.setText(user.getUser_rank());
-        userBadgeIv.setImageDrawable(getUserBadge());
+        userBadgeIv.setImageDrawable(StreakHelper.getUserBadge(getApplicationContext()));
     }
 
 
@@ -113,22 +114,4 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
         usernameTv.setText(newValue);
     }
 
-    public Drawable getUserBadge(){
-        Drawable drawable = getDrawable(R.drawable.basic);
-        switch (SessionStorage.getUserData().getUser().getUser_rank()){
-            case "bronze":
-                drawable= getDrawable(R.drawable.bronze);
-                break;
-            case "silver":
-                drawable= getDrawable(R.drawable.silver);
-                break;
-            case "gold":
-                drawable=getDrawable(R.drawable.gold);
-                break;
-            case "diamond":
-                drawable=getDrawable(R.drawable.diamond);
-                break;
-        }
-        return  drawable;
-    }
 }

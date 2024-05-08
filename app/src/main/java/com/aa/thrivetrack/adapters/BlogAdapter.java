@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.callback.OnAllCommentsClicked;
+import com.aa.thrivetrack.helpers.StreakHelper;
 import com.aa.thrivetrack.models.Article;
 import com.aa.thrivetrack.models.Comment;
 import com.aa.thrivetrack.network.SessionStorage;
@@ -53,15 +54,18 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         TextView featuredUsernameTv = holder.itemView.findViewById(R.id.featuredUsernameTv);
         TextView viewAllCommentsTrigger = holder.itemView.findViewById(R.id.viewAllComments);
         ImageView blogPhoto = holder.itemView.findViewById(R.id.imageView);
+        ImageView badgeIv = holder.itemView.findViewById(R.id.badgeIv);
 
         blogTitleholder.setText(article.getArticle_title());
         blogPhoto.setImageDrawable(article.getArticleDrawable(context));
+        blogPhoto.setColorFilter(R.color.black);
         commentTv.setText(String.valueOf(article.getCommentCount()));
         likeTv.setText(String.valueOf(article.getArticle_likes()));
         blogTitleholder.bringToFront();
         Comment topRated = article.getTopRatedComment();
         featuredCommentTv.setText(topRated.getComment_text());
         featuredUsernameTv.setText(topRated.getUser_username());
+        badgeIv.setImageDrawable(context.getDrawable(R.drawable.diamond));
 
         viewAllCommentsTrigger.setOnClickListener(new View.OnClickListener() {
             @Override

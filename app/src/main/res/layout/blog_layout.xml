@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/background">
 
     <TextView
         android:id="@+id/blogPost1"
@@ -12,7 +13,7 @@
         android:gravity="center"
         android:padding="25dp"
         android:text="TextView"
-        android:textColor="@color/teal_200"
+        android:textColor="@color/white"
         android:textSize="50sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +84,7 @@
         app:layout_constraintGuide_begin="512dp" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/badgeIv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -97,10 +98,11 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/badgeIv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintStart_toEndOf="@+id/badgeIv"
+        app:layout_constraintTop_toTopOf="@+id/badgeIv" />
 
     <TextView
         android:id="@+id/featuredUsernameTv"
@@ -109,6 +111,7 @@
         android:gravity="center"
         android:padding="5dp"
         android:text="TextView"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/featuredComment"
         app:layout_constraintStart_toStartOf="@+id/featuredComment" />
 

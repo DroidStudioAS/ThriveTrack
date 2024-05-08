@@ -1,8 +1,10 @@
 package com.aa.thrivetrack.helpers;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
+import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
@@ -51,8 +53,23 @@ public class StreakHelper {
         }
         SessionStorage.resetServerResponse();
 
-
-
-
+    }
+    public static Drawable getUserBadge(Context context){
+        Drawable drawable = context.getDrawable(R.drawable.basic);
+        switch (SessionStorage.getUserData().getUser().getUser_rank()){
+            case "bronze":
+                drawable= context.getDrawable(R.drawable.bronze);
+                break;
+            case "silver":
+                drawable= context.getDrawable(R.drawable.silver);
+                break;
+            case "gold":
+                drawable=context.getDrawable(R.drawable.gold);
+                break;
+            case "diamond":
+                drawable=context.getDrawable(R.drawable.diamond);
+                break;
+        }
+        return  drawable;
     }
 }
