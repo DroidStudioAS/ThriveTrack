@@ -41,7 +41,7 @@ public class PatchDialog extends Dialog {
     Group changeGoalGroup;
     //children
     EditText newGoalEt;
-    Button newGoalTrigger;
+    TextView newGoalTrigger;
 
     Group changeTaskGroup;
     //children
@@ -95,7 +95,7 @@ public class PatchDialog extends Dialog {
 
         changeGoalGroup = (Group)findViewById(R.id.changeGoalGroup);
         newGoalEt = (EditText) findViewById(R.id.newGoalEt);
-        newGoalTrigger=(Button)findViewById(R.id.changeGoalTrigger);
+        newGoalTrigger=(TextView)findViewById(R.id.changeGoalTrigger);
 
         changeTaskGroup = (Group) findViewById(R.id.changeTaskGroup);
         newTaskEt = (EditText)findViewById(R.id.newTaskEt);

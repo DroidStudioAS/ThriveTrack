@@ -15,9 +15,10 @@
         android:id="@+id/dialogTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:text="TextView"
         android:textColor="@color/accentgreen"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +28,7 @@
         android:id="@+id/changeTaskGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         app:constraint_referenced_ids="changeTaskTrigger,oldTaskLabel,newTaskEt,deleteTaskTrigger"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="30dp" />
@@ -36,7 +37,7 @@
         android:id="@+id/changeGoalGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:constraint_referenced_ids="changeGoalTrigger,newGoalEt,newGoalLabel"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="30dp" />
@@ -155,12 +156,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEt" />
 
-    <Button
+    <TextView
         android:id="@+id/changeGoalTrigger"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:background="@drawable/login_button"
+        android:backgroundTint="@color/accentgreen"
+        android:gravity="center"
         android:text="@string/confirm"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newGoalEt" />
@@ -169,9 +174,15 @@
         android:id="@+id/newGoalEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/task_background"
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
+        android:paddingStart="10dp"
+        android:paddingTop="50dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newGoalLabel" />
@@ -181,7 +192,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
-        android:text="Enter New Goal"
+        android:text="Enter Your  New Goal"
+        android:textColor="@color/accentgreen"
         app:layout_constraintEnd_toEndOf="@+id/newGoalEt"
         app:layout_constraintStart_toStartOf="@+id/newGoalEt"
         app:layout_constraintTop_toBottomOf="@+id/newUsernameLabel" />
