@@ -88,7 +88,8 @@ public class EditActivity extends AppCompatActivity implements PatchCallback, On
 
             taskText.setGravity(Gravity.CENTER);
             taskText.setTextSize(18);
-            taskText.setTextColor(Color.WHITE);
+            taskText.setTextColor(Color.BLACK);
+            taskText.setBackgroundResource(R.drawable.task_background);
 
 
             // Add the ImageView to the taskContainer
@@ -104,10 +105,10 @@ public class EditActivity extends AppCompatActivity implements PatchCallback, On
             if (i == 0) {
                 constraintSet.connect(imageView.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
             } else {
-                constraintSet.connect(imageView.getId(), ConstraintSet.TOP, previousViewId, ConstraintSet.BOTTOM);
+                constraintSet.connect(imageView.getId(), ConstraintSet.TOP, previousViewId, ConstraintSet.BOTTOM, 40);
             }
-            constraintSet.constrainWidth(imageView.getId(), 300); // Set width constraint
-            constraintSet.constrainHeight(imageView.getId(), 300); // Set height constraint
+            constraintSet.constrainWidth(imageView.getId(), 250); // Set width constraint
+            constraintSet.constrainHeight(imageView.getId(), 250); // Set height constraint
 
             //set counter constraints
             constraintSet.connect(taskCounter.getId(), ConstraintSet.TOP, imageView.getId(), ConstraintSet.TOP);
@@ -119,6 +120,8 @@ public class EditActivity extends AppCompatActivity implements PatchCallback, On
             constraintSet.connect(taskText.getId(), ConstraintSet.START, imageView.getId(), ConstraintSet.END);
             constraintSet.connect(taskText.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END);
             constraintSet.connect(taskText.getId(), ConstraintSet.BOTTOM, imageView.getId(), ConstraintSet.BOTTOM);
+
+            constraintSet.constrainWidth(taskText.getId(), 600);
             // Update previousViewId to the ID of the current ImageView
             previousViewId = imageView.getId();
             //setOnClickListener For the group
