@@ -29,7 +29,7 @@ public class AddDialog extends Dialog {
 
     Group addTaskGroup;
     EditText addTaskEt;
-    Button confirmTaskInput;
+    TextView confirmTaskInput;
 
     private static final String[] PATH_TO_ADD_TASK = new String[]{"write", "task"};
 
@@ -50,7 +50,7 @@ public class AddDialog extends Dialog {
 
         addTaskGroup=(Group)findViewById(R.id.addTaskGroup);
         addTaskEt=(EditText) findViewById(R.id.addTaskEt);
-        confirmTaskInput=(Button) findViewById(R.id.confirmAddTask);
+        confirmTaskInput=(TextView) findViewById(R.id.confirmAddTask);
         /**End Of Ui Initializations**/
         confirmTaskInput.setOnClickListener(addTask());
 
