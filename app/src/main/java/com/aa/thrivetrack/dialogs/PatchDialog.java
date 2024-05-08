@@ -46,9 +46,8 @@ public class PatchDialog extends Dialog {
     Group changeTaskGroup;
     //children
     EditText newTaskEt;
-    TextView oldTaskTv;
-    Button changeTaskTrigger;
-    Button deleteTaskTrigger;
+    TextView changeTaskTrigger;
+    TextView deleteTaskTrigger;
 
 
 
@@ -99,10 +98,9 @@ public class PatchDialog extends Dialog {
         newGoalTrigger=(Button)findViewById(R.id.changeGoalTrigger);
 
         changeTaskGroup = (Group) findViewById(R.id.changeTaskGroup);
-        oldTaskTv = (TextView)findViewById(R.id.oldTaskTv);
         newTaskEt = (EditText)findViewById(R.id.newTaskEt);
-        changeTaskTrigger = (Button)findViewById(R.id.changeTaskTrigger);
-        deleteTaskTrigger=(Button)findViewById(R.id.deleteTaskTrigger);
+        changeTaskTrigger = (TextView)findViewById(R.id.changeTaskTrigger);
+        deleteTaskTrigger=(TextView)findViewById(R.id.deleteTaskTrigger);
         /*****End Of Ui Initializations*****/
         /*****Start Of OnClickListeners*****/
         confirmNewUsernameTrigger.setOnClickListener(changeUsername());
@@ -141,8 +139,8 @@ public class PatchDialog extends Dialog {
                 break;
             case "task":
                 dialogTitle.setText("Change Task:");
-                oldTaskTv.setText(SessionStorage.getTaskToEdit().getTaskText());
                 changeTaskGroup.setVisibility(View.VISIBLE);
+                newTaskEt.setText(SessionStorage.getTaskToEdit().getTaskText());
                 changeGoalGroup.setVisibility(View.GONE);
                 changePasswordGroup.setVisibility(View.GONE);
                 changeUsernameGroup.setVisibility(View.GONE);

@@ -2,10 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:padding="30dp">
+    android:background="@color/background"
+    android:paddingStart="20dp"
+    android:paddingTop="50dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="50dp">
 
     <TextView
         android:id="@+id/dialogTitle"
@@ -13,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="TextView"
+        android:textColor="@color/accentgreen"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,8 +27,8 @@
         android:id="@+id/changeTaskGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="newTaskEt,changeTaskTrigger,oldTaskLabel,oldTaskTv,newTaskLabel,deleteTaskTrigger"
+        android:visibility="visible"
+        app:constraint_referenced_ids="changeTaskTrigger,oldTaskLabel,newTaskEt,deleteTaskTrigger"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="30dp" />
 
@@ -64,25 +69,21 @@
         app:layout_constraintStart_toStartOf="@+id/newUsernameEt"
         app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
 
-    <Button
-        android:id="@+id/deleteTaskTrigger"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:textColor="#E62323"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changeTaskTrigger" />
-
     <TextView
-        android:id="@+id/newTaskLabel"
-        android:layout_width="wrap_content"
+        android:id="@+id/deleteTaskTrigger"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Enter New Task:"
-        app:layout_constraintEnd_toEndOf="@+id/newTaskEt"
-        app:layout_constraintStart_toStartOf="@+id/newTaskEt"
-        app:layout_constraintTop_toBottomOf="@+id/oldTaskTv" />
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/login_button"
+        android:backgroundTint="#545454"
+        android:gravity="center"
+        android:text="Delete"
+        android:textColor="@color/accentgreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/newUsernameEt"
@@ -185,41 +186,48 @@
         app:layout_constraintStart_toStartOf="@+id/newGoalEt"
         app:layout_constraintTop_toBottomOf="@+id/newUsernameLabel" />
 
-    <EditText
-        android:id="@+id/newTaskEt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTaskLabel" />
-
-    <Button
+    <TextView
         android:id="@+id/changeTaskTrigger"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/login_button"
+        android:backgroundTint="@color/accentgreen"
+        android:gravity="center"
         android:text="@string/confirm"
-        app:layout_constraintEnd_toEndOf="@+id/deleteTaskTrigger"
-        app:layout_constraintStart_toStartOf="@+id/deleteTaskTrigger"
-        app:layout_constraintTop_toBottomOf="@+id/newTaskEt" />
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/deleteTaskTrigger"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/oldTaskLabel"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:gravity="center"
         android:text="Editing Task:"
-        app:layout_constraintEnd_toEndOf="@+id/oldTaskTv"
-        app:layout_constraintStart_toStartOf="@+id/oldTaskTv"
+        android:textColor="@color/accentgreen"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialogTitle" />
 
-    <TextView
-        android:id="@+id/oldTaskTv"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/newTaskEt"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/task_background"
+        android:paddingStart="10dp"
+        android:paddingTop="50dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="50dp"
         android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/changeTaskTrigger"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/oldTaskLabel" />
