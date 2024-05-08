@@ -2,10 +2,13 @@ package com.aa.thrivetrack;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.aa.thrivetrack.blog.BlogActivity;
@@ -22,6 +25,7 @@ public class IndexActivity extends AppCompatActivity {
     ImageView todoTrigger;
     ImageView diaryTrigger;
     ImageView blogTrigger;
+    ImageView halfCircle;
 
     private static final String[] PATH_TO_FETCH_BLOG = new String[]{"fetch","blog"};
 
@@ -37,6 +41,7 @@ public class IndexActivity extends AppCompatActivity {
         todoTrigger=(ImageView)findViewById(R.id.todoTrigger);
         diaryTrigger=(ImageView)findViewById(R.id.diaryTrigger);
         blogTrigger=(ImageView)findViewById(R.id.communityTrigger);
+        halfCircle=(ImageView)findViewById(R.id.halfCircle);
         /***End Of Ui Initializations**/
         /***Start Of OnClickListeners**/
         profileTrigger.setOnClickListener(pushTo(new Intent(this, ProfileActivity.class)));
@@ -65,7 +70,6 @@ public class IndexActivity extends AppCompatActivity {
             }
         };
     }
-
 
 
 
