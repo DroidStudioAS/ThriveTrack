@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -148,6 +149,9 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                     toGoTo = new GoalInputEndFragment();
                 }else if (SessionStorage.getModeSelected().equals("explore")){
                     toGoTo=new ConfirmChoiceFragment();
+                    nextFragmentButton.setBackgroundResource(R.drawable.example_button);
+                    nextFragmentButton.setTextColor(getColor(R.color.accentgreen));
+                    nextFragmentButton.setPadding(100,0,100,0);
                 }
                 break;
             case 4:
