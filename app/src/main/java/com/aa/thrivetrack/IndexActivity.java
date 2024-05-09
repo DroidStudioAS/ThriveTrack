@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.aa.thrivetrack.blog.BlogActivity;
+import com.aa.thrivetrack.helpers.StreakHelper;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
@@ -56,6 +58,11 @@ public class IndexActivity extends AppCompatActivity {
         NetworkHelper.waitForReply();
         Log.i("response",SessionStorage.getBlog().toString());
         SessionStorage.resetServerResponse();
+
+
+        //initialize sp and check for streak changes
+        SharedPreferences sharedPreferences = getSharedPreferences(SessionStorage.getUsername(), MODE_PRIVATE);
+        StreakHelper.checkAndSetLastCompareDate(sharedPreferences, IndexActivity.this);
     }
     public View.OnClickListener pushTo(Intent intent){
         return new View.OnClickListener() {

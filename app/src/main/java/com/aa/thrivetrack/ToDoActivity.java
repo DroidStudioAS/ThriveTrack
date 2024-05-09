@@ -7,7 +7,6 @@ import androidx.constraintlayout.widget.Guideline;
 
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
-import android.graphics.BlendMode;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -19,11 +18,8 @@ import android.widget.Toast;
 import com.aa.thrivetrack.helpers.DateHelper;
 import com.aa.thrivetrack.helpers.StreakHelper;
 import com.aa.thrivetrack.models.Task;
-import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
-import java.util.HashMap;
-import java.util.Map;
 
 //todo: cover the case where user has 2 acounts on the same device for shared preferences;
 public class ToDoActivity extends AppCompatActivity {
@@ -55,7 +51,7 @@ public class ToDoActivity extends AppCompatActivity {
 
         checkedCount=sharedPreferences.getInt("checked_count",0);
         todaysTasksCompleted=sharedPreferences.getBoolean("tasks_completed", false);
-        checkAndSetLastCompareDate();
+        StreakHelper.checkAndSetLastCompareDate(sharedPreferences, ToDoActivity.this);
 
         populateUI();
 
@@ -93,29 +89,14 @@ public class ToDoActivity extends AppCompatActivity {
                     editor.apply();
                     //Handle streak;
                     handleLocalStreakChange(checkedCount);
-                    updateUserStreak(callApi);
+                    StreakHelper.updateUserStreak(callApi, ToDoActivity.this);
                 }
             });
 
         }
         constraintSet.applyTo(todoContainer);
     }
-    public void checkAndSetLastCompareDate(){
-        String lastCompareDate = sharedPreferences.getString("date","");
-        if(!lastCompareDate.equals(DateHelper.buildTodaysDate())){
-            //reset streak if yesterday was not completed
-            if(!todaysTasksCompleted){
-                SessionStorage.getUserData().getUser().setUser_streak(0);
-                updateUserStreak(true);
-                Toast.makeText(getApplicationContext(), "Streak Reset", Toast.LENGTH_SHORT).show();
-            }
-            //new day
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
-            editor.putString("date", DateHelper.buildTodaysDate());
-            editor.apply();
-        }
-    }
+
     public void setViewIdAndText(CheckBox toAdd, Task task){
         toAdd.setId(View.generateViewId());
         toAdd.setText(task.getTaskText());
@@ -151,22 +132,6 @@ public class ToDoActivity extends AppCompatActivity {
             callApi=true;
         }
     }
-    public void updateUserStreak(boolean callApi){
-        if (!callApi){
-            return;
-        }
-        Map<String,String> params = new HashMap<>();
-        params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
-        params.put("streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()));
-        params.put("end-date", DateHelper.buildTodaysDate());
-        NetworkHelper.callPatch(PATH_TO_EDIT_STREAK, params, 0);
-        NetworkHelper.waitForReply();
-        if(SessionStorage.getServerResponse().equals("true")){
-            Toast.makeText(getApplicationContext(),"Your Streak Has Been Updated! Keep It Up", Toast.LENGTH_SHORT).show();
-        }
-         SessionStorage.resetServerResponse();
-        StreakHelper.changeUserRank(SessionStorage.getUserData().getUser(), ToDoActivity.this);
 
-    }
 
 }
