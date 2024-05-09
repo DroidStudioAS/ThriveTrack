@@ -102,4 +102,5 @@ public class Comment {
                 ", user_rank='" + user_rank + '\'' +
                 '}';
     }
+
 }

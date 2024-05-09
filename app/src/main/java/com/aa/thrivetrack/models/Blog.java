@@ -37,4 +37,10 @@ public class Blog {
                 ", comments=" + comments +
                 '}';
     }
+    public int getNextCommentId(){
+        int length = this.getComments().size();
+        int lastId = this.comments.get(length-1).getComment_id();
+        return lastId+1;
+
+    }
 }

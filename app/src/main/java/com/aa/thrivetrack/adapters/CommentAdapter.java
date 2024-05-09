@@ -60,6 +60,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
             }
         }
     }
+    public void addToComments(Comment comment){
+        this.comments.add(comment);
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {

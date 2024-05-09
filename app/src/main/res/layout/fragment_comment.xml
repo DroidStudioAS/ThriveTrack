@@ -105,7 +105,7 @@
         app:layout_constraintTop_toBottomOf="@+id/hideComments" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/commentInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -122,18 +122,18 @@
         android:textColor="@color/white"
         android:textColorHint="@color/accentgreen"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView10"
+        app:layout_constraintEnd_toStartOf="@+id/sendCommentTrigger"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/sendCommentTrigger"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginEnd="30dp"
         android:scaleType="fitXY"
         android:src="@android:drawable/ic_menu_send"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextMultiLine"
+        app:layout_constraintBottom_toBottomOf="@+id/commentInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextMultiLine" />
+        app:layout_constraintTop_toTopOf="@+id/commentInput" />
 </androidx.constraintlayout.widget.ConstraintLayout>
