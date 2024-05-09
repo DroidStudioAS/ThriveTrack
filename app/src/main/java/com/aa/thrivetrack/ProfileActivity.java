@@ -18,6 +18,7 @@ import com.aa.thrivetrack.helpers.DateHelper;
 import com.aa.thrivetrack.helpers.DialogHelper;
 import com.aa.thrivetrack.helpers.StreakHelper;
 import com.aa.thrivetrack.models.Data;
+import com.aa.thrivetrack.models.Streak;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.SessionStorage;
 import com.applandeo.materialcalendarview.CalendarDay;
@@ -70,34 +71,26 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
             }
         });
 
+        List<CalendarDay> streakDays = new ArrayList<>();
 
+        for(Streak streak : SessionStorage.getUserData().getStreaks()){
+            ArrayList<String> datesInRange = DateHelper.datesInRange(streak.getStreak_start(), streak.getStreak_end());
+            for(String date : datesInRange){
+                String[] parsed = date.split("-");
+                int year = Integer.parseInt(parsed[0]);
+                int month = Integer.parseInt(parsed[1])-1;
+                int day = Integer.parseInt(parsed[2]);
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year,month,day);
+                CalendarDay calendarDay = new CalendarDay(calendar);
 
-        ArrayList<String> datesInRange = DateHelper.datesInRange(SessionStorage.getUserData().getStreaks().get(0).getStreak_start(),
-                SessionStorage.getUserData().getStreaks().get(0).getStreak_end());
-        List<CalendarDay> cd = new ArrayList<>();
-        for(String x : datesInRange){
-            String[] parsed = x.split("-");
-            int year = Integer.parseInt(parsed[0]);
-            int month = Integer.parseInt(parsed[1])-1;
-            int day = Integer.parseInt(parsed[2]);
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(year,month,day);
-
-            CalendarDay calendarDay = new CalendarDay(calendar);
-
-            @SuppressLint("UseCompatLoadingForDrawables")
-            Drawable drawable = getDrawable(R.drawable.ic_streak);
-            //calendarDay.setBackgroundDrawable(drawable);
-            calendarDay.setLabelColor(R.color.accentgreen);
-            cd.add(calendarDay);
-
-
-
+                calendarDay.setLabelColor(R.color.accentgreen);
+                streakDays.add(calendarDay);
+            }
         }
 
-        calendarView.setCalendarDays(cd);
-
         /******End Of OnClickListeners******/
+        calendarView.setCalendarDays(streakDays);
         setProfilePageContent();
     }
 

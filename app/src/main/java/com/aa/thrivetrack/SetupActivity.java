@@ -218,7 +218,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
 
         if(SessionStorage.getServerResponse().equals("true")){
             //build session data object
-            User user = new User(Integer.parseInt(SessionStorage.getUser_id()), "bronze");
+            User user = new User(Integer.parseInt(SessionStorage.getUser_id()), "basic");
             ArrayList<Task> tasks = new ArrayList<>();
             tasks.add(new Task(SessionStorage.getFirstTask()));
             tasks.add(new Task(SessionStorage.getSecondTask()));
