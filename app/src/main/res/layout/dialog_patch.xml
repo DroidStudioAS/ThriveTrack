@@ -28,7 +28,7 @@
         android:id="@+id/changeTaskGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:constraint_referenced_ids="changeTaskTrigger,oldTaskLabel,newTaskEt,deleteTaskTrigger"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="30dp" />

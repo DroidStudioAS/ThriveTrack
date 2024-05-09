@@ -3,6 +3,11 @@ public class Streak {
     String streak_start;
     String streak_end;
 
+    public Streak(String streak_start, String streak_end) {
+        this.streak_start = streak_start;
+        this.streak_end = streak_end;
+    }
+
     public String getStreak_start() {
         return streak_start;
     }

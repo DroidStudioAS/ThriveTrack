@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.SetupActivity;
 import com.aa.thrivetrack.helpers.DateHelper;
+import com.aa.thrivetrack.models.Streak;
+import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
@@ -24,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,21 +66,25 @@ public class RegisterFragment extends Fragment {
                     NetworkHelper.callPost(PATH_TO_REGISTER, params,0);
                     NetworkHelper.waitForReply();
                     Log.i("response", SessionStorage.getServerResponse());
-                    int userId;
+                    int userId = -1;
                     try {
-                        userId=Integer.parseInt(SessionStorage.getServerResponse());
+                        userId = Integer.parseInt(SessionStorage.getServerResponse());
                         SessionStorage.setUser_id(String.valueOf(userId));
-                    }catch (NumberFormatException e){
+                    }catch (NumberFormatException e) {
                         Log.i("exc active", e.getLocalizedMessage());
                     }
-                    if(!SessionStorage.getUser_id().equals("")){
+
+                    if(!SessionStorage.getUser_id().equals(-1)){
+                        SessionStorage.setUsername(usernameEt.getText().toString());
+                        SessionStorage.setUser_id(String.valueOf(userId));
                         startActivity(new Intent(requireContext(), SetupActivity.class));
+                    }
                     }else if(SessionStorage.getServerResponse().equals("false")){
                         Toast.makeText(getContext(), "Username Taken", Toast.LENGTH_SHORT).show();
                     }
-                    SessionStorage.setUsername(usernameEt.getText().toString());
+                    //SessionStorage.getUserData().getStreaks().add(new Streak());
                     SessionStorage.resetServerResponse();
-                }
+
             }
         });
         /*****End Of OnClickListeners****/

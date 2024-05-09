@@ -56,11 +56,6 @@ public class IndexActivity extends AppCompatActivity {
         NetworkHelper.waitForReply();
         Log.i("response",SessionStorage.getBlog().toString());
         SessionStorage.resetServerResponse();
-
-
-
-
-
     }
     public View.OnClickListener pushTo(Intent intent){
         return new View.OnClickListener() {

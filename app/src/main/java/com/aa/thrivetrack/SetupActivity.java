@@ -27,14 +27,17 @@ import com.aa.thrivetrack.fragments.setup.explore.ConfirmChoiceFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ExploreModeGoalInputFragment;
 import com.aa.thrivetrack.fragments.setup.explore.SelectGoalFragment;
 import com.aa.thrivetrack.fragments.setup.focus.FocusModeGoalInputFragment;
+import com.aa.thrivetrack.helpers.DateHelper;
 import com.aa.thrivetrack.models.Data;
 import com.aa.thrivetrack.models.Diary;
+import com.aa.thrivetrack.models.Streak;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -222,7 +225,10 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
             tasks.add(new Task(SessionStorage.getThirdTask()));
             tasks.add(new Task(SessionStorage.getFourthTask()));
             ArrayList<Diary> diary = new ArrayList<>();
-            Data data = new Data(SessionStorage.getGoalInFocus(), tasks, user,diary);
+            ArrayList<Streak> streaks = new ArrayList<>();
+            streaks.add(new Streak(DateHelper.buildTodaysDate(), DateHelper.buildTodaysDate()));
+
+            Data data = new Data(SessionStorage.getGoalInFocus(), tasks, user,diary, streaks);
 
             SessionStorage.setUserData(data);
 

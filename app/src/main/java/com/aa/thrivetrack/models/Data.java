@@ -13,6 +13,7 @@ public class Data {
     public Data() {
     }
 
+
     @Override
     public String toString() {
         return "Data{" +
@@ -22,11 +23,12 @@ public class Data {
                 '}';
     }
 
-    public Data(String goal, ArrayList<Task> tasks, User user, ArrayList<Diary> diary) {
+    public Data(String goal, ArrayList<Task> tasks, User user, ArrayList<Diary> diary, ArrayList<Streak> streaks) {
         this.goal = goal;
         this.tasks = tasks;
         this.user = user;
         this.diary=diary;
+        this.streak=streaks;
     }
 
     public String getGoal() {
