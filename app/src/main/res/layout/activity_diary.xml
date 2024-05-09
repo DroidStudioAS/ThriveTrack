@@ -91,4 +91,16 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/diaryEntryContainerView"
+        android:name="com.aa.thrivetrack.fragments.DiaryFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView26"
+        tools:layout="@layout/fragment_diary" />
 </androidx.constraintlayout.widget.ConstraintLayout>

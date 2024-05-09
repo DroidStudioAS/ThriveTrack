@@ -5,9 +5,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.constraintlayout.widget.Group;
 import androidx.constraintlayout.widget.Guideline;
+import androidx.fragment.app.FragmentContainerView;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aa.thrivetrack.callback.OnDiaryFragmentClose;
 import com.aa.thrivetrack.helpers.DateHelper;
 import com.aa.thrivetrack.models.Diary;
 import com.aa.thrivetrack.network.NetworkHelper;
@@ -26,7 +29,7 @@ import com.aa.thrivetrack.network.SessionStorage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DiaryActivity extends AppCompatActivity {
+public class DiaryActivity extends AppCompatActivity implements OnDiaryFragmentClose {
 
     ConstraintLayout diaryContainer;
     Guideline diaryGuideline;
@@ -34,6 +37,7 @@ public class DiaryActivity extends AppCompatActivity {
     TextView dateTv;
     EditText diaryInput;
     TextView saveTodaysInput;
+    FragmentContainerView entryContainer;
 
     private SharedPreferences sharedPreferences;
     boolean todayEntered;
@@ -51,6 +55,7 @@ public class DiaryActivity extends AppCompatActivity {
         dateTv=(TextView) findViewById(R.id.dateTv);
         diaryInput=(EditText) findViewById(R.id.todaysInput);
         saveTodaysInput=(TextView) findViewById(R.id.saveTodaysDiary);
+        entryContainer=(FragmentContainerView)findViewById(R.id.diaryEntryContainerView);
         /**Of Ui Initializations**/
 
         sharedPreferences=getSharedPreferences(SessionStorage.getUsername(), MODE_PRIVATE);
@@ -112,51 +117,53 @@ public class DiaryActivity extends AppCompatActivity {
                 continue;
             }
             TextView dateView = new TextView(this);
-            TextView diaryText = new TextView(this);
             //generate ids
             dateView.setId(View.generateViewId());
-            diaryText.setId(View.generateViewId());
             //config views
-            configureViews(entry,dateView,diaryText);
+            configureViews(entry,dateView);
             //add views
             diaryContainer.addView(dateView);
-            diaryContainer.addView(diaryText);
             //constraints
-            setConstraints(constraintSet,dateView,diaryText,previousViewId);
-            previousViewId=diaryText.getId();
+            setConstraints(constraintSet,dateView,previousViewId);
+            previousViewId=dateView.getId();
             constraintSet.applyTo(diaryContainer);
 
         }
     }
-    public void configureViews(Diary entry, TextView dateView, TextView diaryText){
+    public void configureViews(Diary entry, TextView dateView){
         dateView.setText(entry.getEntry_date());
-        diaryText.setText(entry.getEntry_text());
         dateView.setGravity(Gravity.CENTER);
-        diaryText.setGravity(Gravity.CENTER);
         dateView.setTextSize(22);
-        diaryText.setTextSize(16);
-        dateView.setTextColor(Color.WHITE);
-        diaryText.setTextColor(Color.WHITE);
+        dateView.setTextColor(Color.parseColor("#cbcbcb"));
+
+        dateView.setBackgroundResource(R.drawable.date_background);
+        dateView.setPadding(20,10,20,10);
+        dateView.setTypeface(null,Typeface.BOLD);
+
+        dateView.setOnClickListener(dateClicked());
     }
-    public void setConstraints(ConstraintSet constraintSet, TextView dateView, TextView diaryText, int previousViewId){
+    public void setConstraints(ConstraintSet constraintSet, TextView dateView, int previousViewId){
         if(previousViewId==diaryContainer.getId()){
             constraintSet.connect(dateView.getId(), ConstraintSet.TOP, previousViewId,ConstraintSet.TOP);
         }else{
-            constraintSet.connect(dateView.getId(), ConstraintSet.TOP, previousViewId,ConstraintSet.BOTTOM);
+            constraintSet.connect(dateView.getId(), ConstraintSet.TOP, previousViewId,ConstraintSet.BOTTOM, 25);
         }
         constraintSet.connect(dateView.getId(), ConstraintSet.START, ConstraintSet.PARENT_ID,ConstraintSet.START);
         constraintSet.connect(dateView.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID,ConstraintSet.END);
 
         constraintSet.constrainHeight(dateView.getId(), ConstraintSet.WRAP_CONTENT);
-        constraintSet.constrainWidth(dateView.getId(), ConstraintSet.MATCH_CONSTRAINT);
+        constraintSet.constrainWidth(dateView.getId(), ConstraintSet.WRAP_CONTENT);
 
-        constraintSet.connect(diaryText.getId(), ConstraintSet.TOP, dateView.getId(),ConstraintSet.BOTTOM);
-        constraintSet.connect(diaryText.getId(), ConstraintSet.START, ConstraintSet.PARENT_ID,ConstraintSet.START);
-        constraintSet.connect(diaryText.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID,ConstraintSet.END);
 
-        constraintSet.constrainHeight(diaryText.getId(), ConstraintSet.WRAP_CONTENT);
-        constraintSet.constrainWidth(diaryText.getId(), ConstraintSet.MATCH_CONSTRAINT);
-
+    }
+    public View.OnClickListener dateClicked(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                entryContainer.setVisibility(View.VISIBLE);
+                entryContainer.bringToFront();
+            }
+        };
     }
     public void resetSharedPreferences(){
         String lastCompareDate = sharedPreferences.getString("date","");
@@ -169,5 +176,10 @@ public class DiaryActivity extends AppCompatActivity {
             editor.putString("date", DateHelper.buildTodaysDate());
             editor.apply();
         }
+    }
+
+    @Override
+    public void onDiaryFragmentClose() {
+        entryContainer.setVisibility(View.GONE);
     }
 }
