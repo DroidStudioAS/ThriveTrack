@@ -42,6 +42,8 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
 
     ImageView userBadgeIv;
 
+    List<CalendarDay> streakDays;
+
     protected CalendarView calendarView;
 
     @Override
@@ -70,26 +72,11 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
                 dd.show();
             }
         });
-
-        List<CalendarDay> streakDays = new ArrayList<>();
-
-        for(Streak streak : SessionStorage.getUserData().getStreaks()){
-            ArrayList<String> datesInRange = DateHelper.datesInRange(streak.getStreak_start(), streak.getStreak_end());
-            for(String date : datesInRange){
-                String[] parsed = date.split("-");
-                int year = Integer.parseInt(parsed[0]);
-                int month = Integer.parseInt(parsed[1])-1;
-                int day = Integer.parseInt(parsed[2]);
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(year,month,day);
-                CalendarDay calendarDay = new CalendarDay(calendar);
-
-                calendarDay.setLabelColor(R.color.accentgreen);
-                streakDays.add(calendarDay);
-            }
-        }
-
         /******End Of OnClickListeners******/
+
+        streakDays = new ArrayList<>();
+        streakDays=buildCalendarDays();
+
         calendarView.setCalendarDays(streakDays);
         setProfilePageContent();
     }
@@ -105,6 +92,29 @@ public class ProfileActivity extends AppCompatActivity implements PatchCallback 
     @Override
     public void onChange(String newValue) {
         usernameTv.setText(newValue);
+    }
+
+    public List<CalendarDay> buildCalendarDays(){
+        for(Streak streak : SessionStorage.getUserData().getStreaks()){
+            ArrayList<String> datesInRange = DateHelper.datesInRange(streak.getStreak_start(), streak.getStreak_end());
+            addDayToCalendar(datesInRange);
+        }
+
+        return streakDays;
+    }
+    public void addDayToCalendar(ArrayList<String> datesInRange){
+        for(String date : datesInRange){
+            String[] parsed = date.split("-");
+            int year = Integer.parseInt(parsed[0]);
+            int month = Integer.parseInt(parsed[1])-1;
+            int day = Integer.parseInt(parsed[2]);
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year,month,day);
+            CalendarDay calendarDay = new CalendarDay(calendar);
+
+            calendarDay.setLabelColor(R.color.accentgreen);
+            streakDays.add(calendarDay);
+        }
     }
 
 }
