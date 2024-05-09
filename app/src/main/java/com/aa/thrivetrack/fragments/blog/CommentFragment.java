@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.adapters.CommentAdapter;
+import com.aa.thrivetrack.callback.OnAllCommentsClicked;
 import com.aa.thrivetrack.callback.OnArticleClicked;
 import com.aa.thrivetrack.network.SessionStorage;
 
@@ -25,9 +26,11 @@ public class CommentFragment extends Fragment implements OnArticleClicked {
 
     ImageView articleIv;
     TextView articleTv;
+    TextView hideCommentsTrigger;
 
     RecyclerView recyclerView;
     CommentAdapter commentAdapter;
+    OnAllCommentsClicked onAllCommentsClicked;
 
     public CommentFragment() {
         // Required empty public constructor
@@ -43,9 +46,17 @@ public class CommentFragment extends Fragment implements OnArticleClicked {
         articleIv=(ImageView) view.findViewById(R.id.articleIv);
         articleTv=(TextView) view.findViewById(R.id.articleTv);
         recyclerView=(RecyclerView)view.findViewById(R.id.commentRv);
+        hideCommentsTrigger=(TextView)view.findViewById(R.id.hideComments);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         /**End Of Ui Initializations**/
+        onAllCommentsClicked=(OnAllCommentsClicked)container.getContext();
+        hideCommentsTrigger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAllCommentsClicked.onAllCommentsClicked();
+            }
+        });
         setUi();
         return view;
     }

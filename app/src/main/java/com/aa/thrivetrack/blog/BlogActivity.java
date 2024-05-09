@@ -54,12 +54,15 @@ public class BlogActivity extends AppCompatActivity implements OnAllCommentsClic
         Log.i("Callback active", "OnAllCommentsClicked");
         Log.i("Article In Focus", SessionStorage.getArticleInFocus().toString());
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.commentContainer, new CommentFragment()).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.commentContainer, new CommentFragment())
+                .commit();
 
         if(commentContainer.getVisibility()==View.VISIBLE){
             Animation fadeOut = AnimationUtils.loadAnimation(BlogActivity.this, R.anim.fade_out);
-            commentContainer.setVisibility(View.GONE);
             commentContainer.startAnimation(fadeOut);
+            commentContainer.setVisibility(View.GONE);
             return;
         }
         Animation fadeIn = AnimationUtils.loadAnimation(BlogActivity.this, R.anim.fade_in);
