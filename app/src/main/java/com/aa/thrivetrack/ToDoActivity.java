@@ -6,6 +6,8 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.constraintlayout.widget.Guideline;
 
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.BlendMode;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -120,6 +122,8 @@ public class ToDoActivity extends AppCompatActivity {
         toAdd.setTextSize(32);
         toAdd.setTextColor(Color.WHITE);
         toAdd.setChecked(sharedPreferences.getBoolean(task.getTaskText(), false));
+        toAdd.setButtonTintList(ColorStateList.valueOf(getResources().getColor(R.color.accentgreen)));
+
     }
     public void setConstraints(ConstraintSet constraintSet,View toAdd, int previousViewId){
         constraintSet.connect(toAdd.getId(), ConstraintSet.TOP, previousViewId, ConstraintSet.BOTTOM, 60);
