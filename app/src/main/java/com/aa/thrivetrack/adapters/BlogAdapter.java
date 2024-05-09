@@ -1,6 +1,8 @@
 package com.aa.thrivetrack.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,8 +59,12 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         ImageView badgeIv = holder.itemView.findViewById(R.id.badgeIv);
 
         blogTitleholder.setText(article.getArticle_title());
-        blogPhoto.setImageDrawable(article.getArticleDrawable(context));
-        blogPhoto.setColorFilter(R.color.black);
+        blogTitleholder.setTextColor(Color.parseColor("#d9d9d9"));
+        blogTitleholder.setTypeface(null, Typeface.BOLD);
+        blogPhoto.setImageDrawable(context.getDrawable(R.drawable.primer));
+        //blogPhoto.setImageDrawable(article.getArticleDrawable(context));
+        //blogPhoto.setColorFilter(R.color.black);
+        //blogPhoto.setAlpha(0.8F);
         commentTv.setText(String.valueOf(article.getCommentCount()));
         likeTv.setText(String.valueOf(article.getArticle_likes()));
         blogTitleholder.bringToFront();

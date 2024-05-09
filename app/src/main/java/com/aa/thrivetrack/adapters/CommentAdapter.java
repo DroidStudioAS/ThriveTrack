@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aa.thrivetrack.R;
+import com.aa.thrivetrack.helpers.StreakHelper;
 import com.aa.thrivetrack.models.Comment;
 
 import java.util.List;
@@ -49,6 +50,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
                 holder.usernameTvs[i].setText(comment.getUser_username());
                 holder.commentTvs[i].setText(comment.getComment_text());
                 holder.likeCountTvs[i].setText(String.valueOf(comment.getComment_likes()));
+                holder.rankIvs[i].setImageDrawable(StreakHelper.getUserBadge(context, comment.getUser_rank()));
             } else {
                 holder.rankIvs[i].setVisibility(View.GONE);
                 holder.likeIvs[i].setVisibility(View.GONE);

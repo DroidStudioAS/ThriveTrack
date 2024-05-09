@@ -72,4 +72,22 @@ public class StreakHelper {
         }
         return  drawable;
     }
+    public static Drawable getUserBadge(Context context, String userRank){
+        Drawable drawable = context.getDrawable(R.drawable.basic);
+        switch (userRank){
+            case "bronze":
+                drawable= context.getDrawable(R.drawable.bronze);
+                break;
+            case "silver":
+                drawable= context.getDrawable(R.drawable.silver);
+                break;
+            case "gold":
+                drawable=context.getDrawable(R.drawable.gold);
+                break;
+            case "diamond":
+                drawable=context.getDrawable(R.drawable.diamond);
+                break;
+        }
+        return  drawable;
+    }
 }
