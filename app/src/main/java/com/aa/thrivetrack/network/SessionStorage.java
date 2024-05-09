@@ -6,6 +6,7 @@ import android.util.Log;
 import com.aa.thrivetrack.models.Article;
 import com.aa.thrivetrack.models.Blog;
 import com.aa.thrivetrack.models.Data;
+import com.aa.thrivetrack.models.Diary;
 import com.aa.thrivetrack.models.Task;
 import com.google.gson.Gson;
 
@@ -40,14 +41,20 @@ public class SessionStorage {
    private static Blog BLOG;
 
    private static Article ARTICLE_IN_FOCUS;
+   private static Diary diaryInFocus;
 
    private static Task taskToEdit;
 
    private static boolean todaysTasksCompleted = false;
 
 
+
     //GETTERS
 
+
+    public static Diary getDiaryInFocus() {
+        return diaryInFocus;
+    }
 
     public static Task getTaskToEdit() {
         return taskToEdit;
@@ -228,6 +235,10 @@ public class SessionStorage {
     }
     public static void setTodaysTasksCompleted(boolean todaysTasksCompleted) {
         SessionStorage.todaysTasksCompleted = todaysTasksCompleted;
+    }
+
+    public static void setDiaryInFocus(Diary diaryInFocus) {
+        SessionStorage.diaryInFocus = diaryInFocus;
     }
 
     public static boolean validateExploreGoal(int index){

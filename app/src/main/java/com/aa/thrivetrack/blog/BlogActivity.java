@@ -60,7 +60,6 @@ public class BlogActivity extends AppCompatActivity implements OnAllCommentsClic
             Animation fadeOut = AnimationUtils.loadAnimation(BlogActivity.this, R.anim.fade_out);
             commentContainer.setVisibility(View.GONE);
             commentContainer.startAnimation(fadeOut);
-
             return;
         }
         Animation fadeIn = AnimationUtils.loadAnimation(BlogActivity.this, R.anim.fade_in);

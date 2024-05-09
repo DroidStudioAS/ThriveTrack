@@ -14,13 +14,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aa.thrivetrack.blog.BlogActivity;
 import com.aa.thrivetrack.callback.OnDiaryFragmentClose;
+import com.aa.thrivetrack.callback.OnDiaryFragmentOpen;
+import com.aa.thrivetrack.fragments.DiaryFragment;
 import com.aa.thrivetrack.helpers.DateHelper;
 import com.aa.thrivetrack.models.Diary;
 import com.aa.thrivetrack.network.NetworkHelper;
@@ -38,6 +43,7 @@ public class DiaryActivity extends AppCompatActivity implements OnDiaryFragmentC
     EditText diaryInput;
     TextView saveTodaysInput;
     FragmentContainerView entryContainer;
+
 
     private SharedPreferences sharedPreferences;
     boolean todayEntered;
@@ -127,6 +133,8 @@ public class DiaryActivity extends AppCompatActivity implements OnDiaryFragmentC
             setConstraints(constraintSet,dateView,previousViewId);
             previousViewId=dateView.getId();
             constraintSet.applyTo(diaryContainer);
+            dateView.setOnClickListener(dateClicked(entry));
+
 
         }
     }
@@ -140,7 +148,6 @@ public class DiaryActivity extends AppCompatActivity implements OnDiaryFragmentC
         dateView.setPadding(20,10,20,10);
         dateView.setTypeface(null,Typeface.BOLD);
 
-        dateView.setOnClickListener(dateClicked());
     }
     public void setConstraints(ConstraintSet constraintSet, TextView dateView, int previousViewId){
         if(previousViewId==diaryContainer.getId()){
@@ -156,11 +163,21 @@ public class DiaryActivity extends AppCompatActivity implements OnDiaryFragmentC
 
 
     }
-    public View.OnClickListener dateClicked(){
+
+    public View.OnClickListener dateClicked(Diary diary){
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SessionStorage.setDiaryInFocus(diary);
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.diaryEntryContainerView, new DiaryFragment())
+                        .commit();
+
+                Animation fadeIn = AnimationUtils.loadAnimation(DiaryActivity.this, R.anim.fade_in);
                 entryContainer.setVisibility(View.VISIBLE);
+                entryContainer.startAnimation(fadeIn);
                 entryContainer.bringToFront();
             }
         };
@@ -180,6 +197,8 @@ public class DiaryActivity extends AppCompatActivity implements OnDiaryFragmentC
 
     @Override
     public void onDiaryFragmentClose() {
-        entryContainer.setVisibility(View.GONE);
-    }
+            Animation fadeOut = AnimationUtils.loadAnimation(DiaryActivity.this, R.anim.fade_out);
+            entryContainer.setVisibility(View.GONE);
+            entryContainer.startAnimation(fadeOut);
+        }
 }

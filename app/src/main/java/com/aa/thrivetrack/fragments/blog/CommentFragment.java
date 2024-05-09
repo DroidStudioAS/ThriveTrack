@@ -45,7 +45,6 @@ public class CommentFragment extends Fragment implements OnArticleClicked {
         recyclerView=(RecyclerView)view.findViewById(R.id.commentRv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-
         /**End Of Ui Initializations**/
         setUi();
         return view;
