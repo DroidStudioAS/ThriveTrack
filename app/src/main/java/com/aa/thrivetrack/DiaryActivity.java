@@ -99,10 +99,11 @@ public class DiaryActivity extends AppCompatActivity {
 
     }
     public void populateUi(){
-        int previousViewId = diaryGuideline.getId();
+        int previousViewId = diaryContainer.getId();
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(diaryContainer);
 
+        Log.i("container id", String.valueOf(previousViewId));
         dateTv.setText(DateHelper.buildTodaysDate());
 
         for(Diary entry : SessionStorage.getUserData().getDiary()){
@@ -137,7 +138,11 @@ public class DiaryActivity extends AppCompatActivity {
         diaryText.setTextColor(Color.WHITE);
     }
     public void setConstraints(ConstraintSet constraintSet, TextView dateView, TextView diaryText, int previousViewId){
-        constraintSet.connect(dateView.getId(), ConstraintSet.TOP, previousViewId,ConstraintSet.BOTTOM);
+        if(previousViewId==diaryContainer.getId()){
+            constraintSet.connect(dateView.getId(), ConstraintSet.TOP, previousViewId,ConstraintSet.TOP);
+        }else{
+            constraintSet.connect(dateView.getId(), ConstraintSet.TOP, previousViewId,ConstraintSet.BOTTOM);
+        }
         constraintSet.connect(dateView.getId(), ConstraintSet.START, ConstraintSet.PARENT_ID,ConstraintSet.START);
         constraintSet.connect(dateView.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID,ConstraintSet.END);
 
