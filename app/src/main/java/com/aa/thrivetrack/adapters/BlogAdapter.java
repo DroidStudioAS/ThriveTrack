@@ -67,6 +67,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         featuredUsernameTv.setText(topRated.getUser_username());
         badgeIv.setImageDrawable(context.getDrawable(R.drawable.diamond));
 
+        viewAllCommentsTrigger.setText("View All " + String.valueOf(article.getCommentCount()) + " Comments");
         viewAllCommentsTrigger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

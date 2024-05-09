@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:backgroundTint="@color/background">
 
     <TextView
@@ -38,17 +39,20 @@
     <ImageView
         android:id="@+id/likeIcon1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blogPost1"
-        app:srcCompat="@android:drawable/ic_menu_view" />
+        app:srcCompat="@drawable/icon_like" />
 
     <TextView
         android:id="@+id/likeTv1"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
         android:gravity="center"
         android:text="TextView"
+        android:textColor="@color/accentgreen"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/likeIcon1"
         app:layout_constraintEnd_toStartOf="@+id/commentIcon1"
         app:layout_constraintHorizontal_bias="0.5"
@@ -59,19 +63,23 @@
         android:id="@+id/commentIcon1"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/likeTv1"
         app:layout_constraintEnd_toStartOf="@+id/commentTv1"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/likeTv1"
         app:layout_constraintTop_toBottomOf="@+id/blogPost1"
-        app:srcCompat="@android:drawable/stat_sys_phone_call_on_hold" />
+        app:srcCompat="@drawable/icon_comment" />
 
     <TextView
         android:id="@+id/commentTv1"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
         android:gravity="center"
         android:text="TextView"
+        android:textColor="@color/accentgreen"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/commentIcon1"
         app:layout_constraintStart_toEndOf="@+id/commentIcon1"
         app:layout_constraintTop_toBottomOf="@+id/blogPost1" />
@@ -81,12 +89,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="512dp" />
+        app:layout_constraintGuide_begin="528dp" />
 
     <ImageView
         android:id="@+id/badgeIv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/likeTv1"
@@ -96,18 +105,21 @@
         android:id="@+id/featuredComment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/comment_background"
         android:padding="10dp"
         android:text="TextView"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/badgeIv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/badgeIv"
-        app:layout_constraintTop_toTopOf="@+id/badgeIv" />
+        app:layout_constraintStart_toEndOf="@+id/badgeIv" />
 
     <TextView
         android:id="@+id/featuredUsernameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:gravity="center"
         android:padding="5dp"
         android:text="TextView"
@@ -121,6 +133,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="View All Comments"
+        android:textColor="@color/accentgreen"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
