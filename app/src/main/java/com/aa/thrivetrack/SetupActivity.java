@@ -15,6 +15,7 @@ import com.aa.thrivetrack.callback.OnContinueClicked;
 import com.aa.thrivetrack.callback.OnExploreModeGoalInputCallback;
 import com.aa.thrivetrack.callback.OnFocusModeGoalInputCallback;
 import com.aa.thrivetrack.callback.OnTaskInputCallback;
+import com.aa.thrivetrack.dialogs.ExplanationDialog;
 import com.aa.thrivetrack.fragments.setup.ModePickerFragment;
 import com.aa.thrivetrack.fragments.setup.GoalInputEndFragment;
 import com.aa.thrivetrack.fragments.setup.SetupEndFragment;
@@ -74,6 +75,13 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
         /*****End of Ui Initializations*****/
         nextFragmentButton.setVisibility(View.INVISIBLE);
         exampleButton.setVisibility(View.INVISIBLE);
+        exampleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExplanationDialog ed = new ExplanationDialog(SetupActivity.this, "ex");
+                ed.show();
+            }
+        });
         next=new ModePickerFragment();
 
         /*****Start of OnClickListeners*****/
