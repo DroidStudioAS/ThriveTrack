@@ -119,6 +119,9 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
         if(next instanceof ExploreModeGoalInputFragment){
             exploreModeCallback.onInput();
         }
+        if(next instanceof ConfirmChoiceFragment){
+            onChoiceConfirmed.onChoiceConfirmed();
+        }
     }
 
 
@@ -147,6 +150,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                         break;
                     case "explore":
                         fragment = new ConfirmChoiceFragment();
+                        onChoiceConfirmed=(OnChoiceConfirmed) fragment;
                         break;
                 }
                 break;

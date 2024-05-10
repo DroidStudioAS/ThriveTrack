@@ -57,6 +57,12 @@ public class ConfirmChoiceFragment extends Fragment implements OnChoiceConfirmed
 
     @Override
     public void onChoiceConfirmed() {
+        SessionStorage.setFirstExploreGoal(firstGoalEt.getText().toString().trim());
+        SessionStorage.setSecondExploreGoal(secondGoalEt.getText().toString().trim());
+        SessionStorage.setThirdExploreGoal(thirdGoalEt.getText().toString().trim());
+        SessionStorage.setFourthExploreGoal(fourthGoalEt.getText().toString().trim());
+        SessionStorage.setFifthExploreGoal(fifthGoalEt.getText().toString().trim());
+
         if(fifthGoalEt==null){
             return;
         }
@@ -64,11 +70,8 @@ public class ConfirmChoiceFragment extends Fragment implements OnChoiceConfirmed
             Toast.makeText(getContext(),"Goals Can Not Be Blank", Toast.LENGTH_SHORT).show();
             return;
         }
-        SessionStorage.setFirstExploreGoal(firstGoalEt.getText().toString());
-        SessionStorage.setSecondExploreGoal(secondGoalEt.getText().toString());
-        SessionStorage.setThirdExploreGoal(thirdGoalEt.getText().toString());
-        SessionStorage.setFourthExploreGoal(fourthGoalEt.getText().toString());
-        SessionStorage.setFifthExploreGoal(fifthGoalEt.getText().toString());
+
+        return;
 
     }
 }
