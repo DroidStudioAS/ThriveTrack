@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.aa.thrivetrack.R;
+import com.aa.thrivetrack.callback.OnChoiceConfirmed;
 import com.aa.thrivetrack.network.SessionStorage;
 
-public class ConfirmChoiceFragment extends Fragment {
+public class ConfirmChoiceFragment extends Fragment implements OnChoiceConfirmed {
     EditText firstGoalEt ;
     EditText secondGoalEt;
     EditText thirdGoalEt ;
@@ -42,6 +44,32 @@ public class ConfirmChoiceFragment extends Fragment {
         thirdGoalEt.setText(SessionStorage.getThirdExploreGoal()) ;
         fourthGoalEt.setText(SessionStorage.getFourthExploreGoal());
         fifthGoalEt.setText(SessionStorage.getFifthExploreGoal());
+    }
+
+    public boolean validateGoals(){
+        if(fifthGoalEt.getText().toString().equals("") || firstGoalEt.getText().toString().equals("")
+                ||secondGoalEt.getText().toString().equals("") || thirdGoalEt.getText().toString().equals("")
+                ||fourthGoalEt.getText().toString().equals(""))  {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void onChoiceConfirmed() {
+        if(fifthGoalEt==null){
+            return;
+        }
+        if(!validateGoals()){
+            Toast.makeText(getContext(),"Goals Can Not Be Blank", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        SessionStorage.setFirstExploreGoal(firstGoalEt.getText().toString());
+        SessionStorage.setSecondExploreGoal(secondGoalEt.getText().toString());
+        SessionStorage.setThirdExploreGoal(thirdGoalEt.getText().toString());
+        SessionStorage.setFourthExploreGoal(fourthGoalEt.getText().toString());
+        SessionStorage.setFifthExploreGoal(fifthGoalEt.getText().toString());
+
     }
 }
 

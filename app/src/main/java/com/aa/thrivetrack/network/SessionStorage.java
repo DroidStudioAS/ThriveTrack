@@ -281,6 +281,14 @@ public class SessionStorage {
         }
         return isValid;
     }
+    public static boolean validateAllGoals(){
+        boolean isValid = true;
+
+        if(firstExploreGoal.equals("") || secondExploreGoal.equals("") || thirdExploreGoal.equals("") || fourthExploreGoal.equals("") || fifthExploreGoal.equals("")){
+            isValid=false;
+        }
+        return isValid;
+    }
 
 
 }

@@ -41,35 +41,46 @@ public class ExploreModeGoalInputFragment extends Fragment implements OnExploreM
 
     @Override
     public void onInput() {
-       String goal = goalInput.getText().toString().trim();
-       if(goal.equals("")){
+        Log.i("callback", "callback");
+        if(goalInput==null){
+            return;
+        }
+         String goal = goalInput.getText().toString().trim();
+        if(goal.equals("")){
+           Toast.makeText(getContext(),"Please Fill The Goal In To Continue", Toast.LENGTH_SHORT).show();
            return;
-       }
-       //todo: refactor this logic to setter;
-       switch (onGoal){
-           case 1:
-               SessionStorage.setFirstExploreGoal(goal);
-               break;
-           case 2:
-               SessionStorage.setSecondExploreGoal(goal);
-               break;
-           case 3:
-               SessionStorage.setThirdExploreGoal(goal);
-               break;
-           case 4:
-               SessionStorage.setFourthExploreGoal(goal);
-               break;
-           case 5:
-               SessionStorage.setFifthExploreGoal(goal);
-               break;
-       }
+        }
+       setTemporaryGoals(goal);
+
 
        onGoal++;
-       goalInputLabel.setText(String.valueOf(onGoal)+")");
-       goalInput.setText("");
+       if(onGoal<6) {
+           goalInputLabel.setText(String.valueOf(onGoal) + ")");
+           goalInput.setText("");
+       }
 
 
 
+    }
+
+    public void setTemporaryGoals(String goal){
+        switch (onGoal){
+            case 1:
+                SessionStorage.setFirstExploreGoal(goal);
+                break;
+            case 2:
+                SessionStorage.setSecondExploreGoal(goal);
+                break;
+            case 3:
+                SessionStorage.setThirdExploreGoal(goal);
+                break;
+            case 4:
+                SessionStorage.setFourthExploreGoal(goal);
+                break;
+            case 5:
+                SessionStorage.setFifthExploreGoal(goal);
+                break;
+        }
     }
 
 

@@ -21,7 +21,6 @@ import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.SessionStorage;
 
 
-//todo: cover the case where user has 2 acounts on the same device for shared preferences;
 public class ToDoActivity extends AppCompatActivity {
 
     ConstraintLayout todoContainer;
@@ -72,7 +71,7 @@ public class ToDoActivity extends AppCompatActivity {
             //add elements
             todoContainer.addView(toAdd);
             previousViewId=toAdd.getId();
-
+            //todo move the onChangeListener to a seperate function
             toAdd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -96,7 +95,6 @@ public class ToDoActivity extends AppCompatActivity {
         }
         constraintSet.applyTo(todoContainer);
     }
-
     public void setViewIdAndText(CheckBox toAdd, Task task){
         toAdd.setId(View.generateViewId());
         toAdd.setText(task.getTaskText());

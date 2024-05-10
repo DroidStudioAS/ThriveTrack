@@ -1,5 +1,6 @@
 package com.aa.thrivetrack.fragments.setup;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,8 @@ import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.network.SessionStorage;
 
 public class ModePickerFragment extends Fragment {
+    Context context;
+
     String modeInFocus = "";
 
     TextView focusButton;
@@ -29,43 +32,31 @@ public class ModePickerFragment extends Fragment {
         focusButton = (TextView)view.findViewById(R.id.focusButton);
         exploreButton = (TextView)view.findViewById(R.id.exploreButton);
         /*****End of Ui Initializations*****/
+        context=container.getContext();
 
         /*****Start of OnClickListeners*****/
-        focusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleModeSelection(1);
-                Log.i("mode in focus", modeInFocus);
-            }
-        });
-        exploreButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleModeSelection(2);
-                Log.i("mode in focus", modeInFocus);
-            }
-        });
+        focusButton.setOnClickListener(handleModeSelection(1));
+        exploreButton.setOnClickListener(handleModeSelection(2));
         /*****End of OnClickListeners*****/
 
 
         return view;
     }
-    public void handleModeSelection(int index){
-      if(index==1){
-          modeInFocus="focus";
-          focusButton.setAlpha(1);
-          exploreButton.setAlpha(0.5F);
-      }else {
-          modeInFocus = "explore";
-          focusButton.setAlpha(0.5F);
-          exploreButton.setAlpha(1);
-      }
-        SessionStorage.setModeSelected(modeInFocus);
-    }
-    public boolean validateInput(){
-        if(modeInFocus.equals("")){
-            return false;
-        }
-        return true;
+    public View.OnClickListener handleModeSelection(int index){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(index==1){
+                    modeInFocus="focus";
+                    focusButton.setAlpha(1);
+                    exploreButton.setAlpha(0.5F);
+                }else {
+                    modeInFocus = "explore";
+                    focusButton.setAlpha(0.5F);
+                    exploreButton.setAlpha(1);
+                }
+                SessionStorage.setModeSelected(modeInFocus);
+            }
+        };
     }
 }
