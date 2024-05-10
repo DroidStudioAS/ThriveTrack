@@ -2,9 +2,11 @@ package com.aa.thrivetrack.validation;
 
 import androidx.fragment.app.Fragment;
 
+import com.aa.thrivetrack.fragments.setup.GoalInputEndFragment;
 import com.aa.thrivetrack.fragments.setup.ModePickerFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ConfirmChoiceFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ExploreModeGoalInputFragment;
+import com.aa.thrivetrack.fragments.setup.explore.SelectGoalFragment;
 import com.aa.thrivetrack.network.SessionStorage;
 
 public class SetupValidator {
@@ -22,12 +24,21 @@ public class SetupValidator {
         }
         return isValid;
     }
+    public static boolean validateSelectedGoal(){
+        return SessionStorage.getGoalInFocus().equals("") ? false : true;
+    }
     public static boolean validateFragment(Fragment fragment){
         if(fragment instanceof ModePickerFragment){
             return validateModeSelected();
         }
         if(fragment instanceof ExploreModeGoalInputFragment || fragment instanceof ConfirmChoiceFragment){
             return validateAllGoals();
+        }
+        if(fragment instanceof SelectGoalFragment){
+            return validateSelectedGoal();
+        }
+        if(fragment instanceof GoalInputEndFragment){
+            return true;
         }
         return false;
     }
