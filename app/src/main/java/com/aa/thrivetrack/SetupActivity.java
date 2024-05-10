@@ -5,20 +5,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.aa.thrivetrack.callback.OnChoiceConfirmed;
 import com.aa.thrivetrack.callback.OnContinueClicked;
 import com.aa.thrivetrack.callback.OnExploreModeGoalInputCallback;
 import com.aa.thrivetrack.callback.OnFocusModeGoalInputCallback;
 import com.aa.thrivetrack.callback.OnTaskInputCallback;
-import com.aa.thrivetrack.fragments.setup.IntroductionFragment;
 import com.aa.thrivetrack.fragments.setup.ModePickerFragment;
 import com.aa.thrivetrack.fragments.setup.GoalInputEndFragment;
 import com.aa.thrivetrack.fragments.setup.SetupEndFragment;
@@ -39,7 +35,6 @@ import com.aa.thrivetrack.network.SessionStorage;
 import com.aa.thrivetrack.validation.SetupValidator;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,8 +54,6 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
     TextView nextFragmentButton;
     TextView exampleButton;
 
-    Fragment previousFragment;
-    Fragment nextFragment;
 
     Fragment next;
 
@@ -87,33 +80,29 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
         nextFragmentButton.setOnClickListener(fragmentTransition());
         /*****End of OnClickListeners*****/
     }
-    //INTRODUCTION
-    @Override
-    public void onContinueClicked() {
-        nextFragment= new ModePickerFragment();
 
-        switchFragment(nextFragment);
-        nextFragmentButton.setVisibility(View.VISIBLE);
-    }
 
     //method to determine what fragment is next and validate it
     public View.OnClickListener fragmentTransition(){
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("next",next.toString());
+                if(next instanceof SetupEndFragment){
+                    registerUserGoalsAndTasks();
+                    return;
+                }
 
                 setInterfaceCallback();
 
                 if(SetupValidator.validateFragment(next)) {
                     currentIndex++;
-                    next = determineNextFragment(currentIndex);
-                    switchFragment(determineNextFragment(currentIndex));
+                    next = determineNextFragment();
+                    switchFragment(determineNextFragment());
                 }
             }
 
         };
-    };
+    }
     public void setInterfaceCallback(){
         if(next instanceof ExploreModeGoalInputFragment){
             exploreModeCallback.onInput();
@@ -129,9 +118,8 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
         }
     }
 
-
     //callback to be defined HERE!
-    public Fragment determineNextFragment(int index) {
+    public Fragment determineNextFragment() {
         Fragment fragment = new Fragment();
         switch (currentIndex) {
             case 1:
@@ -210,14 +198,56 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                 .addToBackStack(null)
                 .commit();
     }
+    public void registerUserGoalsAndTasks(){
+        Log.i("username", SessionStorage.getUsername());
+        Map<String ,String> params = new HashMap<>();
+        //build parameters
+        params.put("username",  SessionStorage.getUsername());
+        params.put("goal", SessionStorage.getGoalInFocus());
+        params.put("taskOne", SessionStorage.getFirstTask());
+        params.put("taskTwo", SessionStorage.getSecondTask());
+        params.put("taskThree", SessionStorage.getThirdTask());
+        params.put("taskFour", SessionStorage.getFourthTask());
 
+        NetworkHelper.callPost(PATH_TO_WRITE, params,0);
+        NetworkHelper.waitForReply();
+
+        if(SessionStorage.getServerResponse().equals("true")){
+            //build session data object neccessary for app functioning
+            //when logging in, this will all be parsed automatically from the server
+            User user = new User(Integer.parseInt(SessionStorage.getUser_id()), "basic");
+            ArrayList<Task> tasks = new ArrayList<>();
+            tasks.add(new Task(SessionStorage.getFirstTask()));
+            tasks.add(new Task(SessionStorage.getSecondTask()));
+            tasks.add(new Task(SessionStorage.getThirdTask()));
+            tasks.add(new Task(SessionStorage.getFourthTask()));
+
+            ArrayList<Diary> diary = new ArrayList<>();
+            ArrayList<Streak> streaks = new ArrayList<>();
+            streaks.add(new Streak(DateHelper.buildTodaysDate(), DateHelper.buildTodaysDate()));
+
+            Data data = new Data(SessionStorage.getGoalInFocus(), tasks, user,diary, streaks);
+
+            SessionStorage.setUserData(data);
+
+            startActivity(new Intent(this, IndexActivity.class));
+        }
+        SessionStorage.resetServerResponse();
+    }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         currentIndex--;
-        next=determineNextFragment(currentIndex);
+        next=determineNextFragment();
         switchFragment(next);
 
+    }
+    //INTRODUCTION
+    @Override
+    public void onContinueClicked() {
+        switchFragment(next);
+        nextFragmentButton.setVisibility(View.VISIBLE);
+        exampleButton.setVisibility(View.VISIBLE);
     }
 }

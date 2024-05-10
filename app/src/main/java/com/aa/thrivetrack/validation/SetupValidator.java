@@ -13,13 +13,15 @@ import com.aa.thrivetrack.fragments.setup.focus.FocusModeGoalInputFragment;
 import com.aa.thrivetrack.network.SessionStorage;
 
 public class SetupValidator {
-    public static boolean validateModeSelected(){
+
+    private static boolean validateModeSelected(){
         if(SessionStorage.getModeSelected().equals("")){
             return false;
         }
         return true;
     }
-    public static boolean validateAllGoals(){
+
+    private static boolean validateAllGoals(){
         boolean isValid = true;
 
         if(SessionStorage.getFirstExploreGoal().equals("") || SessionStorage.getSecondExploreGoal().equals("") || SessionStorage.getThirdExploreGoal().equals("") || SessionStorage.getFourthExploreGoal().equals("") || SessionStorage.getFifthExploreGoal().equals("")){
@@ -27,10 +29,12 @@ public class SetupValidator {
         }
         return isValid;
     }
-    public static boolean validateSelectedGoal(){
+
+    private static boolean validateSelectedGoal(){
         return SessionStorage.getGoalInFocus().equals("") ? false : true;
     }
-    public static boolean validateTasks(){
+
+    private static boolean validateTasks(){
         boolean isValid = true;
 
         if(SessionStorage.getFirstTask().equals("") || SessionStorage.getSecondTask().equals("") || SessionStorage.getThirdTask().equals("") || SessionStorage.getFourthTask().equals("")){
@@ -38,6 +42,13 @@ public class SetupValidator {
         }
         return isValid;
     }
+
+    /*
+    * This is the only method
+    * accessible from the setup activity.
+    * It is called whenever we are supposed to transition
+    * fragments.
+    * */
     public static boolean validateFragment(Fragment fragment){
         if(fragment instanceof ModePickerFragment){
             return validateModeSelected();

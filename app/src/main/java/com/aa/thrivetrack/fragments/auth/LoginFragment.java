@@ -32,6 +32,7 @@ public class LoginFragment extends Fragment {
 
     private static final String[] PATH_TO_LOGIN = new String[]{"authentication","login"};
     private static final String[] PATH_TO_FETCH_DATA = new String[]{"fetch","user-data"};
+    private static final String[] PATH_TO_USER_ID = new String[]{"fetch","user-id"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +59,13 @@ public class LoginFragment extends Fragment {
 
                 Log.i("server reponse", SessionStorage.getServerResponse());
                 if(SessionStorage.getServerResponse().equals("true")){
+                    Map<String,String> fetchParams = new HashMap<>();
+                    fetchParams.put("username", SessionStorage.getUsername());
+                    NetworkHelper.callGet(PATH_TO_USER_ID, params, 0);
+                    NetworkHelper.waitForReply();
+
+                    SessionStorage.setUser_id(SessionStorage.getServerResponse());
+                    SessionStorage.resetServerResponse();
                     startActivity(new Intent(requireContext(), SetupActivity.class));
                 }else if(SessionStorage.getServerResponse().equals("false")){
                     SessionStorage.setUsername(usernameEt.getText().toString());
