@@ -105,7 +105,6 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
 
                 setInterfaceCallback();
 
-
                 if(SetupValidator.validateFragment(next)) {
                     currentIndex++;
                     next = determineNextFragment(currentIndex);
@@ -125,6 +124,9 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
         if(next instanceof TaskInputFragment){
             taskInputCallback.onInput();
         }
+        if(next instanceof FocusModeGoalInputFragment){
+            focusModeCallback.onInput();
+        }
     }
 
 
@@ -139,6 +141,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                 switch (SessionStorage.getModeSelected()) {
                     case "focus":
                         fragment = new FocusModeGoalInputFragment();
+                        focusModeCallback=(OnFocusModeGoalInputCallback) fragment;
                         break;
                     case "explore":
                         fragment = new ExploreModeGoalInputFragment();
@@ -213,6 +216,8 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
     public void onBackPressed() {
         super.onBackPressed();
         currentIndex--;
+        next=determineNextFragment(currentIndex);
+        switchFragment(next);
 
     }
 }

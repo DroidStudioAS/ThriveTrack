@@ -9,6 +9,7 @@ import com.aa.thrivetrack.fragments.setup.TaskInputFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ConfirmChoiceFragment;
 import com.aa.thrivetrack.fragments.setup.explore.ExploreModeGoalInputFragment;
 import com.aa.thrivetrack.fragments.setup.explore.SelectGoalFragment;
+import com.aa.thrivetrack.fragments.setup.focus.FocusModeGoalInputFragment;
 import com.aa.thrivetrack.network.SessionStorage;
 
 public class SetupValidator {
@@ -44,7 +45,7 @@ public class SetupValidator {
         if(fragment instanceof ExploreModeGoalInputFragment || fragment instanceof ConfirmChoiceFragment){
             return validateAllGoals();
         }
-        if(fragment instanceof SelectGoalFragment){
+        if(fragment instanceof SelectGoalFragment || fragment instanceof FocusModeGoalInputFragment){
             return validateSelectedGoal();
         }
         if(fragment instanceof GoalInputEndFragment || fragment instanceof TaskInputExplanationFragment){
