@@ -23,6 +23,8 @@ public class ExploreModeGoalInputFragment extends Fragment implements OnExploreM
     TextView goalInputLabel;
     EditText goalInput;
 
+    View parent;
+
 
 
     @Override
@@ -33,8 +35,10 @@ public class ExploreModeGoalInputFragment extends Fragment implements OnExploreM
         /*****Start of Ui Initializations*****/
         goalInputLabel=(TextView) view.findViewById(R.id.goalLabelExplore);
         goalInput=(EditText) view.findViewById(R.id.exploreGoalEt);
+        parent=view;
         /*****End of Ui Initializations*****/
         goalInputLabel.setText(String.valueOf(onGoal)+")");
+        Log.i("oncreateview", "yes");
 
         return view;
     }

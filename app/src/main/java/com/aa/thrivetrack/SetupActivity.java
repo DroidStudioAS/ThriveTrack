@@ -36,6 +36,7 @@ import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
+import com.aa.thrivetrack.validation.SetupValidator;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,6 +62,8 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
     Fragment previousFragment;
     Fragment nextFragment;
 
+    Fragment next;
+
     private OnFocusModeGoalInputCallback focusModeCallback;
     private OnExploreModeGoalInputCallback exploreModeCallback;
     private OnTaskInputCallback taskInputCallback;
@@ -78,6 +81,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
         /*****End of Ui Initializations*****/
         nextFragmentButton.setVisibility(View.INVISIBLE);
         exampleButton.setVisibility(View.INVISIBLE);
+        next=new ModePickerFragment();
 
         /*****Start of OnClickListeners*****/
         nextFragmentButton.setOnClickListener(fragmentTransition());
@@ -97,12 +101,28 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentIndex++;
-                switchFragment(determineNextFragment(currentIndex));
+                Log.i("next",next.toString());
+
+                setInterfaceCallback();
+
+
+                if(SetupValidator.validateFragment(next)) {
+                    currentIndex++;
+                    next = determineNextFragment(currentIndex);
+                    switchFragment(determineNextFragment(currentIndex));
+                }
             }
+
         };
     };
+    public void setInterfaceCallback(){
+        if(next instanceof ExploreModeGoalInputFragment){
+            exploreModeCallback.onInput();
+        }
+    }
 
+
+    //callback to be defined HERE!
     public Fragment determineNextFragment(int index) {
         Fragment fragment = new Fragment();
         switch (currentIndex) {
@@ -116,6 +136,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                         break;
                     case "explore":
                         fragment = new ExploreModeGoalInputFragment();
+                        exploreModeCallback=(OnExploreModeGoalInputCallback) fragment;
                         break;
                 }
                 break;
