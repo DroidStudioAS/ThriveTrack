@@ -273,14 +273,7 @@ public class SessionStorage {
         return isValidated;
     }
 
-    public static boolean validateTasks(){
-        boolean isValid = true;
 
-        if(firstTask.equals("") || secondTask.equals("") || thirdTask.equals("") || fourthTask.equals("")){
-            isValid=false;
-        }
-        return isValid;
-    }
 
 
 

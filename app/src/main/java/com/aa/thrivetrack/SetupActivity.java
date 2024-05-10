@@ -122,6 +122,9 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
         if(next instanceof ConfirmChoiceFragment){
             onChoiceConfirmed.onChoiceConfirmed();
         }
+        if(next instanceof TaskInputFragment){
+            taskInputCallback.onInput();
+        }
     }
 
 
@@ -168,6 +171,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                 switch (SessionStorage.getModeSelected()) {
                     case "focus":
                         fragment = new TaskInputFragment();
+                        taskInputCallback=(OnTaskInputCallback) fragment;
                         break;
                     case "explore":
                         fragment = new GoalInputEndFragment();
@@ -186,6 +190,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                 break;
             case 7:
                 fragment=new TaskInputFragment();
+                taskInputCallback=(OnTaskInputCallback) fragment;
                 break;
             case 8:
                 fragment=new SetupEndFragment();
