@@ -125,19 +125,23 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
     //callback to be initialized HERE!
     public Fragment determineNextFragment() {
         Fragment fragment = new Fragment();
+        exampleButton.setVisibility(View.GONE);
         switch (currentIndex) {
             case 1:
                 fragment = new ModePickerFragment();
+                exampleButton.setVisibility(View.VISIBLE);
                 break;
             case 2:
                 switch (SessionStorage.getModeSelected()) {
                     case "focus":
                         fragment = new FocusModeGoalInputFragment();
                         focusModeCallback=(OnFocusModeGoalInputCallback) fragment;
+                        exampleButton.setVisibility(View.VISIBLE);
                         break;
                     case "explore":
                         fragment = new ExploreModeGoalInputFragment();
                         exploreModeCallback=(OnExploreModeGoalInputCallback) fragment;
+                        exampleButton.setVisibility(View.VISIBLE);
                         break;
                 }
                 break;
@@ -167,6 +171,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                     case "focus":
                         fragment = new TaskInputFragment();
                         taskInputCallback=(OnTaskInputCallback) fragment;
+                        exampleButton.setVisibility(View.VISIBLE);
                         break;
                     case "explore":
                         fragment = new GoalInputEndFragment();
@@ -185,6 +190,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                 break;
             case 7:
                 fragment=new TaskInputFragment();
+                exampleButton.setVisibility(View.VISIBLE);
                 taskInputCallback=(OnTaskInputCallback) fragment;
                 break;
             case 8:
