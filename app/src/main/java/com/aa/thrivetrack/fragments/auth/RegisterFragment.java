@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,9 @@ public class RegisterFragment extends Fragment {
     EditText usernameEt;
     EditText passwordEt;
     EditText confirmPasswordEt;
+    EditText securityAwnser;
+
+    Spinner securityQuestion;
 
     private static final String[] PATH_TO_REGISTER = new String[]{"authentication","register"};
 
@@ -51,7 +56,14 @@ public class RegisterFragment extends Fragment {
         usernameEt = (EditText)view.findViewById(R.id.registerUsernameEt);
         passwordEt = (EditText)view.findViewById(R.id.registerPassowordEt);
         confirmPasswordEt = (EditText) view.findViewById(R.id.registerConfirmPasswordEt);
+        securityQuestion=(Spinner)view.findViewById(R.id.securityQuestions);
+        securityAwnser=(EditText)view.findViewById(R.id.securityAwnserEt);
         /*****End Of Ui Initializations****/
+        /**Spinner setup**/
+        String[] securityQuestions=getResources().getStringArray(R.array.security_questions);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getContext(), R.layout.custom_spinner, securityQuestions);
+        securityQuestion.setAdapter(spinnerAdapter);
+
         /*****Start Of OnClickListeners****/
         registerTrigger.setOnClickListener(new View.OnClickListener() {
             @Override

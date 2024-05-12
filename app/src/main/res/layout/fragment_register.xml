@@ -14,7 +14,7 @@
         android:id="@+id/registerUsernameEt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:ems="10"
         android:hint="Username:"
@@ -31,7 +31,7 @@
         android:id="@+id/registerConfirmPasswordEt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:ems="10"
         android:hint="Confirm Password:"
@@ -45,10 +45,10 @@
         app:layout_constraintTop_toBottomOf="@+id/registerPassowordEt" />
 
     <EditText
-        android:id="@+id/registerConfirmPasswordEt2"
+        android:id="@+id/securityAwnserEt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:ems="10"
         android:hint="Awnser:"
@@ -59,13 +59,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/securityQuestions" />
 
     <EditText
         android:id="@+id/registerPassowordEt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:ems="10"
         android:hint="Password:"
@@ -85,10 +85,10 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/login_button"
+        android:backgroundTint="@color/accentgreen"
         android:gravity="center"
         android:text="Register"
-        android:backgroundTint="@color/accentgreen"
-        android:background="@drawable/login_button"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,34 +99,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
         android:text="Create\nAccount"
         android:textColor="@color/accentgreen"
         android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="0dp"
+        android:id="@+id/securityQuestions"
+        android:layout_width="366dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        app:layout_constraintEnd_toEndOf="@+id/registerConfirmPasswordEt"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/registerConfirmPasswordEt"
-        app:layout_constraintTop_toBottomOf="@+id/registerConfirmPasswordEt" />
+        app:layout_constraintEnd_toEndOf="@+id/textView18"
+        app:layout_constraintStart_toStartOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:text="Security Question:"
         android:textColor="@color/accentgreen"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
-        app:layout_constraintEnd_toEndOf="@+id/registerConfirmPasswordEt"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/registerConfirmPasswordEt"
         app:layout_constraintTop_toBottomOf="@+id/registerConfirmPasswordEt" />
 
@@ -134,10 +131,10 @@
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:src="@drawable/ic_arrow_left"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

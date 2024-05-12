@@ -26,4 +26,11 @@
     <string name="delete_warning">Are You Sure You Want To Delete Your Account?\nThis Is An Irreversible Process, That Will Delete All Of Your Data?\nPlus, Our Community Will Miss You :(</string>
     <string name="enter_password_label">Enter Password</string>
     <string name="confirm">Confirm</string>
+
+    <array name="security_questions">
+        <item name="1">What Is Your Hometown?</item>
+        <item name="2">What Is Your Pets Name?</item>
+        <item name="3">What Is The Name Of Your Elementary School?</item>
+        <item name="4">What Is Your Favorite Color?</item>
+    </array>
 </resources>
