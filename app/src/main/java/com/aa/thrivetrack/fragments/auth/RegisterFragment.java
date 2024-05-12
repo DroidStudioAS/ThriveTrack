@@ -23,6 +23,7 @@ import com.aa.thrivetrack.models.Streak;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
+import com.aa.thrivetrack.validation.ToastFactory;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -31,6 +32,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class RegisterFragment extends Fragment {
@@ -72,6 +74,9 @@ public class RegisterFragment extends Fragment {
                     Map<String ,String> params = new HashMap();
                     params.put("username",usernameEt.getText().toString());
                     params.put("password", passwordEt.getText().toString());
+                    params.put("security-question",securityQuestion.getSelectedItem().toString());
+                    params.put("security-answer", securityAwnser.getText().toString().trim().toLowerCase(Locale.ROOT));
+
                     params.put("streak-start", DateHelper.buildTodaysDate());
                     params.put("streak-end",DateHelper.buildTodaysDate());
 
@@ -92,7 +97,7 @@ public class RegisterFragment extends Fragment {
                         startActivity(new Intent(requireContext(), SetupActivity.class));
                     }
                     }else if(SessionStorage.getServerResponse().equals("false")){
-                        Toast.makeText(getContext(), "Username Taken", Toast.LENGTH_SHORT).show();
+                        ToastFactory.showToast(getContext(),"Username Taken");
                     }
                     //SessionStorage.getUserData().getStreaks().add(new Streak());
                     SessionStorage.resetServerResponse();
@@ -106,11 +111,13 @@ public class RegisterFragment extends Fragment {
     }
     public boolean validateParams(){
         boolean inputValid = true;
-        String username = usernameEt.getText().toString();
-        String password = passwordEt.getText().toString();
-        String confirmedPassword = confirmPasswordEt.getText().toString();
+        String username = usernameEt.getText().toString().trim();
+        String password = passwordEt.getText().toString().trim();
+        String confirmedPassword = confirmPasswordEt.getText().toString().trim();
+        String answer = securityAwnser.getText().toString().trim();
 
-        if(username.trim().equals("") || password.trim().equals("") || confirmedPassword.trim().equals("") || !password.equals(confirmedPassword)){
+        if(username.trim().equals("") || password.trim().equals("") || confirmedPassword.trim().equals("") || !password.equals(confirmedPassword) || answer.equals("")){
+            ToastFactory.showToast(getContext(), "You Must Fill In All The Information");
             inputValid=false;
         }
 
