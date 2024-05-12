@@ -5,6 +5,7 @@ public class User {
     String user_rank;
     int user_streak;
 
+
     public User() {
     }
 
