@@ -7,6 +7,7 @@ import com.aa.thrivetrack.models.Article;
 import com.aa.thrivetrack.models.Blog;
 import com.aa.thrivetrack.models.Data;
 import com.aa.thrivetrack.models.Diary;
+import com.aa.thrivetrack.models.Security;
 import com.aa.thrivetrack.models.Task;
 import com.google.gson.Gson;
 
@@ -42,6 +43,7 @@ public class SessionStorage {
 
    private static Article ARTICLE_IN_FOCUS;
    private static Diary diaryInFocus;
+   private static Security securityQuestion;
 
    private static Task taskToEdit;
 
@@ -145,6 +147,7 @@ public class SessionStorage {
     *0- For a single line of data (msg:true/false)
     *1-For Parsing All the User data neccesary for the app to function (onlogin);
     * 2-BLOG POSTS
+    * 3-security questions
     */
     public static void setServerResponse(String serverResponse, int executionStatus) {
         Gson gson = new Gson();
@@ -160,6 +163,15 @@ public class SessionStorage {
             Blog blog = gson.fromJson(serverResponse, Blog.class);
             setBlog(blog);
             SERVER_RESPONSE=serverResponse;
+        }else if(executionStatus==3){
+            Log.i("resp", serverResponse);
+            if(serverResponse.contains("false")){
+                SERVER_RESPONSE="false";
+                return;
+            }
+            Security security = gson.fromJson(serverResponse, Security.class);
+            setSecurityQuestion(security);
+            SERVER_RESPONSE="true";
         }
     }
 
@@ -273,8 +285,11 @@ public class SessionStorage {
         return isValidated;
     }
 
+    public static Security getSecurityQuestion() {
+        return securityQuestion;
+    }
 
-
-
-
+    public static void setSecurityQuestion(Security securityQuestion) {
+        SessionStorage.securityQuestion = securityQuestion;
+    }
 }

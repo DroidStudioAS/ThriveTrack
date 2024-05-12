@@ -22,4 +22,12 @@ public class Security {
     public void setSecurity_answer(String security_answer) {
         this.security_answer = security_answer;
     }
+
+    @Override
+    public String toString() {
+        return "Security{" +
+                "security_question='" + security_question + '\'' +
+                ", security_answer='" + security_answer + '\'' +
+                '}';
+    }
 }
