@@ -96,7 +96,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
 
                 setInterfaceCallback();
 
-                if(SetupValidator.validateFragment(next)) {
+                if(SetupValidator.validateFragment(next, SetupActivity.this)) {
                     currentIndex++;
                     next = determineNextFragment();
                     switchFragment(next);
