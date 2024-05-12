@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.aa.thrivetrack.IndexActivity;
 import com.aa.thrivetrack.R;
+import com.aa.thrivetrack.RecoveryActivity;
 import com.aa.thrivetrack.SetupActivity;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.NetworkHelper;
@@ -27,6 +28,7 @@ import java.util.Map;
 public class LoginFragment extends Fragment {
 
     TextView loginTrigger;
+    TextView restoreTrigger;
     EditText usernameEt;
     EditText passwordEt;
 
@@ -41,6 +43,7 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         /*****Start Of Ui Initializations****/
         loginTrigger=(TextView)view.findViewById(R.id.loginTrigger);
+        restoreTrigger=(TextView)view.findViewById(R.id.forgotPasswordTrigger);
         usernameEt = (EditText)view.findViewById(R.id.loginUsernameEt);
         passwordEt=  (EditText)view.findViewById(R.id.loginPasswordEt);
         /*****End Of Ui Initializations****/
@@ -85,6 +88,12 @@ public class LoginFragment extends Fragment {
                     Log.i("task",x.toString());
                 }
 
+            }
+        });
+        restoreTrigger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), RecoveryActivity.class));
             }
         });
         /*****End Of OnClickListeners****/

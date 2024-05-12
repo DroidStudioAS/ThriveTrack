@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".RecoveryActivity">
+
+    <TextView
+        android:id="@+id/recoveryPromptTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:text="What Is Your Username?"
+        android:textColor="@color/accentgreen"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:hint="Username:"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/accentgreen"
+        android:textSize="25sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/recoveryTrigger"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/recoveryPromptTv"
+        app:layout_constraintTop_toBottomOf="@+id/recoveryPromptTv" />
+
+    <TextView
+        android:id="@+id/recoveryTrigger"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/login_button"
+        android:backgroundTint="@color/accentgreen"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:text="Continue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/qAndAGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="securityAnswerEt,securityQuestionTv" />
+
+    <EditText
+        android:id="@+id/securityAnswerEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:hint="Answer:"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@color/accentgreen"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/recoveryTrigger"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/recoveryPromptTv"
+        app:layout_constraintTop_toBottomOf="@+id/recoveryPromptTv" />
+
+    <TextView
+        android:id="@+id/securityQuestionTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:gravity="start"
+        android:text="TextView"
+        android:textColor="@color/accentgreen"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/securityAnswerEt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/recoveryPromptTv"
+        app:layout_constraintTop_toBottomOf="@+id/recoveryPromptTv" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/newPasswordGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="editTextTextPassword,editTextTextPassword2" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:hint="New Password:"
+        android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHint="@color/accentgreen"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/recoveryPromptTv"
+        app:layout_constraintTop_toBottomOf="@+id/recoveryPromptTv" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="Confirm New Password:"
+        android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHint="@color/accentgreen"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+</androidx.constraintlayout.widget.ConstraintLayout>
