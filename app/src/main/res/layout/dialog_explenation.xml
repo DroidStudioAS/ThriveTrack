@@ -1,20 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="20dp"
-    android:layout_marginTop="40dp"
-    android:layout_marginEnd="20dp"
-    android:layout_marginBottom="40dp">
+    android:background="@color/background">
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/focusInputGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="editTextTextPersonName,textView27" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Become A Junior Software Developer"
+        android:inputType="textMultiLine"
+        android:textColorHint="@color/accentgreen"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="TextView"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:padding="25dp"
+        android:text="What Is The One Thing That Will Completely Change Your Life When You Achieve It?"
+        android:textColor="@color/accentgreen"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/modeGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="exploreButton2,exploreExp,focusButton2,focusExp" />
+
+    <TextView
+        android:id="@+id/exploreButton2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:alpha="0.5"
+        android:background="@drawable/success_background"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:text="Exploration"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/focusButton2" />
+
+    <TextView
+        android:id="@+id/focusButton2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:alpha="0.5"
+        android:background="@drawable/success_background"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:text="Focus Mode"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/exploreButton2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/focusExp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="Focus Mode Is For People That Have Already Thought About What There Goals And Priorities Are."
+        android:textColor="@color/accentgreen"
+        app:layout_constraintEnd_toEndOf="@+id/focusButton2"
+        app:layout_constraintStart_toStartOf="@+id/focusButton2"
+        app:layout_constraintTop_toBottomOf="@+id/focusButton2" />
+
+    <TextView
+        android:id="@+id/exploreExp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="Explore Mode Will Help You Determine Your Priorities What Is Most Important To You In Life."
+        android:textColor="@color/accentgreen"
+        app:layout_constraintEnd_toEndOf="@+id/exploreButton2"
+        app:layout_constraintStart_toStartOf="@+id/exploreButton2"
+        app:layout_constraintTop_toBottomOf="@+id/exploreButton2" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/taskInputGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="fourthTaskEt2,firstTaskEt2,thirdTaskEt2,secondTaskEt2,textView28" />
+
+    <EditText
+        android:id="@+id/fourthTaskEt2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Send Out 1 CV A Day"
+        android:inputType="textMultiLine|textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@color/accentgreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/thirdTaskEt2"
+        app:layout_constraintTop_toBottomOf="@+id/thirdTaskEt2" />
+
+    <EditText
+        android:id="@+id/firstTaskEt2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Learn JavsScript For 1 Hour"
+        android:inputType="textMultiLine|textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@color/accentgreen"
+        app:layout_constraintBottom_toTopOf="@+id/secondTaskEt2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/textView28"
+        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+    <EditText
+        android:id="@+id/thirdTaskEt2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Make An Open Source Contribution A Day"
+        android:inputType="textMultiLine|textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@color/accentgreen"
+        app:layout_constraintBottom_toTopOf="@+id/fourthTaskEt2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/textView28"
+        app:layout_constraintTop_toBottomOf="@+id/secondTaskEt2" />
+
+    <EditText
+        android:id="@+id/secondTaskEt2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Work On A Daily Project"
+        android:inputType="textMultiLine|textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@color/accentgreen"
+        app:layout_constraintBottom_toTopOf="@+id/thirdTaskEt2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/textView28"
+        app:layout_constraintTop_toBottomOf="@+id/firstTaskEt2" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/task_input_title"
+        android:textColor="@color/accentgreen"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/exoloreModeInputGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="secondTaskEt3,firstTaskEt3,thirdTaskEt4,thirdTaskEt3,fourthTaskEt3,textView29" />
+
+    <EditText
+        android:id="@+id/secondTaskEt3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Earn 80 000$ This Year"
+        android:inputType="textMultiLine|textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@color/accentgreen"
+        app:layout_constraintBottom_toTopOf="@+id/fourthTaskEt3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstTaskEt3" />
+
+    <EditText
+        android:id="@+id/firstTaskEt3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Become A Junior Software Developer"
+        android:inputType="textMultiLine|textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@color/accentgreen"
+        app:layout_constraintBottom_toTopOf="@+id/secondTaskEt3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thirdTaskEt3" />
+
+    <EditText
+        android:id="@+id/thirdTaskEt3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Buy A Bmw 530D"
+        android:inputType="textMultiLine|textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@color/accentgreen"
+        app:layout_constraintBottom_toTopOf="@+id/firstTaskEt3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+    <EditText
+        android:id="@+id/thirdTaskEt4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Read 52 Books"
+        android:inputType="textMultiLine|textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@color/accentgreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fourthTaskEt3" />
+
+    <EditText
+        android:id="@+id/fourthTaskEt3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Buy A House"
+        android:inputType="textMultiLine|textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@color/accentgreen"
+        app:layout_constraintBottom_toTopOf="@+id/thirdTaskEt4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondTaskEt3" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="What Are Your Goals? Who Do You Want To Become?"
+        android:textColor="@color/accentgreen"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/exploreButton2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

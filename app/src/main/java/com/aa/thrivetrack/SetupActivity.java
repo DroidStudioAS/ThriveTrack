@@ -41,16 +41,6 @@ import java.util.Map;
 
 public class SetupActivity extends AppCompatActivity implements OnContinueClicked {
 
-    /*
-    1-introduction fragment
-    2-mode picker
-    3-focus or explore goal input
-    4-focus-task input exp end explore-confirm choice
-    5-focus- task input explore task input exp
-    6- focus - setup end explore- task input
-    7-explore setup end
-     */
-
     int currentIndex=1;
     TextView nextFragmentButton;
     TextView exampleButton;
@@ -63,6 +53,8 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
     private OnTaskInputCallback taskInputCallback;
     private OnChoiceConfirmed onChoiceConfirmed;
 
+    ExplanationDialog explanationDialog;
+
     private static final String[] PATH_TO_WRITE = new String[]{"write","user-goal-and-tasks"};
 
     @Override
@@ -73,16 +65,18 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
         nextFragmentButton=(TextView) findViewById(R.id.fragmentTransitionTrigger);
         exampleButton=(TextView)findViewById(R.id.exampleTrigger);
         /*****End of Ui Initializations*****/
+        next=new ModePickerFragment();
+
+        determineExplanation(next);
+
         nextFragmentButton.setVisibility(View.INVISIBLE);
         exampleButton.setVisibility(View.INVISIBLE);
         exampleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExplanationDialog ed = new ExplanationDialog(SetupActivity.this, "ex");
-                ed.show();
+              explanationDialog.show();
             }
         });
-        next=new ModePickerFragment();
 
         /*****Start of OnClickListeners*****/
         nextFragmentButton.setOnClickListener(fragmentTransition());
@@ -105,12 +99,14 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                 if(SetupValidator.validateFragment(next)) {
                     currentIndex++;
                     next = determineNextFragment();
-                    switchFragment(determineNextFragment());
+                    switchFragment(next);
+                    determineExplanation(next);
                 }
             }
 
         };
     }
+
     public void setInterfaceCallback(){
         if(next instanceof ExploreModeGoalInputFragment){
             exploreModeCallback.onInput();
@@ -126,7 +122,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
         }
     }
 
-    //callback to be defined HERE!
+    //callback to be initialized HERE!
     public Fragment determineNextFragment() {
         Fragment fragment = new Fragment();
         switch (currentIndex) {
@@ -206,6 +202,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                 .addToBackStack(null)
                 .commit();
     }
+
     public void registerUserGoalsAndTasks(){
         Log.i("username", SessionStorage.getUsername());
         Map<String ,String> params = new HashMap<>();
@@ -243,14 +240,31 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
         SessionStorage.resetServerResponse();
     }
 
+    public void determineExplanation(Fragment fragment){
+        if (fragment instanceof ModePickerFragment){
+            explanationDialog=new ExplanationDialog(SetupActivity.this,"mode");
+        }
+        if(fragment instanceof FocusModeGoalInputFragment){
+            explanationDialog=new ExplanationDialog(SetupActivity.this,"focus-input");
+        }
+        if(fragment instanceof TaskInputFragment){
+            explanationDialog=new ExplanationDialog(SetupActivity.this,"tasks");
+        }
+        if(fragment instanceof ExploreModeGoalInputFragment){
+            explanationDialog=new ExplanationDialog(SetupActivity.this,"explore-input");
+        }
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         currentIndex--;
         next=determineNextFragment();
         switchFragment(next);
+        determineExplanation(next);
 
     }
+
     //INTRODUCTION
     @Override
     public void onContinueClicked() {
