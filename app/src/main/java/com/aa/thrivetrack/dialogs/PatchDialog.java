@@ -3,6 +3,7 @@ package com.aa.thrivetrack.dialogs;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -165,6 +166,7 @@ public class PatchDialog extends Dialog {
                 Log.i("response", SessionStorage.getServerResponse());
                 if(SessionStorage.getServerResponse().equals("true")){
                     Toast.makeText(getContext(), "Username Changed", Toast.LENGTH_SHORT).show();
+                    renameSharedPreferences(newUsername);
                     SessionStorage.setUsername(newUsername);
                     patchCallback.onChange(newUsername);
                     dismissDialog();
@@ -282,6 +284,32 @@ public class PatchDialog extends Dialog {
                 dd.show();
             }
         };
+    }
+
+    public void renameSharedPreferences(String username){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SessionStorage.getUsername(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor oldEditor = sharedPreferences.edit();
+        Map<String, ?> dataToCopy = sharedPreferences.getAll();
+
+        SharedPreferences newSharedPreferences = context.getSharedPreferences(username, Context.MODE_PRIVATE);
+        SharedPreferences.Editor newEditor = newSharedPreferences.edit();
+
+        for(Map.Entry<String,?> entry : dataToCopy.entrySet()){
+            String key = entry.getKey();
+            Object value = entry.getValue();
+
+            if(value instanceof String){
+                newEditor.putString(key, (String) value);
+            }else if(value instanceof Boolean){
+                newEditor.putBoolean(key, (Boolean) value);
+            }else if(value instanceof Integer){
+                newEditor.putInt(key, (Integer)value);
+            }
+        }
+        newEditor.apply();
+
+        oldEditor.clear();
+        oldEditor.apply();
     }
 
 
