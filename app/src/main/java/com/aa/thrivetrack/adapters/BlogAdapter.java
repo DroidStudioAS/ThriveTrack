@@ -70,7 +70,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         blogTitleholder.setText(article.getArticle_title());
         blogTitleholder.setTextColor(Color.parseColor("#d9d9d9"));
         blogTitleholder.setTypeface(null, Typeface.BOLD);
-        blogPhoto.setImageDrawable(context.getDrawable(R.drawable.primer));
+        blogPhoto.setImageDrawable(article.getArticleDrawable(context));
 
         commentTv.setText(String.valueOf(article.getCommentCount()));
         likeTv.setText(String.valueOf(article.getArticle_likes()));
