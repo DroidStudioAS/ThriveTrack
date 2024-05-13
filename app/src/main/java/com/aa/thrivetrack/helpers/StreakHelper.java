@@ -97,6 +97,24 @@ public class StreakHelper {
         }
         return  drawable;
     }
+    public static String getRankColor(String userRank){
+        String colorString = "#000000";
+        switch (userRank){
+            case "bronze":
+                colorString="#d79947";
+                break;
+            case "silver":
+                colorString= "#e3e5ea";
+                break;
+            case "gold":
+                colorString="#ffd700";
+                break;
+            case "diamond":
+                colorString="#b9f2ff";
+                break;
+        }
+        return  colorString;
+    }
 
     public static void updateUserStreak(boolean callApi, Context context, boolean todaysTasksCompleted, String lastCompareDate){
         if (!callApi){

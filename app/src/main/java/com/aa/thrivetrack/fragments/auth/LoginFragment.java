@@ -50,7 +50,20 @@ public class LoginFragment extends Fragment {
         /*****End Of Ui Initializations****/
 
         /*****Start Of OnClickListeners****/
-        loginTrigger.setOnClickListener(new View.OnClickListener() {
+        loginTrigger.setOnClickListener(login());
+        restoreTrigger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), RecoveryActivity.class));
+            }
+        });
+        /*****End Of OnClickListeners****/
+
+        return view;
+    }
+
+    public View.OnClickListener login(){
+        return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Map<String ,String> params = new HashMap();
@@ -61,7 +74,6 @@ public class LoginFragment extends Fragment {
                 NetworkHelper.callGet(PATH_TO_LOGIN, params,0);
                 NetworkHelper.waitForReply();
 
-                Log.i("server reponse", SessionStorage.getServerResponse());
                 if(SessionStorage.getServerResponse().equals("true")){
                     Map<String,String> fetchParams = new HashMap<>();
                     fetchParams.put("username", SessionStorage.getUsername());
@@ -80,7 +92,6 @@ public class LoginFragment extends Fragment {
                     NetworkHelper.callGet(PATH_TO_FETCH_DATA, fetchParams,1);
                     NetworkHelper.waitForReply();
 
-                    Log.i("DATA", SessionStorage.getUserData().toString());
                     startActivity(new Intent(requireContext(), IndexActivity.class));
                 }else if(SessionStorage.getServerResponse().contains("incorect")){
                     ToastFactory.showToast(getContext(), "Username/And Or Password Incorrect");
@@ -90,17 +101,7 @@ public class LoginFragment extends Fragment {
                 for(Task x : SessionStorage.USER_TASKS){
                     Log.i("task",x.toString());
                 }
-
             }
-        });
-        restoreTrigger.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), RecoveryActivity.class));
-            }
-        });
-        /*****End Of OnClickListeners****/
-
-        return view;
+        };
     }
 }
