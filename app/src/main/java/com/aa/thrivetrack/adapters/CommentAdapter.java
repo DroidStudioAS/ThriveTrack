@@ -1,6 +1,9 @@
 package com.aa.thrivetrack.adapters;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,8 +86,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                boolean commentLiked = context.getSharedPreferences(SessionStorage.getUsername(), Context.MODE_PRIVATE).getBoolean(String.valueOf(comment.getComment_id()), false);
                 int commentId = comment.getComment_id();
-                int commentLikes = comment.getComment_likes()+1;
+                int commentLikes =  commentLiked? comment.getComment_likes()-1:comment.getComment_likes()+1;
+
+                SharedPreferences.Editor editor = context.getSharedPreferences(SessionStorage.getUsername(), Context.MODE_PRIVATE).edit();
 
                 Map<String, String> params = new HashMap<>();
                 params.put("comment-id", String.valueOf(commentId));
@@ -93,13 +100,32 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
                 NetworkHelper.callPatch(PATH_T0_LIKE_COMMENT, params, 0);
                 NetworkHelper.waitForReply();
                 if(SessionStorage.getServerResponse().equals("true")){
-                    ToastFactory.showToast(context,"Comment Liked!");
+                    if(commentLiked){
+                        ToastFactory.showToast(context, "Like Deleted");
+                    }else{
+                        ToastFactory.showToast(context, "Comment Liked");
+                    }
+                    comment.setComment_likes(commentLikes);
+                    editor.putBoolean(String.valueOf(comment.getComment_id()), !commentLiked).commit();
+                    notifyDataSetChanged();
+
+                    likeAnimation(v);
+
                 }else{
                     ToastFactory.showToast(context,"Oops, Something went wrong");
                 }
                 SessionStorage.resetServerResponse();
             }
         };
+    }
+    public void likeAnimation(View v){
+        ObjectAnimator scaleUp = ObjectAnimator.ofFloat(v, "scaleX", 1.0f, 1.5f);
+        scaleUp.setDuration(500); // Duration in milliseconds
+        scaleUp.setRepeatCount(1); // Repeat once
+        scaleUp.setRepeatMode(ObjectAnimator.REVERSE); // Reverse animation on repeat
+
+        // Start the animation
+        scaleUp.start();
     }
 
     public class CommentHolder extends RecyclerView.ViewHolder {
