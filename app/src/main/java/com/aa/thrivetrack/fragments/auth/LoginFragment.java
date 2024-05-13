@@ -21,6 +21,7 @@ import com.aa.thrivetrack.SetupActivity;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
+import com.aa.thrivetrack.validation.ToastFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -81,6 +82,8 @@ public class LoginFragment extends Fragment {
 
                     Log.i("DATA", SessionStorage.getUserData().toString());
                     startActivity(new Intent(requireContext(), IndexActivity.class));
+                }else if(SessionStorage.getServerResponse().contains("incorect")){
+                    ToastFactory.showToast(getContext(), "Username/And Or Password Incorrect");
                 }
                 SessionStorage.setUsername(usernameEt.getText().toString());
                 SessionStorage.resetServerResponse();
