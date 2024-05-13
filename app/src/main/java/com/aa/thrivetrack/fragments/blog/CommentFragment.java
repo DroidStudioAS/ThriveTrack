@@ -81,7 +81,7 @@ public class CommentFragment extends Fragment implements OnArticleClicked {
 
     public void setUi(){
         if(SessionStorage.getArticleInFocus()!=null){
-            articleIv.setImageDrawable(getContext().getDrawable(R.drawable.primer));
+            articleIv.setImageDrawable(SessionStorage.getArticleInFocus().getArticleDrawable(getContext()));
             // articleIv.setImageDrawable(SessionStorage.getArticleInFocus().getArticleDrawable(getActivity().getApplicationContext()));
             articleTv.setText(SessionStorage.getArticleInFocus().getArticle_title());
             commentAdapter = new CommentAdapter(SessionStorage.getArticleInFocus().getPostComments(), getContext());
