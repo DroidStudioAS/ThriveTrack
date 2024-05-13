@@ -76,6 +76,7 @@ public class ToDoActivity extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     callApi=false;
+                    String lastCompareDate = sharedPreferences.getString("date","");
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean(task.getTaskText(),isChecked);
                     editor.apply();
@@ -88,7 +89,7 @@ public class ToDoActivity extends AppCompatActivity {
                     editor.apply();
                     //Handle streak;
                     handleLocalStreakChange(checkedCount);
-                    StreakHelper.updateUserStreak(callApi, ToDoActivity.this);
+                    StreakHelper.updateUserStreak(callApi, ToDoActivity.this, todaysTasksCompleted,lastCompareDate);
                 }
             });
 

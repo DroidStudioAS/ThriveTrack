@@ -10,6 +10,7 @@ import com.aa.thrivetrack.ToDoActivity;
 import com.aa.thrivetrack.models.User;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
+import com.aa.thrivetrack.validation.ToastFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +23,8 @@ public class StreakHelper {
 
     public static final String[] PATH_TO_UPDATE_RANK = new String[]{"edit","patch","user-rank"};
     private static final String[] PATH_TO_EDIT_STREAK = new String[]{"edit","patch","user-streak"};
+    private static final String[] START_NEW_STREAK = new String[]{"write","streak"};
+
 
 
     public static void changeUserRank(User user, Context context){
@@ -95,15 +98,45 @@ public class StreakHelper {
         return  drawable;
     }
 
-    public static void updateUserStreak(boolean callApi, Context context){
+    public static void updateUserStreak(boolean callApi, Context context, boolean todaysTasksCompleted, String lastCompareDate){
         if (!callApi){
             return;
         }
         Map<String,String> params = new HashMap<>();
-        params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
-        params.put("streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()));
-        params.put("end-date", DateHelper.buildTodaysDate());
-        NetworkHelper.callPatch(PATH_TO_EDIT_STREAK, params, 0);
+        String[] PATH = PATH_TO_EDIT_STREAK;
+        boolean isNewStreak = false;
+
+        //options: extend streak by 1 yesterdays tasks completed and streak!=0 todaysTasksCompleted
+        //end streak yesterdays tasks not completed streak!=0 and !todaystaskscompleted
+        //start new streak yesterdays tasks not completed but todays are (streak = 0 && todaysTasksCompleted);
+        if(SessionStorage.getUserData().getUser().getUser_streak()>0 && todaysTasksCompleted){
+            //extend streak
+            params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
+            params.put("streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()));
+            params.put("end-date", DateHelper.buildTodaysDate());
+        }else if(SessionStorage.getUserData().getUser().getUser_streak()>0 && !todaysTasksCompleted){
+            //end streak
+            ToastFactory.showToast(context,"You Killed Your Streak :(");
+            SessionStorage.getUserData().getUser().setUser_streak(0);
+            params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
+            params.put("streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()));
+            params.put("end-date", lastCompareDate);
+            return;
+        }else if(SessionStorage.getUserData().getUser().getUser_streak()==0 && todaysTasksCompleted){
+            //start new streak
+            PATH= START_NEW_STREAK;
+            isNewStreak=true;
+            SessionStorage.getUserData().getUser().setUser_streak(1);
+            params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
+            params.put("streak", String.valueOf(1));
+            params.put("start-date", DateHelper.buildTodaysDate());
+            params.put("end-date", DateHelper.buildTodaysDate());
+        }
+        if(isNewStreak){
+            NetworkHelper.callPost(PATH, params, 0);
+        }else{
+            NetworkHelper.callPatch(PATH, params, 0);
+        }
         NetworkHelper.waitForReply();
         if(SessionStorage.getServerResponse().equals("true")){
             Toast.makeText(context,"Your Streak Has Been Updated! Keep It Up", Toast.LENGTH_SHORT).show();
@@ -120,7 +153,7 @@ public class StreakHelper {
             //reset streak if yesterday was not completed
             if(!todaysTasksCompleted){
                 SessionStorage.getUserData().getUser().setUser_streak(0);
-                updateUserStreak(true, context);
+                updateUserStreak(true, context, todaysTasksCompleted, lastCompareDate);
                 Toast.makeText(context, "Streak Reset", Toast.LENGTH_SHORT).show();
             }
             //new day
