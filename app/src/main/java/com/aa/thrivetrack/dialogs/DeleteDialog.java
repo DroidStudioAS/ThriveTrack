@@ -18,6 +18,7 @@ import com.aa.thrivetrack.callback.OnDeleteTask;
 import com.aa.thrivetrack.models.Task;
 import com.aa.thrivetrack.network.NetworkHelper;
 import com.aa.thrivetrack.network.SessionStorage;
+import com.aa.thrivetrack.validation.ToastFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,7 +103,7 @@ public class DeleteDialog extends Dialog {
             public void onClick(View v) {
                 String password = passwordEt.getText().toString().trim();
                 if(password.equals("")){
-                    Toast.makeText(getContext(),"Enter Password", Toast.LENGTH_SHORT).show();
+                   ToastFactory.showToast(context, "You Must Enter A Password");
                     return;
                 }
                 Map<String,String> params = new HashMap<>();
@@ -112,8 +113,10 @@ public class DeleteDialog extends Dialog {
                 NetworkHelper.callDelete(PATH_TO_DELETE_USER,params,0);
                 NetworkHelper.waitForReply();
                 if(SessionStorage.getServerResponse().equals("true")){
-                    Toast.makeText(getContext(),"Account Deleted", Toast.LENGTH_SHORT).show();
+                    ToastFactory.showToast(context, "Account Deleted");
                     context.startActivity(new Intent(context, AuthenticationActivity.class));
+                }else{
+                    ToastFactory.showToast(context, "Wrong Password");
                 }
                 SessionStorage.resetServerResponse();
 
