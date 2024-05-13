@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="15dp"
+    android:background="@color/background"
     android:padding="15dp">
 
     <androidx.constraintlayout.widget.Group
@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/enter_password_label"
+        android:textColor="@color/accentgreen"
         app:layout_constraintEnd_toEndOf="@+id/passwordEt"
         app:layout_constraintStart_toStartOf="@+id/passwordEt"
         app:layout_constraintTop_toBottomOf="@+id/deleteWarningTv" />
@@ -44,6 +45,7 @@
         android:gravity="center"
         android:padding="20dp"
         android:text="@string/delete_warning"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,6 +59,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deleteUserPasswordLabel" />
@@ -76,6 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textColor="@color/accentgreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -87,6 +91,7 @@
         android:layout_marginTop="22dp"
         android:gravity="center"
         android:text="Are You Sure You Want To Delete \nThis Task:"
+        android:textColor="@color/accentgreen"
         app:layout_constraintEnd_toEndOf="@+id/taskToDeleteTv"
         app:layout_constraintStart_toStartOf="@+id/taskToDeleteTv"
         app:layout_constraintTop_toTopOf="@+id/deleteUserPasswordLabel" />
@@ -96,6 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textColor="@color/accentgreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deleteTaskWarning" />
