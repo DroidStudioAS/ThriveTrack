@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aa.thrivetrack.R;
+import com.aa.thrivetrack.helpers.AnimationHelper;
 import com.aa.thrivetrack.helpers.StreakHelper;
 import com.aa.thrivetrack.models.Comment;
 import com.aa.thrivetrack.network.NetworkHelper;
@@ -109,7 +110,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
                     editor.putBoolean(String.valueOf(comment.getComment_id()), !commentLiked).commit();
                     notifyDataSetChanged();
 
-                    likeAnimation(v);
+                    AnimationHelper.likeAnimation(v);
 
                 }else{
                     ToastFactory.showToast(context,"Oops, Something went wrong");
@@ -118,15 +119,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
             }
         };
     }
-    public void likeAnimation(View v){
-        ObjectAnimator scaleUp = ObjectAnimator.ofFloat(v, "scaleX", 1.0f, 1.5f);
-        scaleUp.setDuration(500); // Duration in milliseconds
-        scaleUp.setRepeatCount(1); // Repeat once
-        scaleUp.setRepeatMode(ObjectAnimator.REVERSE); // Reverse animation on repeat
 
-        // Start the animation
-        scaleUp.start();
-    }
 
     public class CommentHolder extends RecyclerView.ViewHolder {
         private ImageView[] rankIvs = new ImageView[5];
