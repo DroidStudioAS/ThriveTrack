@@ -65,10 +65,10 @@ public class SetupValidator {
         if(fragment instanceof ExploreModeGoalInputFragment || fragment instanceof ConfirmChoiceFragment){
             return validateAllGoals(context);
         }
-        if(fragment instanceof SelectGoalFragment || fragment instanceof FocusModeGoalInputFragment){
+        if(fragment instanceof SelectGoalFragment || fragment instanceof FocusModeGoalInputFragment || fragment instanceof TaskInputExplanationFragment){
             return validateSelectedGoal(context);
         }
-        if(fragment instanceof GoalInputEndFragment || fragment instanceof TaskInputExplanationFragment){
+        if(fragment instanceof GoalInputEndFragment){
             return true;
         }
         if(fragment instanceof TaskInputFragment){

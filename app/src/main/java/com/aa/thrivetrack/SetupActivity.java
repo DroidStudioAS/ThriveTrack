@@ -14,6 +14,7 @@ import com.aa.thrivetrack.callback.OnChoiceConfirmed;
 import com.aa.thrivetrack.callback.OnContinueClicked;
 import com.aa.thrivetrack.callback.OnExploreModeGoalInputCallback;
 import com.aa.thrivetrack.callback.OnFocusModeGoalInputCallback;
+import com.aa.thrivetrack.callback.OnGoalConfirmed;
 import com.aa.thrivetrack.callback.OnTaskInputCallback;
 import com.aa.thrivetrack.dialogs.ExplanationDialog;
 import com.aa.thrivetrack.fragments.setup.ModePickerFragment;
@@ -52,6 +53,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
     private OnExploreModeGoalInputCallback exploreModeCallback;
     private OnTaskInputCallback taskInputCallback;
     private OnChoiceConfirmed onChoiceConfirmed;
+    private OnGoalConfirmed onGoalConfirmed;
 
     ExplanationDialog explanationDialog;
 
@@ -114,6 +116,9 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
         if(next instanceof ConfirmChoiceFragment){
             onChoiceConfirmed.onChoiceConfirmed();
         }
+        if(next instanceof TaskInputExplanationFragment){
+            onGoalConfirmed.onGoalConfirmed();
+        }
         if(next instanceof TaskInputFragment){
             taskInputCallback.onInput();
         }
@@ -160,6 +165,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                 switch (SessionStorage.getModeSelected()) {
                     case "focus":
                         fragment = new TaskInputExplanationFragment();
+                        onGoalConfirmed=(OnGoalConfirmed) fragment;
                         break;
                     case "explore":
                         fragment = new SelectGoalFragment();
@@ -185,6 +191,7 @@ public class SetupActivity extends AppCompatActivity implements OnContinueClicke
                         break;
                     case "explore":
                         fragment = new TaskInputExplanationFragment();
+                        onGoalConfirmed=(OnGoalConfirmed) fragment;
                         break;
                 }
                 break;

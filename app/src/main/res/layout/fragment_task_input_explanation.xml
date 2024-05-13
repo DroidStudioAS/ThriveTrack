@@ -14,17 +14,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="You Selected"
+        android:text="You Selected (Edit It If You Wish)"
         android:textColor="@color/accentgreen"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/goalTv"
         app:layout_constraintStart_toStartOf="@+id/goalTv"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/goalTv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/comment_input_background"
+        android:padding="15dp"
         android:textColor="@color/accentgreen"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,21 +48,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goalTv" />
-
-    <TextView
-        android:id="@+id/button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/login_button"
-        android:backgroundTint="@color/accentgreen"
-        android:gravity="center"
-        android:text="Change Goal"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

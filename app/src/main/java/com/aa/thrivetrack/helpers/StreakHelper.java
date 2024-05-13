@@ -32,13 +32,13 @@ public class StreakHelper {
         String userRank = user.getUser_rank();
         String rankToSet = "";
         if (userStreak<SILVER_BORDER){
-            rankToSet="bronze";
+            rankToSet="basic";
         }else if(userStreak<GOLD_BORDER){
-            rankToSet="silver";
+            rankToSet="bronze";
         }else if(userStreak<PLATINUM_BORDER){
-            rankToSet="gold";
+            rankToSet="silver";
         }else if(userStreak<DIAMOND_BORDER){
-            rankToSet="platinum";
+            rankToSet="gold";
         }else if(userStreak>=PLATINUM_BORDER){
             rankToSet="diamond";
         }
@@ -146,7 +146,6 @@ public class StreakHelper {
 
     }
     public static void checkAndSetLastCompareDate(SharedPreferences sharedPreferences, Context context){
-
         boolean todaysTasksCompleted = sharedPreferences.getBoolean("tasks_completed", false);
         String lastCompareDate = sharedPreferences.getString("date","");
         if(!lastCompareDate.equals(DateHelper.buildTodaysDate())){
