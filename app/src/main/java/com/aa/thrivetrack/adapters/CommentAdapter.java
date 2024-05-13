@@ -13,14 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aa.thrivetrack.R;
 import com.aa.thrivetrack.helpers.StreakHelper;
 import com.aa.thrivetrack.models.Comment;
+import com.aa.thrivetrack.network.NetworkHelper;
+import com.aa.thrivetrack.network.SessionStorage;
+import com.aa.thrivetrack.validation.ToastFactory;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentHolder> {
 
     private List<Comment> comments;
     private Context context;
     private int itemsPerPage = 5;
+
+    private static final String[] PATH_T0_LIKE_COMMENT = new String[]{"edit","patch","comment-likes"};
 
     public CommentAdapter(List<Comment> comments, Context context) {
         this.comments = comments;
@@ -51,6 +58,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
                 holder.commentTvs[i].setText(comment.getComment_text());
                 holder.likeCountTvs[i].setText(String.valueOf(comment.getComment_likes()));
                 holder.rankIvs[i].setImageDrawable(StreakHelper.getUserBadge(context, comment.getUser_rank()));
+
+                holder.likeIvs[i].setOnClickListener(likeComment(comment));
             } else {
                 holder.rankIvs[i].setVisibility(View.GONE);
                 holder.likeIvs[i].setVisibility(View.GONE);
@@ -68,6 +77,29 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
     @Override
     public int getItemCount() {
         return (int) Math.ceil((double) comments.size() / itemsPerPage);
+    }
+
+    public View.OnClickListener likeComment(Comment comment){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int commentId = comment.getComment_id();
+                int commentLikes = comment.getComment_likes()+1;
+
+                Map<String, String> params = new HashMap<>();
+                params.put("comment-id", String.valueOf(commentId));
+                params.put("comment-likes", String.valueOf(commentLikes));
+
+                NetworkHelper.callPatch(PATH_T0_LIKE_COMMENT, params, 0);
+                NetworkHelper.waitForReply();
+                if(SessionStorage.getServerResponse().equals("true")){
+                    ToastFactory.showToast(context,"Comment Liked!");
+                }else{
+                    ToastFactory.showToast(context,"Oops, Something went wrong");
+                }
+                SessionStorage.resetServerResponse();
+            }
+        };
     }
 
     public class CommentHolder extends RecyclerView.ViewHolder {

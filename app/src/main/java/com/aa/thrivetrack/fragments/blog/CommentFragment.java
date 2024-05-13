@@ -116,8 +116,7 @@ public class CommentFragment extends Fragment implements OnArticleClicked {
                     SessionStorage.getArticleInFocus()
                             .getPostComments()
                             .add(newComment);
-                    //increase comment count
-                    SessionStorage.getArticleInFocus().setArticle_likes(SessionStorage.getArticleInFocus().getArticle_likes()+1);
+
                     //refresh view
                     commentAdapter.addToComments(newComment);
                     recyclerView.setAdapter(commentAdapter);

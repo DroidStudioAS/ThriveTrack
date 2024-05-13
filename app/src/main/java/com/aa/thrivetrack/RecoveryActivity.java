@@ -92,7 +92,8 @@ public class RecoveryActivity extends AppCompatActivity {
                     securityQuestionTv.setText(SessionStorage.getSecurityQuestion().getSecurity_question());
 
                     SessionStorage.resetServerResponse();
-                }else if(qAndAGroup.getVisibility()==View.VISIBLE) {
+                }
+                else if(qAndAGroup.getVisibility()==View.VISIBLE) {
                     //second step- answer security question
                     String answer = securityAnswerEt.getText().toString().trim().toLowerCase(Locale.ROOT);
                     Map<String,String> params = new HashMap<>();
@@ -109,7 +110,8 @@ public class RecoveryActivity extends AppCompatActivity {
                     newPasswordGroup.setVisibility(View.VISIBLE);
 
                     SessionStorage.resetServerResponse();
-                }else if(newPasswordGroup.getVisibility()==View.VISIBLE){
+                }
+                else if(newPasswordGroup.getVisibility()==View.VISIBLE){
                     //third step- reset password
                     String password = newPassword.getText().toString().trim();
                     String confirmed = confirmedPassword.getText().toString().trim();
@@ -138,7 +140,6 @@ public class RecoveryActivity extends AppCompatActivity {
                     SessionStorage.resetServerResponse();
 
                 }
-
             }
         };
     }
