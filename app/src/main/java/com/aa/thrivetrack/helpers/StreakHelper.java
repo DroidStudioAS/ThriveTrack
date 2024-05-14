@@ -124,6 +124,8 @@ public class StreakHelper {
         String[] PATH = PATH_TO_EDIT_STREAK;
         boolean isNewStreak = false;
 
+        String date = DateHelper.buildTodaysDate();
+
         //options: extend streak by 1 yesterdays tasks completed and streak!=0 todaysTasksCompleted
         //end streak yesterdays tasks not completed streak!=0 and !todaystaskscompleted
         //start new streak yesterdays tasks not completed but todays are (streak = 0 && todaysTasksCompleted);
@@ -132,7 +134,7 @@ public class StreakHelper {
             params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
             params.put("streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()));
             params.put("end-date", DateHelper.buildTodaysDate());
-        }else if(SessionStorage.getUserData().getUser().getUser_streak()>0 && !todaysTasksCompleted){
+        }else if(SessionStorage.getUserData().getUser().getUser_streak()>0 && !todaysTasksCompleted && !lastCompareDate.equals(date)){
             //end streak
             ToastFactory.showToast(context,"You Killed Your Streak :(");
             SessionStorage.getUserData().getUser().setUser_streak(0);
