@@ -50,7 +50,6 @@ public class ToDoActivity extends AppCompatActivity {
 
         checkedCount=sharedPreferences.getInt("checked_count",0);
         todaysTasksCompleted=sharedPreferences.getBoolean("tasks_completed", false);
-        StreakHelper.checkAndSetLastCompareDate(sharedPreferences, ToDoActivity.this);
 
         populateUI();
 
@@ -89,7 +88,7 @@ public class ToDoActivity extends AppCompatActivity {
                     editor.apply();
                     //Handle streak;
                     handleLocalStreakChange(checkedCount);
-                    StreakHelper.updateUserStreak(callApi, ToDoActivity.this, todaysTasksCompleted,lastCompareDate);
+                    //StreakHelper.updateUserStreak(callApi, ToDoActivity.this, todaysTasksCompleted,lastCompareDate);
                 }
             });
 

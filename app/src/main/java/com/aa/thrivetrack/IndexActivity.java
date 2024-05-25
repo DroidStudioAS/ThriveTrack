@@ -10,6 +10,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.aa.thrivetrack.blog.BlogActivity;
@@ -29,6 +31,11 @@ public class IndexActivity extends AppCompatActivity {
     ImageView blogTrigger;
     ImageView halfCircle;
 
+    //debug elements
+    EditText dateInput;
+    Button debugTrigger;
+
+
     private static final String[] PATH_TO_FETCH_BLOG = new String[]{"fetch","blog"};
 
 
@@ -44,6 +51,10 @@ public class IndexActivity extends AppCompatActivity {
         diaryTrigger=(ImageView)findViewById(R.id.diaryTrigger);
         blogTrigger=(ImageView)findViewById(R.id.communityTrigger);
         halfCircle=(ImageView)findViewById(R.id.halfCircle);
+        //debug elements
+        debugTrigger=(Button) findViewById(R.id.streakDebugTrigger);
+        dateInput=(EditText)findViewById(R.id.dateInput);
+
         /***End Of Ui Initializations**/
         /***Start Of OnClickListeners**/
         profileTrigger.setOnClickListener(pushTo(new Intent(this, ProfileActivity.class)));
@@ -51,6 +62,15 @@ public class IndexActivity extends AppCompatActivity {
         todoTrigger.setOnClickListener(pushTo(new Intent(this, ToDoActivity.class)));
         diaryTrigger.setOnClickListener(pushTo(new Intent(this, DiaryActivity.class)));
         blogTrigger.setOnClickListener(pushTo(new Intent(this, BlogActivity.class)));
+
+        debugTrigger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = getSharedPreferences(SessionStorage.getUsername(), MODE_PRIVATE).edit();
+                editor.putString("date", dateInput.getText().toString().trim());
+                editor.commit();
+            }
+        });
         /***End Of OnClickListeners**/
         //fetch blog
         Map<String, String> params = new HashMap<>();
@@ -62,7 +82,6 @@ public class IndexActivity extends AppCompatActivity {
 
         //initialize sp and check for streak changes
         SharedPreferences sharedPreferences = getSharedPreferences(SessionStorage.getUsername(), MODE_PRIVATE);
-        StreakHelper.checkAndSetLastCompareDate(sharedPreferences, IndexActivity.this);
     }
     public View.OnClickListener pushTo(Intent intent){
         return new View.OnClickListener() {
