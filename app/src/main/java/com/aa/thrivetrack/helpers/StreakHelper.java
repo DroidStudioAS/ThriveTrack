@@ -3,6 +3,7 @@ package com.aa.thrivetrack.helpers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.aa.thrivetrack.R;
@@ -23,11 +24,11 @@ public class StreakHelper {
 
     public static final String[] PATH_TO_UPDATE_RANK = new String[]{"edit","patch","user-rank"};
     private static final String[] PATH_TO_EDIT_STREAK = new String[]{"edit","patch","user-streak"};
-    private static final String[] START_NEW_STREAK = new String[]{"write","streak"};
+    private static final String[] PATH_TO_START_NEW_STREAK = new String[]{"write","streak"};
 
 
 
-    public static void changeUserRank(User user, Context context){
+    public static void changeUserRank(User user){
         int userStreak = user.getUser_streak();
         String userRank = user.getUser_rank();
         String rankToSet = "";
@@ -56,7 +57,7 @@ public class StreakHelper {
         NetworkHelper.waitForReply();
 
         if(SessionStorage.getServerResponse().equals("true")){
-            Toast.makeText(context, "your rank has been updated", Toast.LENGTH_SHORT).show();
+            Log.i("updated", "true");
         }
         SessionStorage.resetServerResponse();
 
@@ -97,6 +98,7 @@ public class StreakHelper {
         }
         return  drawable;
     }
+
     public static String getRankColor(String userRank){
         String colorString = "#000000";
         switch (userRank){
@@ -116,70 +118,55 @@ public class StreakHelper {
         return  colorString;
     }
 
-    public static void updateUserStreak(boolean callApi, Context context, boolean todaysTasksCompleted, String lastCompareDate){
-        if (!callApi){
+    public void updateUserStreak(SharedPreferences sharedPreferences){
+        //get date, tasks completed and streak length;
+        //get date, tasks completed and streak length;
+        String todaysDate = DateHelper.buildTodaysDate();
+        String lastCompareDate = sharedPreferences.getString("date", "");
+        boolean tasksCompleted=sharedPreferences.getBoolean("tasks_completed", false);
+        int userStreak = SessionStorage.getUserData().getUser().getUser_streak();
+
+        //if there is no last date or user is on same day, return
+        boolean isNewDay = todaysDate.equals(lastCompareDate);
+        if(!isNewDay || lastCompareDate.equals("")){
+            Log.i("Same day", "true");
             return;
-        }
-        Map<String,String> params = new HashMap<>();
-        String[] PATH = PATH_TO_EDIT_STREAK;
-        boolean isNewStreak = false;
-
-        String date = DateHelper.buildTodaysDate();
-
-        //options: extend streak by 1 yesterdays tasks completed and streak!=0 todaysTasksCompleted
-        //end streak yesterdays tasks not completed streak!=0 and !todaystaskscompleted
-        //start new streak yesterdays tasks not completed but todays are (streak = 0 && todaysTasksCompleted);
-        if(SessionStorage.getUserData().getUser().getUser_streak()>0 && todaysTasksCompleted){
-            //extend streak
+        };
+        Map<String, String> params = new HashMap<>();
+        //IF new day, AND tasks are completed, AND streak>0 => EXTEND STREAK
+        if(tasksCompleted && userStreak>0){
             params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
-            params.put("streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()));
-            params.put("end-date", DateHelper.buildTodaysDate());
-        }else if(SessionStorage.getUserData().getUser().getUser_streak()>0 && !todaysTasksCompleted && !lastCompareDate.equals(date)){
-            //end streak
-            ToastFactory.showToast(context,"You Killed Your Streak :(");
-            SessionStorage.getUserData().getUser().setUser_streak(0);
-            params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
-            params.put("streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()));
+            params.put("streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()+1));
             params.put("end-date", lastCompareDate);
-            return;
-        }else if(SessionStorage.getUserData().getUser().getUser_streak()==0 && todaysTasksCompleted){
-            //start new streak
-            PATH= START_NEW_STREAK;
-            isNewStreak=true;
-            SessionStorage.getUserData().getUser().setUser_streak(1);
+            NetworkHelper.callPatch(PATH_TO_EDIT_STREAK, params, 0);
+            Log.i("extending streak", String.valueOf(true));
+        }
+        //IF new day, AND tasks are NOT completed, AND streak>0 =>KILL STREAK
+        if(!tasksCompleted && userStreak>0){
+            //just update streak to 0 and reset user rank
+            SessionStorage.getUserData().getUser().setUser_streak(0);
+            changeUserRank(SessionStorage.getUserData().getUser());
+            Log.i("Killing streak", String.valueOf(true));
+        }
+        //IF new day, AND tasks are completed, AND streak===0 => START NEW STREAK
+        if(tasksCompleted && userStreak==0){
             params.put("user-id", String.valueOf(SessionStorage.getUserData().getUser().getUser_id()));
-            params.put("streak", String.valueOf(1));
-            params.put("start-date", DateHelper.buildTodaysDate());
-            params.put("end-date", DateHelper.buildTodaysDate());
+            params.put("streak", String.valueOf(SessionStorage.getUserData().getUser().getUser_streak()+1));
+            params.put("start-date", lastCompareDate);
+            params.put("end-date", lastCompareDate);
+            NetworkHelper.callPatch(PATH_TO_START_NEW_STREAK, params, 0);
+            Log.i("starting streak", String.valueOf(true));
+
         }
-        if(isNewStreak){
-            NetworkHelper.callPost(PATH, params, 0);
-        }else{
-            NetworkHelper.callPatch(PATH, params, 0);
-        }
-        NetworkHelper.waitForReply();
-        if(SessionStorage.getServerResponse().equals("true")){
-            Toast.makeText(context,"Your Streak Has Been Updated! Keep It Up", Toast.LENGTH_SHORT).show();
-        }
-        SessionStorage.resetServerResponse();
-        StreakHelper.changeUserRank(SessionStorage.getUserData().getUser(), context);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.putString("date",todaysDate);
+        editor.commit();
+        Log.i("Same day", "false");
+
 
     }
-    public static void checkAndSetLastCompareDate(SharedPreferences sharedPreferences, Context context){
-        boolean todaysTasksCompleted = sharedPreferences.getBoolean("tasks_completed", false);
-        String lastCompareDate = sharedPreferences.getString("date","");
-        if(!lastCompareDate.equals(DateHelper.buildTodaysDate())){
-            //reset streak if yesterday was not completed
-            if(!todaysTasksCompleted){
-                SessionStorage.getUserData().getUser().setUser_streak(0);
-                updateUserStreak(true, context, todaysTasksCompleted, lastCompareDate);
-                Toast.makeText(context, "Streak Reset", Toast.LENGTH_SHORT).show();
-            }
-            //new day
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
-            editor.putString("date", DateHelper.buildTodaysDate());
-            editor.apply();
-        }
-    }
+
+
 }
